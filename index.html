@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harsh Vijay Gupta — Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0a0e17;--bg2:#0f1523;--bg3:#141c2e;--teal:#00c9a7;--teal2:#00e5c0;--white:#f0f4ff;--muted:#8892a4;--border:rgba(0,201,167,0.15);}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden;}
+  nav{position:fixed;top:0;width:100%;z-index:100;padding:1.2rem 4rem;display:flex;justify-content:space-between;align-items:center;background:rgba(10,14,23,0.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+  .nav-logo{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--teal);text-decoration:none;}
+  .nav-links{display:flex;gap:2.5rem;list-style:none;}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s;}
+  .nav-links a:hover{color:var(--teal);}
+  #home{min-height:100vh;display:grid;grid-template-columns:1fr 420px;align-items:center;padding:6rem 4rem 4rem;gap:4rem;position:relative;overflow:hidden;}
+  .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,201,167,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);}
+  .hero-content{position:relative;z-index:1;}
+  .hero-tag{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(0,201,167,0.1);border:1px solid var(--border);color:var(--teal);padding:0.4rem 1rem;border-radius:100px;font-size:0.8rem;font-family:'DM Mono',monospace;margin-bottom:1.5rem;animation:fadeUp 0.6s ease both;}
+  .hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+  h1{font-family:'DM Serif Display',serif;font-size:clamp(2.8rem,5vw,5rem);line-height:1.05;color:var(--white);margin-bottom:1rem;animation:fadeUp 0.6s 0.1s ease both;}
+  h1 span{color:var(--teal);font-style:italic;}
+  .hero-sub{font-size:1rem;color:var(--muted);max-width:500px;margin-bottom:2.5rem;font-weight:300;animation:fadeUp 0.6s 0.2s ease both;}
+  .hero-buttons{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp 0.6s 0.3s ease both;}
+  .btn-primary{background:var(--teal);color:var(--bg);padding:0.8rem 2rem;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.9rem;transition:all 0.2s;}
+  .btn-primary:hover{background:var(--teal2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,201,167,0.3);}
+  .btn-secondary{border:1px solid var(--border);color:var(--white);padding:0.8rem 2rem;border-radius:6px;text-decoration:none;font-weight:500;font-size:0.9rem;transition:all 0.2s;}
+  .btn-secondary:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px);}
+  .hero-stats{display:flex;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);animation:fadeUp 0.6s 0.4s ease both;}
+  .stat-num{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--teal);line-height:1;}
+  .stat-label{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.3rem;}
+  .hero-photo-wrap{position:relative;z-index:1;display:flex;justify-content:center;align-items:center;animation:fadeUp 0.6s 0.2s ease both;}
+  .hero-photo-frame{position:relative;}
+  .hero-photo-frame::before{content:'';position:absolute;inset:-2px;border-radius:20px;background:linear-gradient(135deg,var(--teal),transparent 60%);z-index:-1;}
+  .hero-photo{width:100%;max-width:380px;height:480px;object-fit:cover;object-position:center top;border-radius:18px;display:block;filter:grayscale(10%);transition:filter 0.3s;}
+  .hero-photo:hover{filter:grayscale(0%);}
+  .hero-photo-badge{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);background:var(--bg3);border:1px solid var(--border);border-radius:100px;padding:0.5rem 1.2rem;font-size:0.78rem;font-family:'DM Mono',monospace;color:var(--teal);white-space:nowrap;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  section{padding:6rem 4rem;position:relative;z-index:1;}
+  .section-label{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--teal);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.8rem;}
+  .section-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem);color:var(--white);margin-bottom:3rem;line-height:1.15;}
+  .section-divider{width:100%;height:1px;background:var(--border);}
+  #about{background:var(--bg2);}
+  .about-grid{display:grid;grid-template-columns:200px 1fr 1fr;gap:3rem;align-items:start;}
+  .about-photo-wrap{display:flex;justify-content:center;}
+  .about-photo{width:180px;height:220px;object-fit:cover;object-position:center top;border-radius:12px;border:1px solid var(--border);}
+  .about-text p{color:var(--muted);margin-bottom:1.2rem;font-size:0.95rem;font-weight:300;}
+  .about-text p strong{color:var(--white);font-weight:500;}
+  .about-highlights{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .highlight-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1.3rem;transition:border-color 0.2s,transform 0.2s;}
+  .highlight-card:hover{border-color:var(--teal);transform:translateY(-3px);}
+  .highlight-icon{font-size:1.4rem;margin-bottom:0.6rem;}
+  .highlight-title{font-size:0.83rem;font-weight:600;color:var(--white);margin-bottom:0.3rem;}
+  .highlight-desc{font-size:0.76rem;color:var(--muted);}
+  #experience{background:var(--bg);}
+  .timeline{position:relative;padding-left:2rem;}
+  .timeline::before{content:'';position:absolute;left:0;top:8px;bottom:0;width:1px;background:linear-gradient(to bottom,var(--teal),transparent);}
+  .timeline-item{position:relative;margin-bottom:3rem;padding-left:2.5rem;}
+  .timeline-dot{position:absolute;left:-2.1rem;top:6px;width:10px;height:10px;border-radius:50%;background:var(--teal);border:2px solid var(--bg);box-shadow:0 0 10px rgba(0,201,167,0.5);}
+  .timeline-item.current .timeline-dot{animation:pulse-dot 2s infinite;}
+  @keyframes pulse-dot{0%,100%{box-shadow:0 0 10px rgba(0,201,167,0.5)}50%{box-shadow:0 0 20px rgba(0,201,167,0.9)}}
+  .timeline-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.3rem;flex-wrap:wrap;gap:0.5rem;}
+  .timeline-role{font-size:1.05rem;font-weight:600;color:var(--white);}
+  .timeline-company{font-size:0.83rem;color:var(--teal);margin-bottom:0.2rem;font-family:'DM Mono',monospace;}
+  .timeline-company-italic{font-size:0.8rem;color:var(--muted);font-style:italic;margin-bottom:0.4rem;}
+  .timeline-date{font-size:0.78rem;color:var(--muted);font-family:'DM Mono',monospace;white-space:nowrap;}
+  .timeline-bullets{list-style:none;margin-top:0.8rem;}
+  .timeline-bullets li{font-size:0.87rem;color:var(--muted);padding:0.25rem 0 0.25rem 1.2rem;position:relative;font-weight:300;}
+  .timeline-bullets li::before{content:'→';position:absolute;left:0;color:var(--teal);font-size:0.75rem;top:0.33rem;}
+  .timeline-bullets li strong{color:var(--white);font-weight:500;}
+  #projects{background:var(--bg2);}
+  .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+  .project-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:2rem;transition:all 0.3s;position:relative;overflow:hidden;}
+  .project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),transparent);opacity:0;transition:opacity 0.3s;}
+  .project-card:hover{border-color:rgba(0,201,167,0.4);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.3);}
+  .project-card:hover::before{opacity:1;}
+  .project-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.2rem;}
+  .tag{background:rgba(0,201,167,0.1);border:1px solid rgba(0,201,167,0.2);color:var(--teal);padding:0.2rem 0.7rem;border-radius:100px;font-size:0.72rem;font-family:'DM Mono',monospace;}
+  .project-title{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--white);margin-bottom:0.8rem;line-height:1.3;}
+  .project-desc{font-size:0.84rem;color:var(--muted);margin-bottom:1.2rem;font-weight:300;line-height:1.6;}
+  .project-insight{background:rgba(0,201,167,0.05);border-left:2px solid var(--teal);padding:0.6rem 1rem;border-radius:0 6px 6px 0;font-size:0.79rem;color:var(--muted);margin-bottom:1.5rem;font-style:italic;}
+  .project-insight strong{color:var(--teal);font-style:normal;}
+  .project-link{display:inline-flex;align-items:center;gap:0.5rem;color:var(--teal);text-decoration:none;font-size:0.82rem;font-weight:500;transition:gap 0.2s;}
+  .project-link:hover{gap:0.8rem;}
+  #skills{background:var(--bg);}
+  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
+  .skill-group{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1.4rem 1.6rem;transition:border-color 0.2s;}
+  .skill-group:hover{border-color:rgba(0,201,167,0.3);}
+  .skill-group-title{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--teal);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.9rem;}
+  .skill-pills{display:flex;flex-wrap:wrap;gap:0.45rem;}
+  .skill-pill{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:var(--white);padding:0.3rem 0.8rem;border-radius:6px;font-size:0.8rem;transition:all 0.2s;}
+  .skill-pill:hover{background:rgba(0,201,167,0.1);border-color:rgba(0,201,167,0.3);color:var(--teal);}
+  .skill-pill.highlight{background:rgba(0,201,167,0.1);border-color:rgba(0,201,167,0.25);color:var(--teal);}
+  #certifications{background:var(--bg2);}
+  .certs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;max-width:900px;}
+  .cert-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all 0.3s;}
+  .cert-card:hover{border-color:var(--teal);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.3);}
+  .cert-image{width:100%;height:200px;object-fit:cover;object-position:center;display:block;}
+  .cert-info{padding:1.4rem;}
+  .cert-name{font-size:0.95rem;font-weight:600;color:var(--white);margin-bottom:0.4rem;line-height:1.3;}
+  .cert-issuer{font-size:0.8rem;color:var(--teal);font-family:'DM Mono',monospace;margin-bottom:0.2rem;}
+  .cert-date{font-size:0.75rem;color:var(--muted);}
+  #education{background:var(--bg);}
+  .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+  .edu-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:2rem;transition:border-color 0.2s;}
+  .edu-card:hover{border-color:rgba(0,201,167,0.3);}
+  .edu-degree{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--white);margin-bottom:0.4rem;}
+  .edu-school{font-size:0.85rem;color:var(--teal);font-family:'DM Mono',monospace;margin-bottom:0.8rem;}
+  .edu-meta{font-size:0.8rem;color:var(--muted);margin-bottom:1rem;}
+  .edu-detail{font-size:0.82rem;color:var(--muted);font-weight:300;line-height:1.6;}
+  .edu-detail strong{color:var(--white);font-weight:500;}
+  #contact{background:var(--bg2);text-align:center;}
+  .contact-inner{max-width:600px;margin:0 auto;}
+  .contact-text{font-size:1rem;color:var(--muted);margin-bottom:2.5rem;font-weight:300;}
+  .contact-links{display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;margin-bottom:3rem;}
+  .contact-link{display:flex;align-items:center;gap:0.6rem;color:var(--muted);text-decoration:none;font-size:0.85rem;padding:0.8rem 1.4rem;border:1px solid var(--border);border-radius:8px;transition:all 0.2s;font-family:'DM Mono',monospace;}
+  .contact-link:hover{color:var(--teal);border-color:var(--teal);transform:translateY(-2px);}
+  .footer-note{font-size:0.75rem;color:var(--muted);font-family:'DM Mono',monospace;opacity:0.4;}
+  @media(max-width:1024px){#home{grid-template-columns:1fr;}.hero-photo-wrap{display:none;}.about-grid{grid-template-columns:1fr;}.about-photo-wrap{display:none;}.projects-grid{grid-template-columns:1fr 1fr;}.skills-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:768px){nav{padding:1rem 1.5rem;}.nav-links{display:none;}section{padding:4rem 1.5rem;}#home{padding:5rem 1.5rem 3rem;}.projects-grid{grid-template-columns:1fr;}.skills-grid{grid-template-columns:1fr;}.certs-grid{grid-template-columns:1fr;}.edu-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#home" class="nav-logo">HVG</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Available for work · Dublin, Ireland</div>
+    <h1>Harsh Vijay<br><span>Gupta</span></h1>
+    <p class="hero-sub">Data Analyst specialising in Power BI, SQL & Python — turning complex datasets into decisions that move businesses forward.</p>
+    <div class="hero-buttons">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-secondary">Get in Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">3+</div><div class="stat-label">Years Experience</div></div>
+      <div><div class="stat-num">8+</div><div class="stat-label">Projects Built</div></div>
+      <div><div class="stat-num">20+</div><div class="stat-label">DAX Measures</div></div>
+      <div><div class="stat-num">MSc</div><div class="stat-label">NCI Dublin</div></div>
+    </div>
+  </div>
+  <div class="hero-photo-wrap">
+    <div class="hero-photo-frame">
+      <img src="profile.jpeg" alt="Harsh Vijay Gupta" class="hero-photo">
+      <div class="hero-photo-badge">📍 Dublin, Ireland</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="about">
+  <div class="section-label">// 01 about</div>
+  <div class="about-grid">
+    <div class="about-photo-wrap">
+      <img src="profile.jpeg" alt="Harsh Vijay Gupta" class="about-photo">
+    </div>
+    <div class="about-text">
+      <h2 class="section-title">The analyst<br><em style="font-family:'DM Serif Display',serif;font-style:italic;">behind the data</em></h2>
+      <p>I'm a <strong>Data Analyst with 3+ years of experience</strong> turning raw data into decisions. I specialise in Power BI (DAX, Power Query), SQL, and Python — with a track record of replacing manual reporting processes, reducing project budgets by 10%, and presenting insights that directly influenced business strategy.</p>
+      <p>Currently based in <strong>Dublin, Ireland</strong> with full work authorisation, actively seeking <strong>Data Analyst, BI Analyst, or Reporting Analyst</strong> roles. I hold an <strong>MSc in Data Analytics from National College of Ireland</strong> (NFQ Level 9).</p>
+      <p>Experienced across the full analytics lifecycle — from data extraction and cleaning through to modelling, visualisation, and presenting insights to non-technical stakeholders.</p>
+    </div>
+    <div class="about-highlights">
+      <div class="highlight-card"><div class="highlight-icon">📊</div><div class="highlight-title">Power BI & DAX</div><div class="highlight-desc">20+ DAX measures, star schema modelling, time intelligence</div></div>
+      <div class="highlight-card"><div class="highlight-icon">🗄️</div><div class="highlight-title">SQL & Databases</div><div class="highlight-desc">MySQL, PostgreSQL — CTEs, window functions</div></div>
+      <div class="highlight-card"><div class="highlight-icon">🐍</div><div class="highlight-title">Python Analytics</div><div class="highlight-desc">Pandas, NumPy, Scikit-learn, Matplotlib, feature engineering</div></div>
+      <div class="highlight-card"><div class="highlight-icon">🎓</div><div class="highlight-title">MSc Data Analytics</div><div class="highlight-desc">National College of Ireland · NFQ Level 9</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="experience">
+  <div class="section-label">// 02 experience</div>
+  <h2 class="section-title">Where I've<br><em style="font-family:'DM Serif Display',serif;font-style:italic;">worked</em></h2>
+  <div class="timeline">
+    <div class="timeline-item current">
+      <div class="timeline-dot"></div>
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-role">Sales & Operations Analyst</div>
+          <div class="timeline-company">Lenehans · Dublin, Ireland</div>
+        </div>
+        <div class="timeline-date">Aug 2024 — Present</div>
+      </div>
+      <ul class="timeline-bullets">
+        <li>Analysed margin data across competing product lines to identify a pricing discrepancy, contributing to a corrective pricing update that reduced pricing errors by <strong>3%</strong></li>
+        <li>Analysed inventory data across <strong>20,000+ SKUs</strong> using Linnworks and HyperStock — monitoring stock levels, flagging anomalies, and reconciling order records daily</li>
+        <li>Reconciled customer purchase records against <strong>Stripe POS</strong> and mobile banking data, maintaining transactional accuracy across daily operations</li>
+        <li>Improved data integrity across in-store and online systems by reporting product inconsistencies across pricing, availability, and descriptions</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-role">Data Analyst</div>
+          <div class="timeline-company">Ellora Infotech · India</div>
+        </div>
+        <div class="timeline-date">Sep 2022 — Dec 2023</div>
+      </div>
+      <ul class="timeline-bullets">
+        <li>Built <strong>5+ Power BI dashboards</strong> for operations and finance teams across <strong>€11M</strong> construction contracts, reducing manual reporting effort by <strong>2–3 days</strong> per project weekly</li>
+        <li>Accelerated cost variance identification by <strong>15%</strong> for senior leadership by developing DAX measures including time-intelligence functions (YTD, MTD, rolling totals) and CALCULATE, FILTER, and SUMX logic</li>
+        <li>Enabled project managers to make faster resourcing decisions by consolidating 3–5 Excel sources per dashboard using Power Query, reducing data preparation time by <strong>20%</strong></li>
+        <li>Enabled finance and operations teams to accurately determine project overheads by writing and optimising SQL queries against MySQL databases, delivering <strong>2 recurring weekly reports</strong> and responding to ad-hoc analysis requests</li>
+        <li>Lowered project budgets by approximately <strong>10%</strong> by proposing and presenting new KPIs — workforce utilisation rate, machinery idle time, and cost variance — directly to stakeholders in weekly dashboard reviews</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-role">Junior Data Analyst</div>
+          <div class="timeline-company">Santosh & Associates · India</div>
+        </div>
+        <div class="timeline-date">Mar 2021 — Jul 2022</div>
+      </div>
+      <ul class="timeline-bullets">
+        <li>Analysed <strong>5,000+ records per month</strong> across 4 government-contracted locations, delivering weekly and monthly reports that supported staff salary verification and contract compliance</li>
+        <li>Built Excel dashboards tracking occupancy, staff attendance, food costs, and maintenance costs across all sites, enabling managers to make data-driven operational decisions</li>
+        <li>Identified seasonal demand patterns linked to high-footfall periods, enabling proactive staffing and resource planning across all locations</li>
+        <li>Delivered accurate cost and occupancy analysis to head office, supporting effective resource allocation across the portfolio and reducing facility costs by <strong>8%</strong></li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-role">Admin & Reporting Assistant</div>
+          <div class="timeline-company">Ellora Construction · India</div>
+        </div>
+        <div class="timeline-date">Aug 2019 — Jan 2021</div>
+      </div>
+      <ul class="timeline-bullets">
+        <li>Consolidated weekly team and vendor updates into structured summary reports supporting project reviews, cost monitoring, and planning decisions</li>
+        <li>Standardised reporting templates across a 3-person admin team, improving reporting consistency and cross-project communication</li>
+        <li>Maintained Excel-based administrative records and coordinated with vendors and suppliers to collect and verify operational data for weekly reporting</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="projects">
+  <div class="section-label">// 03 projects</div>
+  <h2 class="section-title">What I've<br><em style="font-family:'DM Serif Display',serif;font-style:italic;">built</em></h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Star Schema</span></div>
+      <div class="project-title">Meta Ad Performance Dashboard</div>
+      <div class="project-desc">Multi-page Power BI dashboard analysing 400K ad events across 50 campaigns and 9,841 users — tracking impressions, CTR, engagement, and conversion using 12 DAX measures.</div>
+      <div class="project-insight"><strong>Key insight:</strong> CTR of 11.76% against a purchase rate of 0.61% — identified leaking conversion funnel and produced retargeting recommendation.</div>
+      <a href="https://github.com/harshvgupta98/POWERBI_Meta_Ad_Performance_Dashboard" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+    <div class="project-card">
+      <div class="project-tags"><span class="tag">Python</span><span class="tag">PostgreSQL</span><span class="tag">Power BI</span></div>
+      <div class="project-title">Customer Shopping Behaviour Analysis</div>
+      <div class="project-desc">End-to-end analytics pipeline — Python for data wrangling, SQLAlchemy to load into PostgreSQL, and 10 business SQL queries using CTEs and window functions across 3,900 transactions.</div>
+      <div class="project-insight"><strong>Key insight:</strong> Segmented 3,116 loyal vs 83 new customers; identified ~50% discount dependency on key product lines.</div>
+      <a href="https://github.com/harshvgupta98/PYTHON_SQL_POWERBI_Customer_Behavior_Dashboard" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+    <div class="project-card">
+      <div class="project-tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">HR Analytics</span></div>
+      <div class="project-title">HR Attrition Dashboard</div>
+      <div class="project-desc">Power BI attrition dashboard across 1,480 employees tracking attrition rate, salary bands, job roles, and tenure by department using DAX measures and a star schema.</div>
+      <div class="project-insight"><strong>Key insight:</strong> 68% of attrition in the under-€5K salary band; Year 1 spike of 59 employees.</div>
+      <a href="https://github.com/harshvgupta98/POWERBI_HR_Analytics_Dashboard" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+    <div class="project-card">
+      <div class="project-tags"><span class="tag">SQL</span><span class="tag">EDA</span><span class="tag">Relational DB</span></div>
+      <div class="project-title">Online Bookstore SQL Analysis</div>
+      <div class="project-desc">SQL exploratory data analysis on a relational bookstore dataset — analysing sales, customer behaviour, inventory, and revenue across Books, Customers, and Orders tables.</div>
+      <div class="project-insight"><strong>Key concepts:</strong> JOINs, GROUP BY, HAVING, LEFT JOIN, COALESCE, window functions, subqueries.</div>
+      <a href="https://github.com/harshvgupta98/SQL_Project_Online_Bookstore" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+    <div class="project-card">
+      <div class="project-tags"><span class="tag">SQL</span><span class="tag">Data Cleaning</span><span class="tag">EDA</span></div>
+      <div class="project-title">World Life Expectancy SQL</div>
+      <div class="project-desc">SQL data cleaning and exploratory analysis on life expectancy data across 193 countries from 2007–2022 — identifying global trends and high/low performing regions.</div>
+      <div class="project-insight"><strong>Scale:</strong> 193 countries · 15 years of data · full data cleaning pipeline.</div>
+      <a href="https://github.com/harshvgupta98/SQL_Project_World_Life_Expectancy" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+    <div class="project-card">
+      <div class="project-tags"><span class="tag">Excel</span><span class="tag">VBA</span><span class="tag">Dashboard</span></div>
+      <div class="project-title">Sales Performance Dashboard</div>
+      <div class="project-desc">End-to-end Excel dashboard analysing sales performance of 141 executives across 8 regions — built with advanced formulas, pivot tables, dynamic charts, slicers, and VBA macros for automated dashboard refresh and interactivity.</div>
+      <div class="project-insight"><strong>Key features:</strong> VBA macro automation, 4 pivot tables, dynamic charts, regional slicer, top/bottom performer tracking — all in a single-screen dashboard layout.</div>
+      <a href="https://github.com/harshvgupta98/EXCEL_Sales_Performance_Dashboard" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="skills">
+  <div class="section-label">// 04 skills</div>
+  <h2 class="section-title">Tools &<br><em style="font-family:'DM Serif Display',serif;font-style:italic;">technologies</em></h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">BI & Visualisation</div>
+      <div class="skill-pills">
+        <span class="skill-pill highlight">Power BI</span><span class="skill-pill highlight">DAX</span><span class="skill-pill highlight">Power Query</span><span class="skill-pill">Tableau</span><span class="skill-pill">Google Analytics</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Languages</div>
+      <div class="skill-pills">
+        <span class="skill-pill highlight">Python</span><span class="skill-pill highlight">SQL</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Databases</div>
+      <div class="skill-pills">
+        <span class="skill-pill">MySQL</span><span class="skill-pill">PostgreSQL</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Analytics</div>
+      <div class="skill-pills">
+        <span class="skill-pill">KPI Reporting</span><span class="skill-pill">EDA</span><span class="skill-pill">Customer Segmentation</span><span class="skill-pill">Predictive Modelling</span><span class="skill-pill">Time Series</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Machine Learning</div>
+      <div class="skill-pills">
+        <span class="skill-pill">Regression</span><span class="skill-pill">Classification</span><span class="skill-pill">Clustering</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Microsoft Excel</div>
+      <div class="skill-pills">
+        <span class="skill-pill highlight">Advanced Formulas</span><span class="skill-pill highlight">Pivot Tables</span><span class="skill-pill highlight">VBA Macros</span><span class="skill-pill">Charts & Slicers</span><span class="skill-pill">Data Validation</span><span class="skill-pill">Conditional Formatting</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Libraries & Tools</div>
+      <div class="skill-pills">
+        <span class="skill-pill">Pandas</span><span class="skill-pill">NumPy</span><span class="skill-pill">Scikit-learn</span><span class="skill-pill">Matplotlib</span><span class="skill-pill">Linnworks</span><span class="skill-pill">Jupyter Notebook</span><span class="skill-pill">MS Office Suite</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="certifications">
+  <div class="section-label">// 05 certifications</div>
+  <h2 class="section-title">Credentials &<br><em style="font-family:'DM Serif Display',serif;font-style:italic;">learning</em></h2>
+  <div class="certs-grid">
+    <div class="cert-card">
+      <img src="cert_powerbi.png" alt="Microsoft Power BI Certificate" class="cert-image">
+      <div class="cert-info">
+        <div class="cert-name">Microsoft Power BI Desktop for Business Intelligence</div>
+        <div class="cert-issuer">Analyst Builder</div>
+        <div class="cert-date">May 2026</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <img src="cert_mysql.png" alt="MySQL for Data Analytics Certificate" class="cert-image">
+      <div class="cert-info">
+        <div class="cert-name">MySQL for Data Analytics</div>
+        <div class="cert-issuer">Analyst Builder</div>
+        <div class="cert-date">Apr 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="education">
+  <div class="section-label">// 06 education</div>
+  <h2 class="section-title">Academic<br><em style="font-family:'DM Serif Display',serif;font-style:italic;">background</em></h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-degree">MSc in Data Analytics</div>
+      <div class="edu-school">National College of Ireland, Dublin</div>
+      <div class="edu-meta">Jan 2024 – Jan 2025 · NFQ Level 9</div>
+      <div class="edu-detail"><strong>Dissertation:</strong> Predicting E-commerce Sales Using Deep Learning — Built and compared LSTM, GRU, and a Hybrid model on 100,000+ transaction records. Hybrid model achieved <strong>R² of 0.91</strong>.<br><br><strong>Key modules:</strong> Business Intelligence & Business Analytics, Statistics for Data Analytics, Database & Analytics Programming, Domain Application of Predictive Analytics, Data Governance & Ethics</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Bachelor of Engineering in Computer Science</div>
+      <div class="edu-school">Savitribai Phule Pune University, India</div>
+      <div class="edu-meta">May 2015 – May 2019 · First Class</div>
+      <div class="edu-detail">Foundation in computer science principles including data structures, algorithms, database management systems, object-oriented programming, and data analytics.</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="contact">
+  <div class="section-label">// 07 contact</div>
+  <div class="contact-inner">
+    <h2 class="section-title">Let's<br><em style="font-family:'DM Serif Display',serif;font-style:italic;">connect</em></h2>
+    <p class="contact-text">I'm actively seeking Data Analyst, BI Analyst, or Reporting Analyst roles in Dublin. Feel free to reach out directly.</p>
+    <div class="contact-links">
+      <a href="mailto:harshvgupta1998@gmail.com" class="contact-link">✉ harshvgupta1998@gmail.com</a>
+      <a href="https://linkedin.com/in/1harsh-gupta" target="_blank" class="contact-link">in linkedin.com/in/1harsh-gupta</a>
+      <a href="https://github.com/harshvgupta98" target="_blank" class="contact-link">⌥ github.com/harshvgupta98</a>
+    </div>
+    <div class="footer-note">© 2026 Harsh Vijay Gupta · Dublin, Ireland</div>
+  </div>
+</section>
+
+</body>
+</html>
