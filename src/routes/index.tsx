@@ -497,14 +497,10 @@ function Index() {
                         </span>
                       ))}
                     </div>
-                    <ul className="mt-4 space-y-1.5 text-sm text-muted-foreground">
-                      {exp.bullets.map((b, j) => (
-                        <li key={j} className="flex gap-2 leading-relaxed">
-                          <span className="text-accent font-mono mt-0.5">→</span>
-                          <span>{b}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="mt-3 font-mono text-[11px] text-muted-foreground/80">
+                      {exp.dates}
+                    </div>
+
                   </div>
                 </div>
               );
