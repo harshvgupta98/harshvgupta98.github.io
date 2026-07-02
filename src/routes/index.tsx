@@ -2,6 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import nciLogo from "@/assets/nci-logo.png.asset.json";
 import sppuLogo from "@/assets/sppu-logo.jpg.asset.json";
+import tableauLogo from "@/assets/tableau.png.asset.json";
+import excelLogo from "@/assets/excel.png.asset.json";
+import powerbiLogo from "@/assets/powerbi.png.asset.json";
+import portrait from "@/assets/harsh-portrait.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -9,9 +13,9 @@ export const Route = createFileRoute("/")({
 
 /* ------------------------------ DATA ------------------------------ */
 
-// Skill logos via simpleicons.org (colored brand SVGs). `slug` empty → text/emoji fallback.
-const SKILLS: { name: string; slug?: string; fallback?: string }[] = [
-  { name: "Power BI", slug: "powerbi" },
+// Skill logos: `asset` (local CDN) → `slug` (simpleicons) → `fallback` text/emoji.
+const SKILLS: { name: string; asset?: string; slug?: string; fallback?: string }[] = [
+  { name: "Power BI", asset: powerbiLogo.url },
   { name: "DAX", fallback: "λ" },
   { name: "Power Query", fallback: "⚡" },
   { name: "SQL", fallback: "SQL" },
@@ -23,8 +27,8 @@ const SKILLS: { name: string; slug?: string; fallback?: string }[] = [
   { name: "Scikit-learn", slug: "scikitlearn" },
   { name: "Matplotlib", fallback: "📈" },
   { name: "Seaborn", fallback: "🌊" },
-  { name: "Tableau", slug: "tableau" },
-  { name: "Excel", slug: "microsoftexcel" },
+  { name: "Tableau", asset: tableauLogo.url },
+  { name: "Excel", asset: excelLogo.url },
   { name: "VBA", fallback: "⚙️" },
   { name: "Linnworks", fallback: "📦" },
   { name: "Jupyter", slug: "jupyter" },
@@ -368,7 +372,9 @@ function Index() {
               style={{ animationDelay: `${i * 30}ms`, animationFillMode: "both" }}
             >
               <div className="h-6 w-6 flex items-center justify-center group-hover:scale-110 transition-transform">
-                {s.slug ? (
+                {s.asset ? (
+                  <img src={s.asset} alt={`${s.name} logo`} className="h-6 w-6 object-contain" loading="lazy" />
+                ) : s.slug ? (
                   <img
                     src={`https://cdn.simpleicons.org/${s.slug}`}
                     alt={`${s.name} logo`}
@@ -399,23 +405,38 @@ function Index() {
 
       {/* About */}
       <Section id="about" n="01" label="about" title="The analyst" italic="behind the data">
-        <div className="max-w-3xl mx-auto text-center space-y-4 text-muted-foreground leading-relaxed">
-          <p>
-            नमस्कार 🙏 I'm Harsh — a Data & BI Analyst who turns fragmented, inconsistent data into
-            dashboards, KPI frameworks and analytical pipelines that help commercial and operational
-            teams make faster decisions.
-          </p>
-          <p>
-            3+ years specialised in <span className="text-foreground">Power BI (DAX, Power Query, Star Schema)</span>,{" "}
-            <span className="text-foreground">SQL</span> and <span className="text-foreground">Python</span>. I've built
-            dashboards tracking <span className="text-accent font-medium">€11M in contracts</span>, eliminated{" "}
-            <span className="text-accent font-medium">2 days of weekly manual reporting</span>, and reduced pricing errors by{" "}
-            <span className="text-accent font-medium">5%</span> through data validation at scale.
-          </p>
-          <p>
-            MSc in Data Analytics, National College of Ireland. Dublin-based with full work authorisation —
-            actively seeking Data Analyst, BI Analyst, Business Analyst or Reporting Analyst roles across Ireland.
-          </p>
+        <div className="grid md:grid-cols-[1fr_auto] gap-10 items-start max-w-5xl mx-auto">
+          <div className="space-y-4 text-muted-foreground leading-relaxed">
+            <p>
+              नमस्कार 🙏 I'm Harsh — a Data & BI Analyst who turns fragmented, inconsistent data into
+              dashboards, KPI frameworks and analytical pipelines that help commercial and operational
+              teams make faster decisions.
+            </p>
+            <p>
+              3+ years specialised in <span className="text-foreground">Power BI (DAX, Power Query, Star Schema)</span>,{" "}
+              <span className="text-foreground">SQL</span> and <span className="text-foreground">Python</span>. I've built
+              dashboards tracking <span className="text-accent font-medium">€11M in contracts</span>, eliminated{" "}
+              <span className="text-accent font-medium">2 days of weekly manual reporting</span>, and reduced pricing errors by{" "}
+              <span className="text-accent font-medium">5%</span> through data validation at scale.
+            </p>
+            <p>
+              MSc in Data Analytics, National College of Ireland. Dublin-based with full work authorisation —
+              actively seeking Data Analyst, BI Analyst, Business Analyst or Reporting Analyst roles across Ireland.
+            </p>
+          </div>
+          <div className="mx-auto md:mx-0 md:mt-6">
+            <div className="rotate-2 hover:rotate-0 transition-transform duration-500 rounded-md border border-border bg-card p-2 shadow-md">
+              <img
+                src={portrait}
+                alt="Harsh Gupta portrait"
+                width={768}
+                height={896}
+                loading="lazy"
+                className="w-56 h-64 md:w-64 md:h-72 object-cover rounded-sm"
+              />
+              <div className="mt-2 text-center font-mono text-[10px] text-muted-foreground">// harsh.gupta</div>
+            </div>
+          </div>
         </div>
       </Section>
 
