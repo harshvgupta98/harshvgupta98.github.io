@@ -246,21 +246,18 @@ const CERTIFICATIONS = [
 
 type Lang = "python" | "sql";
 
-const SCRIPTS: Record<Lang, string[]> = {
+const SCRIPTS: Record<Lang, { text: string; bold?: string }[]> = {
   python: [
-    'print("Hello, World! 👋 I\'m Harsh Gupta")',
-    'print("Role: Data & BI Analyst · Dublin, IE")',
-    'stack = ["Power BI", "DAX", "SQL", "Python"]',
-    'summary = "3+ yrs turning fragmented data into dashboards"',
-    'status = "Open to Data / BI / --roles"',
+    { text: 'print("Hello, World! 👋 I\'m Harsh Gupta")' },
+    { text: 'print("Current status: Data & Business Intelligence Analyst · Dublin, IE")', bold: "Current status:" },
+    { text: 'print("Professional Summary: Data & BI Analyst with 3+ years of experience turning fragmented data into decision-ready dashboards using Power BI, DAX, SQL and Python.")', bold: "Professional Summary:" },
   ],
   sql: [
-    "SELECT name, role, location",
-    "FROM portfolio",
-    "WHERE name = 'Harsh Gupta';",
-    "-- Role: Data & BI Analyst · Dublin, IE",
-    "-- Stack: Power BI, DAX, SQL, Python",
-    "-- Open to Data / BI / Reporting roles",
+    { text: "SELECT name, role, location, summary" },
+    { text: "FROM portfolio" },
+    { text: "WHERE name = 'Harsh Gupta';" },
+    { text: "-- Role: Data & Business Intelligence Analyst · Dublin, IE", bold: "Role:" },
+    { text: "-- Summary: 3+ yrs turning fragmented data into decision-ready dashboards with Power BI, DAX, SQL and Python.", bold: "Summary:" },
   ],
 };
 
