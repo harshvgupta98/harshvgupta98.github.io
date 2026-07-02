@@ -364,7 +364,18 @@ function Index() {
               className="group aspect-[3/2] rounded-lg border border-border bg-card flex flex-col items-center justify-center gap-2 hover:border-accent hover:-translate-y-0.5 hover:shadow-md transition animate-fade-in"
               style={{ animationDelay: `${i * 30}ms`, animationFillMode: "both" }}
             >
-              <div className="text-2xl group-hover:scale-110 transition-transform">{s.icon}</div>
+              <div className="h-8 w-8 flex items-center justify-center group-hover:scale-110 transition-transform">
+                {s.slug ? (
+                  <img
+                    src={`https://cdn.simpleicons.org/${s.slug}`}
+                    alt={`${s.name} logo`}
+                    className="h-8 w-8 object-contain"
+                    loading="lazy"
+                  />
+                ) : (
+                  <span className="font-mono text-lg text-accent">{s.fallback}</span>
+                )}
+              </div>
               <div className="font-mono text-xs text-muted-foreground group-hover:text-foreground transition">
                 {s.name}
               </div>
