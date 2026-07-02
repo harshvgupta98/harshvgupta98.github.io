@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
+import nciLogo from "@/assets/nci-logo.png.asset.json";
+import sppuLogo from "@/assets/sppu-logo.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -7,27 +9,28 @@ export const Route = createFileRoute("/")({
 
 /* ------------------------------ DATA ------------------------------ */
 
-const SKILLS: { name: string; icon: string }[] = [
-  { name: "Power BI", icon: "📊" },
-  { name: "DAX", icon: "λ" },
-  { name: "Power Query", icon: "⚡" },
-  { name: "SQL", icon: "🗄️" },
-  { name: "MySQL", icon: "🐬" },
-  { name: "PostgreSQL", icon: "🐘" },
-  { name: "Python", icon: "🐍" },
-  { name: "Pandas", icon: "🐼" },
-  { name: "NumPy", icon: "∑" },
-  { name: "Scikit-learn", icon: "🔬" },
-  { name: "Matplotlib", icon: "📈" },
-  { name: "Seaborn", icon: "🌊" },
-  { name: "Tableau", icon: "📉" },
-  { name: "Excel", icon: "🟢" },
-  { name: "VBA", icon: "⚙️" },
-  { name: "Linnworks", icon: "📦" },
-  { name: "Jupyter", icon: "📓" },
-  { name: "Git", icon: "🔀" },
-  { name: "GA4", icon: "📡" },
-  { name: "Star Schema", icon: "✦" },
+// Skill logos via simpleicons.org (colored brand SVGs). `slug` empty → text/emoji fallback.
+const SKILLS: { name: string; slug?: string; fallback?: string }[] = [
+  { name: "Power BI", slug: "powerbi" },
+  { name: "DAX", fallback: "λ" },
+  { name: "Power Query", fallback: "⚡" },
+  { name: "SQL", fallback: "SQL" },
+  { name: "MySQL", slug: "mysql" },
+  { name: "PostgreSQL", slug: "postgresql" },
+  { name: "Python", slug: "python" },
+  { name: "Pandas", slug: "pandas" },
+  { name: "NumPy", slug: "numpy" },
+  { name: "Scikit-learn", slug: "scikitlearn" },
+  { name: "Matplotlib", fallback: "📈" },
+  { name: "Seaborn", fallback: "🌊" },
+  { name: "Tableau", slug: "tableau" },
+  { name: "Excel", slug: "microsoftexcel" },
+  { name: "VBA", fallback: "⚙️" },
+  { name: "Linnworks", fallback: "📦" },
+  { name: "Jupyter", slug: "jupyter" },
+  { name: "Git", slug: "git" },
+  { name: "GA4", slug: "googleanalytics" },
+  { name: "Star Schema", fallback: "✦" },
 ];
 
 const EXPERIENCE = [
@@ -132,6 +135,7 @@ const EDUCATION = [
     year: "2024–2025",
     degree: "MSc in Data Analytics",
     school: "National College of Ireland, Dublin",
+    logo: nciLogo.url,
     detail:
       "NFQ Level 9. Dissertation: Predicting E-commerce Sales Using Deep Learning — LSTM, GRU and a novel Hybrid on 100,000+ records; Hybrid R² of 0.91.",
   },
@@ -139,6 +143,7 @@ const EDUCATION = [
     year: "2015–2019",
     degree: "B.E., Computer Science",
     school: "Savitribai Phule Pune University, India",
+    logo: sppuLogo.url,
     detail: "Foundation in data structures, algorithms, DBMS, OOP and data analytics.",
   },
 ];
@@ -361,7 +366,18 @@ function Index() {
               className="group aspect-[3/2] rounded-lg border border-border bg-card flex flex-col items-center justify-center gap-2 hover:border-accent hover:-translate-y-0.5 hover:shadow-md transition animate-fade-in"
               style={{ animationDelay: `${i * 30}ms`, animationFillMode: "both" }}
             >
-              <div className="text-2xl group-hover:scale-110 transition-transform">{s.icon}</div>
+              <div className="h-8 w-8 flex items-center justify-center group-hover:scale-110 transition-transform">
+                {s.slug ? (
+                  <img
+                    src={`https://cdn.simpleicons.org/${s.slug}`}
+                    alt={`${s.name} logo`}
+                    className="h-8 w-8 object-contain"
+                    loading="lazy"
+                  />
+                ) : (
+                  <span className="font-mono text-lg text-accent">{s.fallback}</span>
+                )}
+              </div>
               <div className="font-mono text-xs text-muted-foreground group-hover:text-foreground transition">
                 {s.name}
               </div>
@@ -476,11 +492,15 @@ function Index() {
           {EDUCATION.map((e, i) => (
             <div
               key={e.degree}
-              className="grid md:grid-cols-[160px_1fr] gap-6 p-6 rounded-xl border border-border bg-card animate-fade-in text-left"
+              className="grid md:grid-cols-[96px_120px_1fr] grid-cols-[64px_1fr] gap-6 items-start p-6 rounded-xl border border-border bg-card animate-fade-in text-left"
               style={{ animationDelay: `${i * 80}ms`, animationFillMode: "both" }}
             >
-              <div className="font-mono text-xs text-accent">{e.year}</div>
+              <div className="h-16 w-16 md:h-20 md:w-20 rounded-md bg-background border border-border flex items-center justify-center overflow-hidden shrink-0">
+                <img src={e.logo} alt={`${e.school} logo`} className="max-h-full max-w-full object-contain p-1" />
+              </div>
+              <div className="font-mono text-xs text-accent hidden md:block">{e.year}</div>
               <div>
+                <div className="font-mono text-xs text-accent md:hidden mb-1">{e.year}</div>
                 <h3 className="text-xl font-semibold">{e.degree}</h3>
                 <div className="text-sm text-muted-foreground mt-1">{e.school}</div>
                 <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{e.detail}</p>
