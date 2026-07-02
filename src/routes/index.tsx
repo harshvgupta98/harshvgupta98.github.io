@@ -535,7 +535,7 @@ function Index() {
       </section>
 
       {/* About */}
-      <section id="about" className="mx-auto max-w-7xl px-6 py-16 md:py-20 border-t border-border">
+      <section id="about" className="mx-auto max-w-5xl px-6 py-16 md:py-20 border-t border-border">
         <div className="grid xl:grid-cols-[1fr_auto] gap-10 items-start mx-auto">
           <div className="rounded-xl border border-border bg-card p-6 shadow-sm space-y-4 font-mono text-[13px] text-foreground/80 leading-relaxed">
             <h3 className="font-mono text-lg font-bold text-foreground">💡 About Me</h3>
