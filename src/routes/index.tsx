@@ -1,33 +1,51 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const SKILLS = [
-  "Power BI", "DAX", "Power Query", "SQL", "MySQL", "PostgreSQL", "Python",
-  "Pandas", "NumPy", "Scikit-learn", "Matplotlib", "Seaborn", "Tableau",
-  "Excel", "VBA", "Linnworks", "Star Schema", "KPI Reporting", "EDA",
-  "Time Series", "Google Analytics", "Jupyter",
+/* ------------------------------ DATA ------------------------------ */
+
+const SKILLS: { name: string; icon: string }[] = [
+  { name: "Power BI", icon: "📊" },
+  { name: "DAX", icon: "λ" },
+  { name: "Power Query", icon: "⚡" },
+  { name: "SQL", icon: "🗄️" },
+  { name: "MySQL", icon: "🐬" },
+  { name: "PostgreSQL", icon: "🐘" },
+  { name: "Python", icon: "🐍" },
+  { name: "Pandas", icon: "🐼" },
+  { name: "NumPy", icon: "∑" },
+  { name: "Scikit-learn", icon: "🔬" },
+  { name: "Matplotlib", icon: "📈" },
+  { name: "Seaborn", icon: "🌊" },
+  { name: "Tableau", icon: "📉" },
+  { name: "Excel", icon: "🟢" },
+  { name: "VBA", icon: "⚙️" },
+  { name: "Linnworks", icon: "📦" },
+  { name: "Jupyter", icon: "📓" },
+  { name: "Git", icon: "🔀" },
+  { name: "GA4", icon: "📡" },
+  { name: "Star Schema", icon: "✦" },
 ];
 
 const EXPERIENCE = [
   {
-    year: "2024 — Present",
+    year: "2024–Present",
     role: "Reporting Analyst",
     company: "Lenehans",
     location: "Dublin, Ireland",
     tags: ["Power BI", "DAX", "Linnworks", "SQL"],
     bullets: [
       "Built Power BI dashboards for buying and procurement teams across 20,000+ SKUs — cutting buying cycle time by 15%.",
-      "Analysed Linnworks operational and sales data to surface seasonal demand and dead stock, reducing excess stock by 8%.",
+      "Analysed Linnworks data to surface seasonal demand and dead stock, reducing excess stock by 8%.",
       "Designed daily stock and pricing reconciliation reports, reducing pricing errors by 5%.",
       "Leveraged AI-assisted analytics to accelerate cleaning, transformation and reporting workflows.",
     ],
   },
   {
-    year: "2022 — 2023",
+    year: "2022–2023",
     role: "Data Analyst",
     company: "Ellora Infotech",
     location: "India",
@@ -36,11 +54,11 @@ const EXPERIENCE = [
       "Delivered dashboards tracking €11M in engineering contracts, eliminating 2 days of weekly manual reporting.",
       "Engineered advanced DAX (CALCULATE, SUMX, time-intelligence) to surface cost variance 15% faster.",
       "Built Power Query ETL pipelines and Python scripts to consolidate Excel/CSV/SQL sources, cutting prep time 20%.",
-      "Designed a unified KPI framework with Finance and Operations, standardising data governance.",
+      "Designed a unified KPI framework with Finance and Operations, standardising governance.",
     ],
   },
   {
-    year: "2021 — 2022",
+    year: "2021–2022",
     role: "Junior Data Analyst",
     company: "Santosh & Associates",
     location: "India",
@@ -48,19 +66,18 @@ const EXPERIENCE = [
     bullets: [
       "Profiled and validated 5,000+ records monthly across 4 government-contracted locations.",
       "Applied MySQL to cleanse and standardise data, lifting reporting accuracy by 10%.",
-      "Identified occupancy and cost trends contributing to an 8% reduction in facility costs.",
-      "Produced monthly management reports consolidating operational data across sites.",
+      "Trend analysis contributed to an 8% reduction in facility costs.",
     ],
   },
   {
-    year: "2019 — 2021",
+    year: "2019–2021",
     role: "Admin Reporting Assistant",
     company: "Ellora EPC Pvt. Ltd.",
     location: "India",
     tags: ["ERP", "Excel", "Reporting"],
     bullets: [
-      "Centralised procurement and operational data across 3+ project sites and 30+ vendors using a company-wide ERP.",
-      "Reconciled material and vendor records weekly, maintaining reporting accuracy for senior management.",
+      "Centralised procurement data across 3+ project sites and 30+ vendors using an ERP system.",
+      "Reconciled material and vendor records weekly to maintain reporting accuracy for senior management.",
     ],
   },
 ];
@@ -69,260 +86,364 @@ const PROJECTS = [
   {
     title: "Meta Ad Performance Dashboard",
     tags: ["Power BI", "DAX", "Star Schema"],
-    desc: "Multi-page Power BI dashboard analysing 400K ad events across 50 campaigns and 9,841 users — tracking impressions, CTR, engagement, and conversion with 12 DAX measures.",
-    insight: "CTR of 11.76% against a 0.61% purchase rate — identified leaking conversion funnel.",
+    desc: "Multi-page Power BI dashboard analysing 400K ad events across 50 campaigns and 9,841 users — impressions, CTR, engagement, and conversion via 12 DAX measures.",
+    insight: "CTR 11.76% vs 0.61% purchase rate — flagged a leaking funnel and retargeting play.",
     href: "https://github.com/harshvgupta98/POWERBI_Meta_Ad_Performance_Dashboard",
   },
   {
     title: "Customer Shopping Behaviour",
     tags: ["Python", "PostgreSQL", "Power BI"],
-    desc: "End-to-end pipeline — Python wrangling, SQLAlchemy load into PostgreSQL, and 10 business queries with CTEs and window functions across 3,900 transactions.",
-    insight: "Segmented 3,116 loyal vs 83 new customers; ~50% discount dependency on key lines.",
+    desc: "End-to-end pipeline — Python wrangling, SQLAlchemy load into PostgreSQL, and 10 SQL queries with CTEs and window functions on 3,900 transactions.",
+    insight: "Segmented 3,116 loyal vs 83 new; ~50% discount dependency on key lines.",
     href: "https://github.com/harshvgupta98/PYTHON_SQL_POWERBI_Customer_Behavior_Dashboard",
   },
   {
     title: "HR Attrition Dashboard",
     tags: ["Power BI", "DAX", "HR Analytics"],
-    desc: "Attrition dashboard across 1,480 employees tracking rate, salary bands, roles, and tenure by department using DAX and a star schema.",
-    insight: "68% of attrition in the under-€5K salary band; Year 1 spike of 59 employees.",
+    desc: "Attrition dashboard across 1,480 employees — rate, salary bands, roles, and tenure by department on a star schema.",
+    insight: "68% attrition sits in the under-€5K band; Year 1 spike of 59 employees.",
     href: "https://github.com/harshvgupta98/POWERBI_HR_Analytics_Dashboard",
   },
   {
-    title: "Online Bookstore SQL Analysis",
+    title: "Online Bookstore SQL",
     tags: ["SQL", "EDA", "Relational DB"],
-    desc: "Exploratory SQL analysis on a relational bookstore dataset — sales, customer behaviour, inventory and revenue across Books, Customers and Orders.",
+    desc: "Exploratory SQL on a bookstore dataset — sales, customer behaviour, inventory and revenue across Books, Customers and Orders.",
     insight: "JOINs, GROUP BY, HAVING, LEFT JOIN, COALESCE, window functions, subqueries.",
     href: "https://github.com/harshvgupta98/SQL_Project_Online_Bookstore",
   },
   {
     title: "World Life Expectancy SQL",
-    tags: ["SQL", "Data Cleaning", "EDA"],
-    desc: "SQL data cleaning and exploratory analysis on life expectancy across 193 countries from 2007–2022 — identifying trends and outlier regions.",
-    insight: "193 countries · 15 years of data · full cleaning pipeline.",
+    tags: ["SQL", "Cleaning", "EDA"],
+    desc: "SQL cleaning and EDA on life expectancy across 193 countries (2007–2022) — trends and outlier regions.",
+    insight: "193 countries · 15 years · full cleaning pipeline.",
     href: "https://github.com/harshvgupta98/SQL_Project_World_Life_Expectancy",
   },
   {
     title: "Sales Performance Dashboard",
     tags: ["Excel", "VBA", "Dashboard"],
-    desc: "End-to-end Excel dashboard analysing 141 executives across 8 regions — advanced formulas, pivot tables, dynamic charts, slicers and VBA macros.",
-    insight: "VBA automation, 4 pivots, dynamic charts, regional slicers — single-screen layout.",
+    desc: "End-to-end Excel dashboard analysing 141 executives across 8 regions — advanced formulas, pivots, dynamic charts, slicers, VBA macros.",
+    insight: "VBA automation · 4 pivots · dynamic charts — single-screen layout.",
     href: "https://github.com/harshvgupta98/EXCEL_Sales_Performance_Dashboard",
   },
 ];
 
 const EDUCATION = [
   {
-    year: "2024 — 2025",
+    year: "2024–2025",
     degree: "MSc in Data Analytics",
     school: "National College of Ireland, Dublin",
-    detail: "NFQ Level 9. Dissertation: Predicting E-commerce Sales Using Deep Learning — LSTM, GRU and a novel Hybrid model on 100,000+ records; Hybrid achieved R² of 0.91.",
+    detail:
+      "NFQ Level 9. Dissertation: Predicting E-commerce Sales Using Deep Learning — LSTM, GRU and a novel Hybrid on 100,000+ records; Hybrid R² of 0.91.",
   },
   {
-    year: "2015 — 2019",
-    degree: "Bachelor of Engineering, Computer Science",
+    year: "2015–2019",
+    degree: "B.E., Computer Science",
     school: "Savitribai Phule Pune University, India",
     detail: "Foundation in data structures, algorithms, DBMS, OOP and data analytics.",
   },
 ];
 
-function TypingTerminal() {
-  const lines = [
-    { prompt: ">>", text: 'print("Hello, World! 👋 I\'m Harsh Gupta")' },
-    { prompt: ">>", text: 'print("Role: Data & BI Analyst · Dublin, IE")' },
-    { prompt: ">>", text: 'stack = ["Power BI", "DAX", "SQL", "Python"]' },
-    { prompt: ">>", text: 'status = "Open to Data / BI / Reporting roles"' },
-  ];
-  const [typed, setTyped] = useState<string[]>(lines.map(() => ""));
+/* ------------------------------ TERMINAL ------------------------------ */
+
+type Lang = "python" | "javascript";
+
+const SCRIPTS: Record<Lang, string[]> = {
+  python: [
+    'print("Hello, World! 👋 I\'m Harsh Gupta")',
+    'print("Role: Data & BI Analyst · Dublin, IE")',
+    'stack = ["Power BI", "DAX", "SQL", "Python"]',
+    'summary = "3+ yrs turning fragmented data into dashboards"',
+    'status = "Open to Data / BI / Reporting roles"',
+  ],
+  javascript: [
+    'console.log("Hello, World! 👋 I\'m Harsh Gupta");',
+    'console.log("Role: Data & BI Analyst · Dublin, IE");',
+    'const stack = ["Power BI", "DAX", "SQL", "Python"];',
+    'const summary = "3+ yrs turning fragmented data into dashboards";',
+    'const status = "Open to Data / BI / Reporting roles";',
+  ],
+};
+
+function Terminal() {
+  const [lang, setLang] = useState<Lang>("python");
+  const lines = SCRIPTS[lang];
+  const [typed, setTyped] = useState<string[]>([]);
   const [lineIdx, setLineIdx] = useState(0);
   const [charIdx, setCharIdx] = useState(0);
 
+  // reset when lang changes
+  useEffect(() => {
+    setTyped([]);
+    setLineIdx(0);
+    setCharIdx(0);
+  }, [lang]);
+
   useEffect(() => {
     if (lineIdx >= lines.length) return;
-    const current = lines[lineIdx].text;
-    if (charIdx <= current.length) {
+    const target = lines[lineIdx];
+    if (charIdx <= target.length) {
       const t = setTimeout(() => {
         setTyped((prev) => {
           const next = [...prev];
-          next[lineIdx] = current.slice(0, charIdx);
+          next[lineIdx] = target.slice(0, charIdx);
           return next;
         });
         setCharIdx((c) => c + 1);
       }, 22);
       return () => clearTimeout(t);
-    } else {
-      const t = setTimeout(() => {
-        setLineIdx((i) => i + 1);
-        setCharIdx(0);
-      }, 350);
-      return () => clearTimeout(t);
     }
-  }, [charIdx, lineIdx]);
+    const t = setTimeout(() => {
+      setLineIdx((i) => i + 1);
+      setCharIdx(0);
+    }, 380);
+    return () => clearTimeout(t);
+  }, [charIdx, lineIdx, lines]);
+
+  const prefix = lang === "python" ? ">>>" : ">";
+  const cmd = lang === "python" ? "python" : "node";
 
   return (
-    <div className="w-full rounded-lg border border-border bg-card/80 shadow-2xl overflow-hidden font-mono text-sm">
-      <div className="flex items-center gap-2 px-4 py-2.5 bg-muted/60 border-b border-border">
-        <span className="h-3 w-3 rounded-full bg-red-500/80" />
-        <span className="h-3 w-3 rounded-full bg-yellow-500/80" />
-        <span className="h-3 w-3 rounded-full bg-green-500/80" />
-        <span className="ml-3 text-xs text-muted-foreground">harsh@portfolio: ~</span>
+    <div className="w-full max-w-2xl mx-auto rounded-xl border border-border bg-card shadow-lg overflow-hidden">
+      {/* Tabs */}
+      <div className="flex items-center gap-1 px-3 pt-3 pb-0 bg-card">
+        {(["python", "javascript"] as Lang[]).map((l) => (
+          <button
+            key={l}
+            onClick={() => setLang(l)}
+            className={`text-xs font-mono px-3 py-1.5 rounded-md transition ${
+              lang === l
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            {l === "python" ? "Python" : "Javascript"}
+          </button>
+        ))}
       </div>
-      <div className="p-5 space-y-1.5 min-h-[220px]">
-        <div className="text-primary">harsh@portfolio:~$ <span className="text-foreground">python</span></div>
+      <div className="mx-3 mt-2 rounded-lg bg-secondary/50 border border-border font-mono text-[13px] leading-relaxed p-4 min-h-[220px] mb-3">
+        <div className="flex items-center gap-2 text-muted-foreground pb-2">
+          <span>✉</span>
+          <span>harsh@portfolio:~$</span>
+          <span className="text-accent">{cmd}</span>
+        </div>
         {typed.map((line, i) => (
-          <div key={i} className="text-foreground">
-            <span className="text-accent">{lines[i].prompt}</span>{" "}
-            <span>{line}</span>
+          <div key={i} className="text-foreground/90">
+            <span className="text-accent">{prefix}</span>{" "}
+            <span className="whitespace-pre-wrap break-words">{line}</span>
             {i === lineIdx && <span className="cursor-blink text-primary">▊</span>}
           </div>
         ))}
         {lineIdx >= lines.length && (
-          <div className="text-primary pt-1">harsh@portfolio:~$ <span className="cursor-blink">▊</span></div>
+          <div className="text-muted-foreground pt-1">
+            <span className="text-accent">{prefix}</span>{" "}
+            <span className="cursor-blink text-primary">▊</span>
+          </div>
         )}
       </div>
     </div>
   );
 }
 
-function SectionLabel({ n, label }: { n: string; label: string }) {
+/* ------------------------------ SIDE RAILS ------------------------------ */
+
+function LeftRail() {
   return (
-    <div className="font-mono text-xs text-muted-foreground mb-3">
-      <span className="text-primary">// {n}</span> {label}
+    <div className="hidden md:flex fixed left-6 bottom-0 flex-col items-center gap-5 z-40">
+      <a
+        href="https://github.com/harshvgupta98"
+        target="_blank"
+        rel="noreferrer"
+        className="text-muted-foreground hover:text-accent hover:-translate-y-0.5 transition"
+        aria-label="GitHub"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.53-1.35-1.29-1.71-1.29-1.71-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.72-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.39-5.25 5.67.41.35.78 1.05.78 2.12v3.14c0 .3.21.67.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+      </a>
+      <a
+        href="https://linkedin.com/in/1harsh-gupta"
+        target="_blank"
+        rel="noreferrer"
+        className="text-muted-foreground hover:text-accent hover:-translate-y-0.5 transition"
+        aria-label="LinkedIn"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.4v1.56h.05a3.73 3.73 0 0 1 3.36-1.85c3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.23 0H1.77C.79 0 0 .78 0 1.73v20.53C0 23.22.79 24 1.77 24h20.46c.98 0 1.77-.78 1.77-1.74V1.73C24 .78 23.21 0 22.23 0Z"/></svg>
+      </a>
+      <a
+        href="mailto:harshvgupta1998@gmail.com"
+        className="text-muted-foreground hover:text-accent hover:-translate-y-0.5 transition"
+        aria-label="Email"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+      </a>
+      <div className="w-px h-24 bg-border" />
     </div>
   );
 }
 
+function RightRail() {
+  return (
+    <div className="hidden md:flex fixed right-6 bottom-0 flex-col items-center gap-5 z-40">
+      <a
+        href="mailto:harshvgupta1998@gmail.com"
+        className="font-mono text-xs tracking-widest text-muted-foreground hover:text-accent transition"
+        style={{ writingMode: "vertical-rl" }}
+      >
+        harshvgupta1998@gmail.com
+      </a>
+      <div className="w-px h-24 bg-border" />
+    </div>
+  );
+}
+
+/* ------------------------------ PAGE ------------------------------ */
+
 function Index() {
+  const skillsDoubled = useMemo(() => [...SKILLS, ...SKILLS], []);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <LeftRail />
+      <RightRail />
+
       {/* Nav */}
-      <header className="sticky top-0 z-40 backdrop-blur bg-background/70 border-b border-border">
+      <header className="sticky top-0 z-30 backdrop-blur bg-background/70 border-b border-border">
         <nav className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
-          <a href="#top" className="font-mono text-sm">
-            <span className="text-primary">harsh</span>
-            <span className="text-muted-foreground">@gupta</span>
-            <span className="text-accent">:~$</span>
+          <a href="#top" className="font-mono text-base md:text-lg font-semibold">
+            <span>harsh</span>
+            <span className="text-accent">.py</span>
           </a>
-          <div className="hidden md:flex items-center gap-6 text-sm text-muted-foreground font-mono">
-            <a href="#about" className="hover:text-primary transition">about</a>
-            <a href="#experience" className="hover:text-primary transition">experience</a>
-            <a href="#projects" className="hover:text-primary transition">projects</a>
-            <a href="#skills" className="hover:text-primary transition">skills</a>
-            <a href="#contact" className="hover:text-primary transition">contact</a>
+          <div className="flex items-center gap-4 md:gap-8 text-sm font-mono">
+            <a href="#about" className="hover:text-accent transition">◆ About</a>
+            <a href="#projects" className="hidden sm:inline hover:text-accent transition">✦ Projects</a>
+            <a href="#experience" className="hidden sm:inline hover:text-accent transition">▣ Work</a>
+            <a href="#education" className="hidden sm:inline hover:text-accent transition">▲ Education</a>
           </div>
-          <a
-            href="mailto:harshvgupta1998@gmail.com"
-            className="text-xs md:text-sm font-mono px-3 py-1.5 rounded border border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground transition"
-          >
-            hire me
-          </a>
         </nav>
       </header>
 
       {/* Hero */}
-      <section id="top" className="mx-auto max-w-6xl px-6 pt-16 pb-20 md:pt-24 md:pb-28">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="font-mono text-xs text-primary mb-4 tracking-wider">
-              // available for work · dublin, ireland
-            </div>
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-[1.05]">
-              Harsh Gupta
-            </h1>
-            <h2 className="mt-3 font-mono text-lg md:text-xl text-accent">
-              Data &amp; BI Analyst
-            </h2>
-            <p className="mt-6 text-muted-foreground max-w-lg leading-relaxed">
-              I turn messy, fragmented data into <span className="text-foreground">Power BI dashboards</span> and analytical pipelines that help teams make faster decisions. 3+ years across commercial and operational environments — from <span className="text-foreground">€11M engineering contracts</span> to <span className="text-foreground">20,000+ SKU</span> procurement tracking.
-            </p>
-            <div className="mt-4 flex flex-wrap gap-2 font-mono text-xs">
-              {["Python", "SQL", "Power BI", "DAX"].map((s) => (
-                <span key={s} className="px-2 py-1 rounded bg-muted text-muted-foreground border border-border">{s}</span>
-              ))}
-            </div>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#projects" className="font-mono text-sm px-4 py-2.5 rounded bg-primary text-primary-foreground hover:opacity-90 transition">
-                view_projects()
-              </a>
-              <a href="#contact" className="font-mono text-sm px-4 py-2.5 rounded border border-border hover:border-primary hover:text-primary transition">
-                get_in_touch()
-              </a>
-            </div>
-            <div className="mt-10 grid grid-cols-4 gap-4 max-w-md">
-              {[
-                ["3+", "yrs exp"],
-                ["8+", "projects"],
-                ["€11M", "tracked"],
-                ["MSc", "NCI Dublin"],
-              ].map(([n, l]) => (
-                <div key={l}>
-                  <div className="font-mono text-2xl text-primary">{n}</div>
-                  <div className="text-[11px] uppercase tracking-wider text-muted-foreground">{l}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div>
-            <TypingTerminal />
-          </div>
+      <section id="top" className="mx-auto max-w-4xl px-6 pt-16 md:pt-24 pb-16 text-center animate-fade-in">
+        <div className="font-mono text-xs text-muted-foreground tracking-widest mb-4">
+          // available for work · dublin, ireland
+        </div>
+        <h1 className="font-mono text-5xl md:text-7xl font-bold tracking-tight">
+          Harsh Gupta
+        </h1>
+        <p className="mt-4 font-mono text-lg md:text-xl text-muted-foreground">
+          Data &amp; BI Analyst
+        </p>
+
+        <div className="mt-10">
+          <Terminal />
+        </div>
+
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <a
+            href="#about"
+            className="font-mono text-sm px-5 py-2.5 rounded-md bg-primary text-primary-foreground hover:opacity-90 transition"
+          >
+            About Me
+          </a>
+          <a
+            href="#contact"
+            className="font-mono text-sm px-5 py-2.5 rounded-md border border-border hover:border-accent hover:text-accent transition"
+          >
+            Get in touch
+          </a>
         </div>
       </section>
 
-      {/* Skills marquee */}
-      <section className="border-y border-border bg-muted/30 py-4 overflow-hidden">
-        <div className="flex gap-3 animate-marquee whitespace-nowrap w-max font-mono text-sm">
-          {[...SKILLS, ...SKILLS].map((s, i) => (
-            <span key={i} className="px-3 py-1 rounded border border-border bg-card text-muted-foreground">
-              {s}
-            </span>
+      {/* Skills grid */}
+      <section id="skills" className="mx-auto max-w-5xl px-6 pb-16">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+          {SKILLS.map((s, i) => (
+            <div
+              key={s.name}
+              className="group aspect-[3/2] rounded-lg border border-border bg-card flex flex-col items-center justify-center gap-2 hover:border-accent hover:-translate-y-0.5 hover:shadow-md transition animate-fade-in"
+              style={{ animationDelay: `${i * 30}ms`, animationFillMode: "both" }}
+            >
+              <div className="text-2xl group-hover:scale-110 transition-transform">{s.icon}</div>
+              <div className="font-mono text-xs text-muted-foreground group-hover:text-foreground transition">
+                {s.name}
+              </div>
+            </div>
           ))}
         </div>
-      </section>
-
-      {/* About */}
-      <section id="about" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <SectionLabel n="01" label="about" />
-        <h2 className="text-3xl md:text-4xl font-bold">
-          The analyst <span className="italic text-primary">behind the data</span>
-        </h2>
-        <div className="mt-8 grid md:grid-cols-3 gap-10">
-          <div className="md:col-span-2 space-y-4 text-muted-foreground leading-relaxed">
-            <p>
-              I turn fragmented, inconsistent data into dashboards, KPI frameworks and analytical pipelines that help commercial and operational teams make faster decisions.
-            </p>
-            <p>
-              3+ years specialised in <span className="text-foreground">Power BI (DAX, Power Query, Star Schema)</span>, <span className="text-foreground">SQL</span> and <span className="text-foreground">Python</span>. I've built dashboards tracking <span className="text-primary">€11M in contracts</span>, eliminated <span className="text-primary">2 days of weekly manual reporting</span>, and reduced pricing errors by <span className="text-primary">5%</span> through data validation at scale.
-            </p>
-            <p>
-              MSc in Data Analytics, National College of Ireland. Based in Dublin with full work authorisation — actively seeking <span className="text-foreground">Data Analyst, BI Analyst, Business Analyst or Reporting Analyst</span> roles across Ireland.
-            </p>
-          </div>
-          <div className="space-y-3">
-            {[
-              ["📊", "Power BI & DAX", "DAX measures, star schema, time intelligence"],
-              ["🗄️", "SQL & Databases", "MySQL, PostgreSQL — CTEs, window functions"],
-              ["🐍", "Python Analytics", "Pandas, NumPy, Scikit-learn, Matplotlib"],
-              ["🎓", "MSc Data Analytics", "NCI Dublin · NFQ Level 9"],
-            ].map(([icon, title, desc]) => (
-              <div key={title} className="p-4 rounded-lg border border-border bg-card">
-                <div className="text-2xl">{icon}</div>
-                <div className="mt-2 font-semibold">{title}</div>
-                <div className="text-xs text-muted-foreground mt-1">{desc}</div>
-              </div>
+        {/* Marquee ribbon */}
+        <div className="mt-10 overflow-hidden border-y border-border py-3 bg-secondary/40">
+          <div className="flex gap-3 animate-marquee whitespace-nowrap w-max font-mono text-xs">
+            {skillsDoubled.map((s, i) => (
+              <span key={i} className="px-3 py-1 rounded border border-border bg-card text-muted-foreground">
+                {s.name}
+              </span>
             ))}
           </div>
         </div>
       </section>
 
+      {/* About */}
+      <Section id="about" n="01" label="about" title="The analyst" italic="behind the data">
+        <div className="max-w-3xl mx-auto text-center space-y-4 text-muted-foreground leading-relaxed">
+          <p>
+            नमस्कार 🙏 I'm Harsh — a Data & BI Analyst who turns fragmented, inconsistent data into
+            dashboards, KPI frameworks and analytical pipelines that help commercial and operational
+            teams make faster decisions.
+          </p>
+          <p>
+            3+ years specialised in <span className="text-foreground">Power BI (DAX, Power Query, Star Schema)</span>,{" "}
+            <span className="text-foreground">SQL</span> and <span className="text-foreground">Python</span>. I've built
+            dashboards tracking <span className="text-accent font-medium">€11M in contracts</span>, eliminated{" "}
+            <span className="text-accent font-medium">2 days of weekly manual reporting</span>, and reduced pricing errors by{" "}
+            <span className="text-accent font-medium">5%</span> through data validation at scale.
+          </p>
+          <p>
+            MSc in Data Analytics, National College of Ireland. Dublin-based with full work authorisation —
+            actively seeking Data Analyst, BI Analyst, Business Analyst or Reporting Analyst roles across Ireland.
+          </p>
+        </div>
+      </Section>
+
+      {/* Projects */}
+      <Section id="projects" n="02" label="projects" title="What I've" italic="built">
+        <div className="grid md:grid-cols-2 gap-5 max-w-5xl mx-auto">
+          {PROJECTS.map((p, i) => (
+            <a
+              key={p.title}
+              href={p.href}
+              target="_blank"
+              rel="noreferrer"
+              className="group p-6 rounded-xl border border-border bg-card hover:border-accent hover:-translate-y-0.5 hover:shadow-md transition flex flex-col animate-fade-in text-left"
+              style={{ animationDelay: `${i * 60}ms`, animationFillMode: "both" }}
+            >
+              <div className="flex flex-wrap gap-1.5 font-mono text-[11px] mb-3">
+                {p.tags.map((t) => (
+                  <span key={t} className="px-2 py-0.5 rounded bg-secondary text-muted-foreground border border-border">
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <h3 className="text-lg font-semibold group-hover:text-accent transition">{p.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
+              <p className="mt-3 text-xs text-foreground/90 leading-relaxed">
+                <span className="text-accent font-mono">insight →</span> {p.insight}
+              </p>
+              <div className="mt-4 font-mono text-xs text-accent opacity-70 group-hover:opacity-100">
+                View on GitHub →
+              </div>
+            </a>
+          ))}
+        </div>
+      </Section>
+
       {/* Experience */}
-      <section id="experience" className="mx-auto max-w-6xl px-6 py-20 md:py-28 border-t border-border">
-        <SectionLabel n="02" label="experience" />
-        <h2 className="text-3xl md:text-4xl font-bold">
-          Where I've <span className="italic text-primary">worked</span>
-        </h2>
-        <div className="mt-10 space-y-6">
-          {EXPERIENCE.map((exp) => (
-            <div key={exp.role + exp.company} className="grid md:grid-cols-[180px_1fr] gap-6 p-6 rounded-lg border border-border bg-card hover:border-primary/50 transition">
-              <div className="font-mono text-xs text-primary">{exp.year}</div>
+      <Section id="experience" n="03" label="work" title="Where I've" italic="worked">
+        <div className="max-w-4xl mx-auto space-y-5">
+          {EXPERIENCE.map((exp, i) => (
+            <div
+              key={exp.role + exp.company}
+              className="grid md:grid-cols-[160px_1fr] gap-6 p-6 rounded-xl border border-border bg-card hover:border-accent/60 transition animate-fade-in text-left"
+              style={{ animationDelay: `${i * 80}ms`, animationFillMode: "both" }}
+            >
+              <div className="font-mono text-xs text-accent">{exp.year}</div>
               <div>
                 <h3 className="text-xl font-semibold">{exp.role}</h3>
                 <div className="text-sm text-muted-foreground mt-1">
@@ -330,13 +451,15 @@ function Index() {
                 </div>
                 <div className="mt-3 flex flex-wrap gap-1.5 font-mono text-[11px]">
                   {exp.tags.map((t) => (
-                    <span key={t} className="px-2 py-0.5 rounded bg-muted text-accent border border-border">{t}</span>
+                    <span key={t} className="px-2 py-0.5 rounded bg-secondary text-muted-foreground border border-border">
+                      {t}
+                    </span>
                   ))}
                 </div>
                 <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                  {exp.bullets.map((b, i) => (
-                    <li key={i} className="flex gap-3 leading-relaxed">
-                      <span className="text-primary font-mono mt-1">→</span>
+                  {exp.bullets.map((b, j) => (
+                    <li key={j} className="flex gap-3 leading-relaxed">
+                      <span className="text-accent font-mono mt-1">→</span>
                       <span>{b}</span>
                     </li>
                   ))}
@@ -345,78 +468,18 @@ function Index() {
             </div>
           ))}
         </div>
-      </section>
-
-      {/* Projects */}
-      <section id="projects" className="mx-auto max-w-6xl px-6 py-20 md:py-28 border-t border-border">
-        <SectionLabel n="03" label="projects" />
-        <h2 className="text-3xl md:text-4xl font-bold">
-          What I've <span className="italic text-primary">built</span>
-        </h2>
-        <div className="mt-10 grid md:grid-cols-2 gap-5">
-          {PROJECTS.map((p) => (
-            <a
-              key={p.title}
-              href={p.href}
-              target="_blank"
-              rel="noreferrer"
-              className="group p-6 rounded-lg border border-border bg-card hover:border-primary hover:-translate-y-0.5 transition flex flex-col"
-            >
-              <div className="flex flex-wrap gap-1.5 font-mono text-[11px] mb-3">
-                {p.tags.map((t) => (
-                  <span key={t} className="px-2 py-0.5 rounded bg-muted text-accent border border-border">{t}</span>
-                ))}
-              </div>
-              <h3 className="text-lg font-semibold group-hover:text-primary transition">{p.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
-              <p className="mt-3 text-xs text-foreground/90 leading-relaxed">
-                <span className="text-primary font-mono">key_insight:</span> {p.insight}
-              </p>
-              <div className="mt-4 font-mono text-xs text-primary opacity-70 group-hover:opacity-100">
-                view on github →
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      {/* Skills */}
-      <section id="skills" className="mx-auto max-w-6xl px-6 py-20 md:py-28 border-t border-border">
-        <SectionLabel n="04" label="skills" />
-        <h2 className="text-3xl md:text-4xl font-bold">
-          Tools &amp; <span className="italic text-primary">technologies</span>
-        </h2>
-        <div className="mt-10 grid md:grid-cols-2 gap-4">
-          {[
-            ["BI & Visualisation", ["Power BI", "DAX", "Power Query", "Tableau", "Google Analytics"]],
-            ["Languages & Databases", ["Python", "SQL", "MySQL", "PostgreSQL"]],
-            ["Analytics", ["KPI Reporting", "EDA", "Customer Segmentation", "Predictive Modelling", "Time Series"]],
-            ["Machine Learning", ["Regression", "Classification", "Clustering"]],
-            ["Microsoft Excel", ["Advanced Formulas", "Pivot Tables", "VBA Macros", "Charts & Slicers", "Data Validation"]],
-            ["Libraries & Tools", ["Pandas", "NumPy", "Scikit-learn", "Matplotlib", "Seaborn", "Linnworks", "Jupyter"]],
-          ].map(([cat, items]) => (
-            <div key={cat as string} className="p-5 rounded-lg border border-border bg-card">
-              <div className="font-mono text-xs text-primary mb-3">{cat as string}</div>
-              <div className="flex flex-wrap gap-2">
-                {(items as string[]).map((s) => (
-                  <span key={s} className="px-2.5 py-1 rounded bg-muted text-sm text-muted-foreground border border-border">{s}</span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      </Section>
 
       {/* Education */}
-      <section className="mx-auto max-w-6xl px-6 py-20 md:py-28 border-t border-border">
-        <SectionLabel n="05" label="education" />
-        <h2 className="text-3xl md:text-4xl font-bold">
-          Academic <span className="italic text-primary">background</span>
-        </h2>
-        <div className="mt-10 space-y-5">
-          {EDUCATION.map((e) => (
-            <div key={e.degree} className="grid md:grid-cols-[180px_1fr] gap-6 p-6 rounded-lg border border-border bg-card">
-              <div className="font-mono text-xs text-primary">{e.year}</div>
+      <Section id="education" n="04" label="education" title="Academic" italic="background">
+        <div className="max-w-4xl mx-auto space-y-5">
+          {EDUCATION.map((e, i) => (
+            <div
+              key={e.degree}
+              className="grid md:grid-cols-[160px_1fr] gap-6 p-6 rounded-xl border border-border bg-card animate-fade-in text-left"
+              style={{ animationDelay: `${i * 80}ms`, animationFillMode: "both" }}
+            >
+              <div className="font-mono text-xs text-accent">{e.year}</div>
               <div>
                 <h3 className="text-xl font-semibold">{e.degree}</h3>
                 <div className="text-sm text-muted-foreground mt-1">{e.school}</div>
@@ -425,36 +488,78 @@ function Index() {
             </div>
           ))}
         </div>
-      </section>
+      </Section>
 
       {/* Contact */}
-      <section id="contact" className="mx-auto max-w-6xl px-6 py-20 md:py-28 border-t border-border">
-        <SectionLabel n="06" label="contact" />
-        <h2 className="text-3xl md:text-4xl font-bold">
-          Let's <span className="italic text-primary">connect</span>
-        </h2>
-        <p className="mt-6 text-muted-foreground max-w-2xl leading-relaxed">
-          I'm actively seeking Data Analyst, BI Analyst, Business Analyst or Reporting Analyst roles in Dublin. Feel free to reach out directly.
-        </p>
-        <div className="mt-8 flex flex-wrap gap-3 font-mono text-sm">
-          <a href="mailto:harshvgupta1998@gmail.com" className="px-4 py-3 rounded border border-border bg-card hover:border-primary hover:text-primary transition">
-            ✉ harshvgupta1998@gmail.com
-          </a>
-          <a href="https://linkedin.com/in/1harsh-gupta" target="_blank" rel="noreferrer" className="px-4 py-3 rounded border border-border bg-card hover:border-primary hover:text-primary transition">
-            in linkedin.com/in/1harsh-gupta
-          </a>
-          <a href="https://github.com/harshvgupta98" target="_blank" rel="noreferrer" className="px-4 py-3 rounded border border-border bg-card hover:border-primary hover:text-primary transition">
-            ⌥ github.com/harshvgupta98
-          </a>
+      <Section id="contact" n="05" label="contact" title="Let's" italic="connect">
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="text-muted-foreground leading-relaxed">
+            I'm actively seeking Data Analyst, BI Analyst, Business Analyst or Reporting Analyst roles in Dublin.
+            Feel free to reach out directly.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3 font-mono text-sm">
+            <a
+              href="mailto:harshvgupta1998@gmail.com"
+              className="px-4 py-3 rounded-md border border-border bg-card hover:border-accent hover:text-accent transition"
+            >
+              ✉ harshvgupta1998@gmail.com
+            </a>
+            <a
+              href="https://linkedin.com/in/1harsh-gupta"
+              target="_blank"
+              rel="noreferrer"
+              className="px-4 py-3 rounded-md border border-border bg-card hover:border-accent hover:text-accent transition"
+            >
+              in LinkedIn
+            </a>
+            <a
+              href="https://github.com/harshvgupta98"
+              target="_blank"
+              rel="noreferrer"
+              className="px-4 py-3 rounded-md border border-border bg-card hover:border-accent hover:text-accent transition"
+            >
+              ⌥ GitHub
+            </a>
+          </div>
         </div>
-      </section>
+      </Section>
 
       <footer className="border-t border-border">
         <div className="mx-auto max-w-6xl px-6 py-8 flex flex-wrap items-center justify-between gap-3 font-mono text-xs text-muted-foreground">
           <div>© {new Date().getFullYear()} Harsh Gupta · Dublin, Ireland</div>
-          <div>Built with React + TanStack Start</div>
+          <div>harsh.py — built with React + TanStack</div>
         </div>
       </footer>
     </div>
+  );
+}
+
+function Section({
+  id,
+  n,
+  label,
+  title,
+  italic,
+  children,
+}: {
+  id: string;
+  n: string;
+  label: string;
+  title: string;
+  italic: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section id={id} className="mx-auto max-w-6xl px-6 py-20 md:py-24 border-t border-border">
+      <div className="text-center mb-10">
+        <div className="font-mono text-xs text-muted-foreground tracking-widest">
+          <span className="text-accent">//</span> {n} {label}
+        </div>
+        <h2 className="mt-3 text-3xl md:text-4xl font-bold">
+          {title} <span className="italic text-accent">{italic}</span>
+        </h2>
+      </div>
+      {children}
+    </section>
   );
 }
