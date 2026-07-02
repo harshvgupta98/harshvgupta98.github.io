@@ -446,20 +446,27 @@ function Index() {
         <div className="grid md:grid-cols-[1fr_auto] gap-10 items-start max-w-5xl mx-auto">
           <div className="space-y-4 text-muted-foreground leading-relaxed">
             <p>
-              नमस्कार 🙏 I'm Harsh · a Data & BI Analyst who turns fragmented, inconsistent data into
-              dashboards, KPI frameworks and analytical pipelines that help commercial and operational
-              teams make faster decisions.
+              नमस्कार 🙏 I'm Harsh, a Data Analyst with 3+ years of experience streamlining reporting
+              and inventory decisions across retail and project based environments. I work mainly in
+              Power BI, SQL and Python, with a focus on DAX modelling, ETL/ELT pipelines, KPI framework
+              design and AI assisted analytics.
             </p>
             <p>
-              3+ years specialised in <span className="text-foreground">Power BI (DAX, Power Query, Star Schema)</span>,{" "}
-              <span className="text-foreground">SQL</span> and <span className="text-foreground">Python</span>. I've built
-              dashboards tracking <span className="text-accent font-medium">€11M in contracts</span>, eliminated{" "}
-              <span className="text-accent font-medium">2 days of weekly manual reporting</span>, and reduced pricing errors by{" "}
-              <span className="text-accent font-medium">5%</span> through data validation at scale.
+              After three years working as a data analyst across project based and administrative
+              environments in India, I moved to Dublin to pursue an MSc in Data Analytics at the National
+              College of Ireland. That year sharpened my grip on predictive analytics, statistical
+              modelling and the kind of data governance that actually holds up once it reaches a dashboard,
+              and it's where I built the hybrid LSTM plus GRU model that still anchors my proudest project.
             </p>
+            <p>When I'm not analysing dashboards, you might find me:</p>
+            <div className="pl-4 space-y-1">
+              <p>🏀 Playing competitive basketball, represented India at junior national level in 2014</p>
+              <p>🏍️ Planning the next motorcycle route, already conquered Umling La, the world's highest motorable road</p>
+              <p>💪 In the gym, training year round</p>
+            </div>
             <p>
-              MSc in Data Analytics, National College of Ireland. Dublin-based with full work authorisation -
-              actively seeking Data Analyst, BI Analyst, Business Analyst or Reporting Analyst roles across Ireland.
+              Currently based in Dublin with full work authorisation, actively looking for Data Analyst,
+              BI Analyst or Reporting Analyst roles across Ireland.
             </p>
           </div>
           <div className="mx-auto md:mx-0 md:mt-6">
@@ -535,7 +542,7 @@ function Index() {
                       <img
                         src={exp.logo}
                         alt={`${exp.company} logo`}
-                        className="max-h-full max-w-full object-contain p-1.5 grayscale brightness-0"
+                        className="max-h-full max-w-full object-contain p-1.5"
                         loading="lazy"
                       />
                     </div>
@@ -589,7 +596,7 @@ function Index() {
                       <img
                         src={e.logo}
                         alt={`${e.school} logo`}
-                        className="max-h-full max-w-full object-contain p-1.5 grayscale brightness-0"
+                        className="max-h-full max-w-full object-contain p-1.5"
                         loading="lazy"
                       />
                     </div>
