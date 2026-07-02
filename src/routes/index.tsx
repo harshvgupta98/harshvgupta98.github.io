@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { ReactNode } from "react";
 import { User, Code2, Briefcase, GraduationCap } from "lucide-react";
 import nciLogo from "@/assets/nci-logo.png.asset.json";
 import sppuLogo from "@/assets/sppu-logo.jpg.asset.json";
@@ -13,6 +14,59 @@ const portrait = portraitAsset.url;
 export const Route = createFileRoute("/")({
   component: Index,
 });
+
+/* ------------------------------ REVEAL ------------------------------ */
+
+function Reveal({
+  children,
+  as: Tag = "div",
+  className = "",
+  direction = "up",
+  delay = 0,
+  style,
+}: {
+  children: ReactNode;
+  as?: "div" | "section" | "li" | "article";
+  className?: string;
+  direction?: "up" | "left" | "right";
+  delay?: number;
+  style?: React.CSSProperties;
+}) {
+  const ref = useRef<HTMLElement | null>(null);
+  const [shown, setShown] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setShown(true);
+            io.disconnect();
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const dirClass =
+    direction === "left" ? "reveal-left" : direction === "right" ? "reveal-right" : "";
+
+  return (
+    <Tag
+      ref={ref as never}
+      className={`reveal ${dirClass} ${shown ? "reveal-in" : ""} ${className}`}
+      style={{ transitionDelay: `${delay}ms`, ...style }}
+    >
+      {children}
+    </Tag>
+  );
+}
+
 
 /* ------------------------------ DATA ------------------------------ */
 
