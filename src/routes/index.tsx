@@ -97,6 +97,7 @@ const SKILLS: { name: string; asset?: string; slug?: string; fallback?: string }
   { name: "Jupyter", slug: "jupyter" },
   { name: "Git", slug: "git" },
   { name: "Star Schema", fallback: "✦" },
+  { name: "Azure", slug: "azure" },
 ];
 
 // Extra skill icons used only inside tag chips
@@ -499,7 +500,7 @@ function Index() {
 
       {/* Skills grid */}
       <section id="skills" className="mx-auto max-w-5xl px-6 pb-16">
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
           {SKILLS.map((s, i) => (
             <div
               key={s.name}
@@ -534,9 +535,10 @@ function Index() {
       </section>
 
       {/* About */}
-      <Section id="about" label="About" title="The analyst" italic="behind the data">
+      <section id="about" className="mx-auto max-w-6xl px-6 py-16 md:py-20 border-t border-border">
         <div className="grid md:grid-cols-[1fr_auto] gap-10 items-start max-w-5xl mx-auto">
           <div className="rounded-xl border border-border bg-card p-6 shadow-sm space-y-4 font-mono text-[13px] text-foreground/80 leading-relaxed">
+            <h3 className="font-mono text-lg font-bold text-foreground">💡 About Me</h3>
             <p>
               नमस्कार 🙏 I'm Harsh, a Data Analyst with 3+ years of experience streamlining reporting and inventory
               decisions across retail and project based environments. I work mainly in Power BI, SQL and Python, with a
@@ -549,13 +551,11 @@ function Index() {
               actually holds up once it reaches a dashboard, and it's where I built the hybrid LSTM plus GRU model that
               still anchors my proudest project.
             </p>
-            <div className="rounded-lg bg-[#f2f2f2] p-5 mt-2">
+            <div className="rounded-lg bg-[#f2f2f2] p-5 mt-2 space-y-1.5">
               <p className="font-semibold text-foreground/90">When I'm not analysing dashboards, you might find me:</p>
-              <ul className="mt-2 list-disc pl-5 space-y-1.5 text-foreground/80">
-                🏀 Playing competitive basketball, represented India at junior national level in 2014 🏍️ Planning the
-                next motorcycle route, already conquered Umling La, the world's highest motorable road 💪 In the gym,
-                training year round
-              </ul>
+              <p>• 🏀 Playing competitive basketball, represented India at junior national level in 2014</p>
+              <p>• 🏍️ Planning the next motorcycle route, already conquered Umling La, the world's highest motorable road</p>
+              <p>• 💪 In the gym, training year round</p>
             </div>
             <p>
               Currently based in Dublin with full work authorisation, actively looking for Data Analyst, BI Analyst or
@@ -576,7 +576,7 @@ function Index() {
             </div>
           </div>
         </div>
-      </Section>
+      </section>
 
       {/* Projects */}
       <Section id="projects" label="Projects" title="What I've" italic="built">
