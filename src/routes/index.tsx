@@ -360,26 +360,26 @@ function Index() {
 
       {/* Skills grid */}
       <section id="skills" className="mx-auto max-w-5xl px-6 pb-16">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2">
           {SKILLS.map((s, i) => (
             <div
               key={s.name}
-              className="group aspect-[3/2] rounded-lg border border-border bg-card flex flex-col items-center justify-center gap-2 hover:border-accent hover:-translate-y-0.5 hover:shadow-md transition animate-fade-in"
+              className="group py-2 rounded-lg border border-border bg-card flex flex-col items-center justify-center gap-1 hover:border-accent hover:-translate-y-0.5 hover:shadow-md transition animate-fade-in"
               style={{ animationDelay: `${i * 30}ms`, animationFillMode: "both" }}
             >
-              <div className="h-8 w-8 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="h-6 w-6 flex items-center justify-center group-hover:scale-110 transition-transform">
                 {s.slug ? (
                   <img
                     src={`https://cdn.simpleicons.org/${s.slug}`}
                     alt={`${s.name} logo`}
-                    className="h-8 w-8 object-contain"
+                    className="h-6 w-6 object-contain"
                     loading="lazy"
                   />
                 ) : (
-                  <span className="font-mono text-lg text-accent">{s.fallback}</span>
+                  <span className="font-mono text-sm text-accent">{s.fallback}</span>
                 )}
               </div>
-              <div className="font-mono text-xs text-muted-foreground group-hover:text-foreground transition">
+              <div className="font-mono text-[10px] text-muted-foreground group-hover:text-foreground transition">
                 {s.name}
               </div>
             </div>
