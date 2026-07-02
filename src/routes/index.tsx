@@ -11,6 +11,9 @@ import lenehansLogo from "@/assets/lenehans.jpg.asset.json";
 import elloraLogo from "@/assets/ellora.jpg.asset.json";
 import santoshLogo from "@/assets/santosh.png.asset.json";
 import portraitAsset from "@/assets/harsh-portrait.jpg.asset.json";
+import certMysql from "@/assets/cert-mysql.png.asset.json";
+import certPowerbi from "@/assets/cert-powerbi.png.asset.json";
+import certPl300 from "@/assets/cert-pl300.png.asset.json";
 
 const portrait = portraitAsset.url;
 
@@ -172,31 +175,21 @@ const PROJECTS = [
     href: "https://github.com/harshvgupta98/PYTHON_SQL_POWERBI_Customer_Behavior_Dashboard",
   },
   {
-    title: "HR Attrition Dashboard",
-    tags: ["Power BI", "DAX", "HR Analytics"],
-    desc: "Attrition dashboard across 1,480 employees · rate, salary bands, roles, and tenure by department on a star schema.",
-    insight: "68% attrition sits in the under-€5K band; Year 1 spike of 59 employees.",
-    href: "https://github.com/harshvgupta98/POWERBI_HR_Analytics_Dashboard",
+    title: "Predicting E-commerce Sales with Deep Learning",
+    tags: ["Python", "LSTM", "GRU"],
+    desc: "MSc dissertation · built LSTM, GRU and a novel Hybrid LSTM+GRU model on 100,000+ Rossmann sales records to forecast daily store revenue.",
+    href: "https://github.com/harshvgupta98",
   },
   {
     title: "Online Bookstore SQL",
     tags: ["SQL", "EDA", "Relational DB"],
     desc: "Exploratory SQL on a bookstore dataset · sales, customer behaviour, inventory and revenue across Books, Customers and Orders.",
-    insight: "JOINs, GROUP BY, HAVING, LEFT JOIN, COALESCE, window functions, subqueries.",
     href: "https://github.com/harshvgupta98/SQL_Project_Online_Bookstore",
-  },
-  {
-    title: "World Life Expectancy SQL",
-    tags: ["SQL", "Cleaning", "EDA"],
-    desc: "SQL cleaning and EDA on life expectancy across 193 countries (2007–2022) · trends and outlier regions.",
-    insight: "193 countries · 15 years · full cleaning pipeline.",
-    href: "https://github.com/harshvgupta98/SQL_Project_World_Life_Expectancy",
   },
   {
     title: "Sales Performance Dashboard",
     tags: ["Excel", "VBA", "Dashboard"],
     desc: "End-to-end Excel dashboard analysing 141 executives across 8 regions · advanced formulas, pivots, dynamic charts, slicers, VBA macros.",
-    insight: "VBA automation · 4 pivots · dynamic charts · single-screen layout.",
     href: "https://github.com/harshvgupta98/EXCEL_Sales_Performance_Dashboard",
   },
 ];
@@ -206,16 +199,15 @@ const EDUCATION = [
     year: "2024–2025",
     degree: "MSc in Data Analytics",
     school: "National College of Ireland, Dublin",
+    dates: "Sep 2024 - Sep 2025",
     logo: nciLogo.url,
-    detail:
-      "NFQ Level 9. Dissertation: Predicting E-commerce Sales Using Deep Learning · LSTM, GRU and a novel Hybrid on 100,000+ records; Hybrid R² of 0.91.",
   },
   {
     year: "2015–2019",
     degree: "B.E., Computer Science",
     school: "Savitribai Phule Pune University, India",
+    dates: "Aug 2015 - Jun 2019",
     logo: sppuLogo.url,
-    detail: "Foundation in data structures, algorithms, DBMS, OOP and data analytics.",
   },
 ];
 
@@ -223,20 +215,20 @@ const CERTIFICATIONS = [
   {
     title: "Microsoft Power BI Desktop for Business Intelligence",
     issuer: "Analyst Builder",
-    date: "May 2026",
-    icon: "📊",
+    date: "3rd May 2026",
+    image: certPowerbi.url,
   },
   {
     title: "MySQL for Data Analytics",
     issuer: "Analyst Builder",
-    date: "Apr 2026",
-    icon: "🗄️",
+    date: "8th Apr 2026",
+    image: certMysql.url,
   },
   {
-    title: "Microsoft Power BI Data Analyst (PL-300)",
+    title: "Microsoft Certified: Power BI Data Analyst Associate (PL-300)",
     issuer: "Microsoft",
-    date: "In progress",
-    icon: "🎯",
+    date: "Earned Jun 2026",
+    image: certPl300.url,
   },
 ];
 
@@ -637,22 +629,22 @@ function Index() {
                     {e.year}
                   </span>
                 </div>
-                <div className="rounded-xl border border-border bg-card p-4 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 shrink-0 rounded-lg bg-background border border-border flex items-center justify-center overflow-hidden">
+                <div className="rounded-xl border border-border bg-card p-5 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left">
+                  <div className="flex items-center gap-5">
+                    <div className="h-16 w-16 shrink-0 rounded-full bg-background border border-border flex items-center justify-center overflow-hidden">
                       <img
                         src={e.logo}
                         alt={`${e.school} logo`}
-                        className="max-h-full max-w-full object-contain p-1"
+                        className="max-h-full max-w-full object-contain p-1.5"
                         loading="lazy"
                       />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h3 className="font-mono text-sm font-semibold">{e.degree}</h3>
-                      <div className="text-xs text-muted-foreground">{e.school}</div>
+                      <h3 className="font-mono text-base font-semibold leading-tight">{e.degree}</h3>
+                      <div className="text-sm text-muted-foreground mt-0.5">{e.school}</div>
+                      <div className="font-mono text-[11px] text-muted-foreground/70 mt-1">{e.dates}</div>
                     </div>
                   </div>
-                  <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{e.detail}</p>
                 </div>
               </Reveal>
             ))}
@@ -661,23 +653,31 @@ function Index() {
       </Section>
 
       {/* Certifications */}
-      <Section id="certifications" label="Certifications" title="Learning" italic="in progress">
-        <div className="max-w-3xl mx-auto grid sm:grid-cols-2 gap-4">
+      <Section id="certifications" label="Certifications" title="Credentials" italic="earned">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-5">
           {CERTIFICATIONS.map((c, i) => (
-            <Reveal key={c.title} direction={i % 2 === 0 ? "left" : "right"} delay={i * 80}>
-              <div className="rounded-xl border border-border bg-card p-4 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 h-full">
-                <div className="flex items-start gap-3">
-                  <div className="h-9 w-9 shrink-0 rounded-lg bg-background border border-border flex items-center justify-center text-base">
-                    {c.icon}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="font-mono text-sm font-semibold leading-snug">{c.title}</h3>
-                    <div className="mt-1 text-xs text-muted-foreground">
-                      {c.issuer} · <span className="font-mono">{c.date}</span>
-                    </div>
+            <Reveal key={c.title} direction={i === 1 ? "up" : i === 0 ? "left" : "right"} delay={i * 80}>
+              <a
+                href={c.image}
+                target="_blank"
+                rel="noreferrer"
+                className="group block rounded-xl border border-border bg-card overflow-hidden hover:border-foreground/40 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 h-full"
+              >
+                <div className="aspect-[4/3] bg-background overflow-hidden border-b border-border">
+                  <img
+                    src={c.image}
+                    alt={`${c.title} certificate`}
+                    className="h-full w-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-mono text-sm font-semibold leading-snug">{c.title}</h3>
+                  <div className="mt-1.5 text-xs text-muted-foreground">
+                    {c.issuer} · <span className="font-mono">{c.date}</span>
                   </div>
                 </div>
-              </div>
+              </a>
             </Reveal>
           ))}
         </div>
