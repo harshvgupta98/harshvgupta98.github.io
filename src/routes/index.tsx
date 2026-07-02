@@ -650,14 +650,14 @@ function Section({
 }) {
   return (
     <section id={id} className="mx-auto max-w-6xl px-6 py-20 md:py-24 border-t border-border">
-      <div className="text-center mb-10">
+      <Reveal className="text-center mb-10">
         <div className="font-mono text-xs text-muted-foreground tracking-widest">
           <span className="text-accent">//</span> {n} {label}
         </div>
         <h2 className="mt-3 text-3xl md:text-4xl font-bold">
           {title} <span className="italic text-accent">{italic}</span>
         </h2>
-      </div>
+      </Reveal>
       {children}
     </section>
   );
