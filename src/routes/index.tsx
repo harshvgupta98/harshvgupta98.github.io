@@ -208,6 +208,13 @@ const EDUCATION = [
     school: "National College of Ireland, Dublin",
     dates: "Sep 2024 - Sep 2025",
     logo: nciLogo.url,
+    modules: [
+      "Business Intelligence & Business Analysis",
+      "Predictive Data Analytics",
+      "Data Mining & Machine Learning",
+      "Database & Analytics Programming",
+      "Statistical Models & Mathematics",
+    ],
   },
   {
     year: "2015–2019",
@@ -215,6 +222,13 @@ const EDUCATION = [
     school: "Savitribai Phule Pune University, India",
     dates: "Aug 2015 - Jun 2019",
     logo: sppuLogo.url,
+    modules: [
+      "Data Structures & Algorithms",
+      "Database Management Systems",
+      "Machine Learning",
+      "Cloud Computing",
+      "Software Modelling & Design",
+    ],
   },
 ];
 
