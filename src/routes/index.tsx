@@ -82,7 +82,7 @@ const SKILLS: { name: string; asset?: string; slug?: string; fallback?: string }
   { name: "Power BI", asset: powerbiLogo.url },
   { name: "DAX", fallback: "λ" },
   { name: "Power Query", fallback: "⚡" },
-  { name: "SQL", fallback: "SQL" },
+  { name: "SQL", asset: sqlLogo.url },
   { name: "MySQL", slug: "mysql" },
   { name: "PostgreSQL", slug: "postgresql" },
   { name: "Python", slug: "python" },
@@ -214,22 +214,25 @@ const EDUCATION = [
 
 const CERTIFICATIONS = [
   {
+    title: "Microsoft Certified: Power BI Data Analyst Associate (PL-300)",
+    issuer: "Microsoft",
+    date: "Earned Jun 2026",
+    image: certPl300.url,
+    link: "https://learn.microsoft.com/en-us/users/harshgupta-5102/credentials/b2ce069000c10d44?ref=https%3A%2F%2Fwww.linkedin.com%2F",
+  },
+  {
     title: "Microsoft Power BI Desktop for Business Intelligence",
     issuer: "Analyst Builder",
     date: "3rd May 2026",
     image: certPowerbi.url,
+    link: "https://www.analystbuilder.com/achievements/verify/B27WFRSDNJ?r=clwtf6zrRshS59Mxarcn5lGef",
   },
   {
     title: "MySQL for Data Analytics",
     issuer: "Analyst Builder",
     date: "8th Apr 2026",
     image: certMysql.url,
-  },
-  {
-    title: "Microsoft Certified: Power BI Data Analyst Associate (PL-300)",
-    issuer: "Microsoft",
-    date: "Earned Jun 2026",
-    image: certPl300.url,
+    link: "https://www.analystbuilder.com/achievements/verify/TEMQA05H13?r=jNEE8Oy1I0ecBqNn8PiFpBoX1",
   },
 ];
 
@@ -659,7 +662,7 @@ function Index() {
           {CERTIFICATIONS.map((c, i) => (
             <Reveal key={c.title} direction={i === 1 ? "up" : i === 0 ? "left" : "right"} delay={i * 80}>
               <a
-                href={c.image}
+                href={c.link}
                 target="_blank"
                 rel="noreferrer"
                 className="group block rounded-xl border border-border bg-card overflow-hidden hover:border-foreground/40 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 h-full"
