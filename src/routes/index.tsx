@@ -2,6 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import nciLogo from "@/assets/nci-logo.png.asset.json";
 import sppuLogo from "@/assets/sppu-logo.jpg.asset.json";
+import tableauLogo from "@/assets/tableau.png.asset.json";
+import excelLogo from "@/assets/excel.png.asset.json";
+import powerbiLogo from "@/assets/powerbi.png.asset.json";
+import portrait from "@/assets/harsh-portrait.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -9,9 +13,9 @@ export const Route = createFileRoute("/")({
 
 /* ------------------------------ DATA ------------------------------ */
 
-// Skill logos via simpleicons.org (colored brand SVGs). `slug` empty → text/emoji fallback.
-const SKILLS: { name: string; slug?: string; fallback?: string }[] = [
-  { name: "Power BI", slug: "powerbi" },
+// Skill logos: `asset` (local CDN) → `slug` (simpleicons) → `fallback` text/emoji.
+const SKILLS: { name: string; asset?: string; slug?: string; fallback?: string }[] = [
+  { name: "Power BI", asset: powerbiLogo.url },
   { name: "DAX", fallback: "λ" },
   { name: "Power Query", fallback: "⚡" },
   { name: "SQL", fallback: "SQL" },
@@ -23,8 +27,8 @@ const SKILLS: { name: string; slug?: string; fallback?: string }[] = [
   { name: "Scikit-learn", slug: "scikitlearn" },
   { name: "Matplotlib", fallback: "📈" },
   { name: "Seaborn", fallback: "🌊" },
-  { name: "Tableau", slug: "tableau" },
-  { name: "Excel", slug: "microsoftexcel" },
+  { name: "Tableau", asset: tableauLogo.url },
+  { name: "Excel", asset: excelLogo.url },
   { name: "VBA", fallback: "⚙️" },
   { name: "Linnworks", fallback: "📦" },
   { name: "Jupyter", slug: "jupyter" },
