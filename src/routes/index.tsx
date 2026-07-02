@@ -325,7 +325,7 @@ function Terminal() {
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            {l === "python" ? "Python" : "Javascript"}
+            {l === "python" ? "Python" : "SQL"}
           </button>
         ))}
       </div>
