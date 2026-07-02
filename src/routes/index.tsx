@@ -1,11 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
+import { User, Code2, Briefcase, GraduationCap } from "lucide-react";
 import nciLogo from "@/assets/nci-logo.png.asset.json";
 import sppuLogo from "@/assets/sppu-logo.jpg.asset.json";
 import tableauLogo from "@/assets/tableau.png.asset.json";
 import excelLogo from "@/assets/excel.png.asset.json";
 import powerbiLogo from "@/assets/powerbi.png.asset.json";
-import portrait from "@/assets/harsh-portrait.jpg";
+import portraitAsset from "@/assets/harsh-portrait.jpg.asset.json";
+
+const portrait = portraitAsset.url;
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -33,7 +36,6 @@ const SKILLS: { name: string; asset?: string; slug?: string; fallback?: string }
   { name: "Linnworks", fallback: "📦" },
   { name: "Jupyter", slug: "jupyter" },
   { name: "Git", slug: "git" },
-  { name: "GA4", slug: "googleanalytics" },
   { name: "Star Schema", fallback: "✦" },
 ];
 
