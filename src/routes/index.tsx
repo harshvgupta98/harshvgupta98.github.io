@@ -343,7 +343,7 @@ function Terminal() {
           </button>
         ))}
       </div>
-      <div className="mx-3 mt-2 rounded-lg bg-white border border-border/60 font-mono text-[13px] leading-relaxed p-4 min-h-[200px] mb-3">
+      <div className="mx-3 mt-2 rounded-lg bg-white border border-border/60 font-mono text-[13px] leading-relaxed p-4 min-h-[200px] mb-3 text-left">
         <div className="flex items-center gap-2 text-foreground/70 pb-2">
           <span>▪</span>
           <span>harsh@portfolio:~$</span>
@@ -650,7 +650,7 @@ function Index() {
                     {e.year}
                   </span>
                 </div>
-                <div className="rounded-xl border border-border bg-card p-5 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left">
+                <div className="text-left">
                   <div className="flex items-start gap-5">
                     <div className="h-16 w-16 shrink-0 rounded-full bg-background border border-border flex items-center justify-center overflow-hidden">
                       <img
@@ -660,7 +660,7 @@ function Index() {
                         loading="lazy"
                       />
                     </div>
-                  <div className="min-w-0 flex-1">
+                    <div className="min-w-0 flex-1">
                       <div className="flex items-baseline justify-between gap-3">
                         <div className="min-w-0">
                           <h3 className="font-mono text-base font-semibold leading-tight truncate">{e.school}</h3>
@@ -670,7 +670,7 @@ function Index() {
                           {e.dates}
                         </div>
                       </div>
-                      <div className="mt-3 pt-3 border-t border-border/60">
+                      <div className="mt-3">
                         <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/80 mb-1.5">
                           Key Modules
                         </div>
@@ -685,6 +685,7 @@ function Index() {
                     </div>
                   </div>
                 </div>
+
               </Reveal>
             ))}
           </div>
