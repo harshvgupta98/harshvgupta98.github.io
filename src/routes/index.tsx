@@ -372,7 +372,9 @@ function Index() {
               style={{ animationDelay: `${i * 30}ms`, animationFillMode: "both" }}
             >
               <div className="h-6 w-6 flex items-center justify-center group-hover:scale-110 transition-transform">
-                {s.slug ? (
+                {s.asset ? (
+                  <img src={s.asset} alt={`${s.name} logo`} className="h-6 w-6 object-contain" loading="lazy" />
+                ) : s.slug ? (
                   <img
                     src={`https://cdn.simpleicons.org/${s.slug}`}
                     alt={`${s.name} logo`}
