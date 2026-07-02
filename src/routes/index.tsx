@@ -504,16 +504,6 @@ function Index() {
             </div>
           ))}
         </div>
-        {/* Marquee ribbon */}
-        <div className="mt-10 overflow-hidden border-y border-border py-3 bg-secondary/40">
-          <div className="flex gap-3 animate-marquee whitespace-nowrap w-max font-mono text-xs">
-            {skillsDoubled.map((s, i) => (
-              <span key={i} className="px-3 py-1 rounded border border-border bg-card text-muted-foreground">
-                {s.name}
-              </span>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* About */}
