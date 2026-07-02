@@ -47,7 +47,7 @@ const EXPERIENCE = [
     location: "Dublin, Ireland",
     tags: ["Power BI", "DAX", "Linnworks", "SQL"],
     bullets: [
-      "Built Power BI dashboards for buying and procurement teams across 20,000+ SKUs — cutting buying cycle time by 15%.",
+      "Built Power BI dashboards for buying and procurement teams across 20,000+ SKUs · cutting buying cycle time by 15%.",
       "Analysed Linnworks data to surface seasonal demand and dead stock, reducing excess stock by 8%.",
       "Designed daily stock and pricing reconciliation reports, reducing pricing errors by 5%.",
       "Leveraged AI-assisted analytics to accelerate cleaning, transformation and reporting workflows.",
@@ -95,43 +95,43 @@ const PROJECTS = [
   {
     title: "Meta Ad Performance Dashboard",
     tags: ["Power BI", "DAX", "Star Schema"],
-    desc: "Multi-page Power BI dashboard analysing 400K ad events across 50 campaigns and 9,841 users — impressions, CTR, engagement, and conversion via 12 DAX measures.",
-    insight: "CTR 11.76% vs 0.61% purchase rate — flagged a leaking funnel and retargeting play.",
+    desc: "Multi-page Power BI dashboard analysing 400K ad events across 50 campaigns and 9,841 users · impressions, CTR, engagement, and conversion via 12 DAX measures.",
+    insight: "CTR 11.76% vs 0.61% purchase rate · flagged a leaking funnel and retargeting play.",
     href: "https://github.com/harshvgupta98/POWERBI_Meta_Ad_Performance_Dashboard",
   },
   {
     title: "Customer Shopping Behaviour",
     tags: ["Python", "PostgreSQL", "Power BI"],
-    desc: "End-to-end pipeline — Python wrangling, SQLAlchemy load into PostgreSQL, and 10 SQL queries with CTEs and window functions on 3,900 transactions.",
+    desc: "End-to-end pipeline · Python wrangling, SQLAlchemy load into PostgreSQL, and 10 SQL queries with CTEs and window functions on 3,900 transactions.",
     insight: "Segmented 3,116 loyal vs 83 new; ~50% discount dependency on key lines.",
     href: "https://github.com/harshvgupta98/PYTHON_SQL_POWERBI_Customer_Behavior_Dashboard",
   },
   {
     title: "HR Attrition Dashboard",
     tags: ["Power BI", "DAX", "HR Analytics"],
-    desc: "Attrition dashboard across 1,480 employees — rate, salary bands, roles, and tenure by department on a star schema.",
+    desc: "Attrition dashboard across 1,480 employees · rate, salary bands, roles, and tenure by department on a star schema.",
     insight: "68% attrition sits in the under-€5K band; Year 1 spike of 59 employees.",
     href: "https://github.com/harshvgupta98/POWERBI_HR_Analytics_Dashboard",
   },
   {
     title: "Online Bookstore SQL",
     tags: ["SQL", "EDA", "Relational DB"],
-    desc: "Exploratory SQL on a bookstore dataset — sales, customer behaviour, inventory and revenue across Books, Customers and Orders.",
+    desc: "Exploratory SQL on a bookstore dataset · sales, customer behaviour, inventory and revenue across Books, Customers and Orders.",
     insight: "JOINs, GROUP BY, HAVING, LEFT JOIN, COALESCE, window functions, subqueries.",
     href: "https://github.com/harshvgupta98/SQL_Project_Online_Bookstore",
   },
   {
     title: "World Life Expectancy SQL",
     tags: ["SQL", "Cleaning", "EDA"],
-    desc: "SQL cleaning and EDA on life expectancy across 193 countries (2007–2022) — trends and outlier regions.",
+    desc: "SQL cleaning and EDA on life expectancy across 193 countries (2007–2022) · trends and outlier regions.",
     insight: "193 countries · 15 years · full cleaning pipeline.",
     href: "https://github.com/harshvgupta98/SQL_Project_World_Life_Expectancy",
   },
   {
     title: "Sales Performance Dashboard",
     tags: ["Excel", "VBA", "Dashboard"],
-    desc: "End-to-end Excel dashboard analysing 141 executives across 8 regions — advanced formulas, pivots, dynamic charts, slicers, VBA macros.",
-    insight: "VBA automation · 4 pivots · dynamic charts — single-screen layout.",
+    desc: "End-to-end Excel dashboard analysing 141 executives across 8 regions · advanced formulas, pivots, dynamic charts, slicers, VBA macros.",
+    insight: "VBA automation · 4 pivots · dynamic charts · single-screen layout.",
     href: "https://github.com/harshvgupta98/EXCEL_Sales_Performance_Dashboard",
   },
 ];
@@ -143,7 +143,7 @@ const EDUCATION = [
     school: "National College of Ireland, Dublin",
     logo: nciLogo.url,
     detail:
-      "NFQ Level 9. Dissertation: Predicting E-commerce Sales Using Deep Learning — LSTM, GRU and a novel Hybrid on 100,000+ records; Hybrid R² of 0.91.",
+      "NFQ Level 9. Dissertation: Predicting E-commerce Sales Using Deep Learning · LSTM, GRU and a novel Hybrid on 100,000+ records; Hybrid R² of 0.91.",
   },
   {
     year: "2015–2019",
@@ -410,7 +410,7 @@ function Index() {
         <div className="grid md:grid-cols-[1fr_auto] gap-10 items-start max-w-5xl mx-auto">
           <div className="space-y-4 text-muted-foreground leading-relaxed">
             <p>
-              नमस्कार 🙏 I'm Harsh — a Data & BI Analyst who turns fragmented, inconsistent data into
+              नमस्कार 🙏 I'm Harsh · a Data & BI Analyst who turns fragmented, inconsistent data into
               dashboards, KPI frameworks and analytical pipelines that help commercial and operational
               teams make faster decisions.
             </p>
@@ -422,7 +422,7 @@ function Index() {
               <span className="text-accent font-medium">5%</span> through data validation at scale.
             </p>
             <p>
-              MSc in Data Analytics, National College of Ireland. Dublin-based with full work authorisation —
+              MSc in Data Analytics, National College of Ireland. Dublin-based with full work authorisation -
               actively seeking Data Analyst, BI Analyst, Business Analyst or Reporting Analyst roles across Ireland.
             </p>
           </div>
@@ -571,7 +571,7 @@ function Index() {
       <footer className="border-t border-border">
         <div className="mx-auto max-w-6xl px-6 py-8 flex flex-wrap items-center justify-between gap-3 font-mono text-xs text-muted-foreground">
           <div>© {new Date().getFullYear()} Harsh Gupta · Dublin, Ireland</div>
-          <div>harsh.py — built with React + TanStack</div>
+          <div>harsh.py · built with React + TanStack</div>
         </div>
       </footer>
     </div>
