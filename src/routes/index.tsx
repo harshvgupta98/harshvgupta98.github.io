@@ -263,9 +263,13 @@ const SCRIPTS: Record<Lang, { text: string; bold?: string }[]> = {
       text: 'print("Professional Summary: Data & BI Analyst with 3+ years of experience turning fragmented data into decision-ready dashboards using Power BI, DAX, SQL and Python.")',
       bold: "Professional Summary:",
     },
+    {
+      text: 'print("Open to work: Actively seeking Data Analyst · BI Analyst · Reporting Analyst roles across Ireland")',
+      bold: "Open to work:",
+    },
   ],
   sql: [
-    { text: "SELECT name, role, location, summary" },
+    { text: "SELECT name, role, location, summary, status" },
     { text: "FROM portfolio" },
     { text: "WHERE name = 'Harsh Gupta';" },
     { text: "-- Role: Data & Business Intelligence Analyst · Dublin, IE", bold: "Role:" },
@@ -273,6 +277,7 @@ const SCRIPTS: Record<Lang, { text: string; bold?: string }[]> = {
       text: "-- Summary: 3+ yrs turning fragmented data into decision-ready dashboards with Power BI, DAX, SQL and Python.",
       bold: "Summary:",
     },
+    { text: "-- Status: Open to work · Data Analyst · BI Analyst · Reporting Analyst · Ireland", bold: "Status:" },
   ],
 };
 
@@ -471,7 +476,7 @@ function Index() {
       </header>
 
       {/* Hero */}
-      <section id="top" className="mx-auto max-w-4xl px-6 pt-16 md:pt-24 pb-16 text-center animate-fade-in">
+      <section id="top" className="mx-auto max-w-4xl px-6 pt-10 md:pt-14 pb-16 text-center animate-fade-in">
         <h1 className="font-mono text-5xl md:text-7xl font-bold tracking-tight">Harsh Gupta</h1>
         <p className="mt-4 font-mono text-lg md:text-xl text-muted-foreground">
           Data &amp; Business Intelligence Analyst
