@@ -583,7 +583,7 @@ function Index() {
 
       {/* Experience */}
       <Section id="experience" label="Work" title="Work" italic="experience">
-        <div className="max-w-2xl mx-auto relative">
+        <div className="max-w-3xl mx-auto relative">
           <div className="absolute left-1/2 top-6 bottom-6 w-px bg-border -translate-x-1/2 hidden md:block" />
           <div className="space-y-6">
             {EXPERIENCE.map((exp, i) => (
@@ -598,7 +598,8 @@ function Index() {
                     {exp.year}
                   </span>
                 </div>
-                <div className="rounded-xl border border-border bg-card p-4 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left">
+                <div className={`rounded-xl border border-border bg-card p-4 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left ${i % 2 === 0 ? "md:mr-10" : "md:ml-10"}`}>
+
                   <div className="flex items-center gap-3">
                     <div className="h-10 w-10 shrink-0 rounded-lg bg-background border border-border flex items-center justify-center overflow-hidden">
                       <img
