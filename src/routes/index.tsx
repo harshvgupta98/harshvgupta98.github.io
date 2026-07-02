@@ -393,12 +393,21 @@ function LeftRail() {
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.4v1.56h.05a3.73 3.73 0 0 1 3.36-1.85c3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.23 0H1.77C.79 0 0 .78 0 1.73v20.53C0 23.22.79 24 1.77 24h20.46c.98 0 1.77-.78 1.77-1.74V1.73C24 .78 23.21 0 22.23 0Z"/></svg>
       </a>
       <a
-        href="mailto:harshvgupta1998@gmail.com"
+        href="https://www.instagram.com/harsh_gupta004?igsh=MTJzaWk5ZnNscGd5ag=="
+        target="_blank"
+        rel="noreferrer"
         className="text-muted-foreground hover:text-accent hover:-translate-y-0.5 transition"
-        aria-label="Email"
+        aria-label="Instagram"
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
       </a>
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="text-muted-foreground hover:text-accent hover:-translate-y-0.5 transition"
+        aria-label="Back to top"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+      </button>
       <div className="w-px h-24 bg-border" />
     </div>
   );
@@ -762,9 +771,11 @@ function Index() {
       </Section>
 
       <footer className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-6 py-8 flex flex-wrap items-center justify-between gap-3 font-mono text-xs text-muted-foreground">
-          <div>© {new Date().getFullYear()} Harsh Gupta · Dublin, Ireland</div>
-          <a href="https://www.instagram.com/harsh_gupta004?igsh=MTJzaWk5ZnNscGd5ag==" target="_blank" rel="noreferrer" className="hover:text-accent transition">Instagram · @harsh_gupta004</a>
+        <div className="mx-auto max-w-4xl px-6 py-8 text-center font-mono text-xs text-muted-foreground">
+          <p className="italic leading-relaxed">
+            "Between the highest motorable road and the free throw line, I learned the same lesson twice. Show up prepared, trust the process and let the numbers do the talking."
+          </p>
+          <div className="mt-3">© {new Date().getFullYear()} Harsh Gupta · Dublin, Ireland</div>
         </div>
       </footer>
     </div>
