@@ -736,40 +736,6 @@ function Index() {
       </Section>
 
 
-      {/* Contact */}
-      <Section id="contact" label="Contact" title="Let's" italic="connect">
-        <div className="max-w-2xl mx-auto text-center">
-          <p className="text-muted-foreground leading-relaxed">
-            I'm actively seeking Data Analyst, BI Analyst, Business Analyst or Reporting Analyst roles in Dublin.
-            Feel free to reach out directly.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3 font-mono text-sm">
-            <a
-              href="mailto:harshvgupta1998@gmail.com"
-              className="px-4 py-3 rounded-md border border-border bg-card hover:border-accent hover:text-accent transition"
-            >
-              ✉ harshvgupta1998@gmail.com
-            </a>
-            <a
-              href="https://linkedin.com/in/1harsh-gupta"
-              target="_blank"
-              rel="noreferrer"
-              className="px-4 py-3 rounded-md border border-border bg-card hover:border-accent hover:text-accent transition"
-            >
-              in LinkedIn
-            </a>
-            <a
-              href="https://github.com/harshvgupta98"
-              target="_blank"
-              rel="noreferrer"
-              className="px-4 py-3 rounded-md border border-border bg-card hover:border-accent hover:text-accent transition"
-            >
-              ⌥ GitHub
-            </a>
-          </div>
-        </div>
-      </Section>
-
       <footer className="border-t border-border">
         <div className="mx-auto max-w-4xl px-6 py-8 text-center font-mono text-xs text-muted-foreground">
           <p className="italic leading-relaxed">
