@@ -343,7 +343,7 @@ function Terminal() {
           </button>
         ))}
       </div>
-      <div className="mx-3 mt-2 rounded-lg bg-white border border-border/60 font-mono text-[13px] leading-relaxed p-4 min-h-[200px] mb-3">
+      <div className="mx-3 mt-2 rounded-lg bg-white border border-border/60 font-mono text-[13px] leading-relaxed p-4 min-h-[200px] mb-3 text-left">
         <div className="flex items-center gap-2 text-foreground/70 pb-2">
           <span>▪</span>
           <span>harsh@portfolio:~$</span>
