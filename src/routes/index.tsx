@@ -510,7 +510,7 @@ function Index() {
       {/* About */}
       <Section id="about" label="About" title="The analyst" italic="behind the data">
         <div className="grid md:grid-cols-[1fr_auto] gap-10 items-start max-w-5xl mx-auto">
-          <div className="rounded-xl border border-border bg-card p-6 shadow-sm space-y-4 text-muted-foreground leading-relaxed">
+          <div className="rounded-xl border border-border bg-card p-6 shadow-sm space-y-4 font-mono text-[13px] text-foreground/80 leading-relaxed">
             <p>
               नमस्कार 🙏 I'm Harsh, a Data Analyst with 3+ years of experience streamlining reporting
               and inventory decisions across retail and project based environments. I work mainly in
@@ -583,7 +583,7 @@ function Index() {
 
       {/* Experience */}
       <Section id="experience" label="Work" title="Work" italic="experience">
-        <div className="max-w-2xl mx-auto relative">
+        <div className="max-w-3xl mx-auto relative">
           <div className="absolute left-1/2 top-6 bottom-6 w-px bg-border -translate-x-1/2 hidden md:block" />
           <div className="space-y-6">
             {EXPERIENCE.map((exp, i) => (
@@ -598,7 +598,8 @@ function Index() {
                     {exp.year}
                   </span>
                 </div>
-                <div className="rounded-xl border border-border bg-card p-4 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left">
+                <div className={`rounded-xl border border-border bg-card p-4 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left ${i % 2 === 0 ? "md:mr-10" : "md:ml-10"}`}>
+
                   <div className="flex items-center gap-3">
                     <div className="h-10 w-10 shrink-0 rounded-lg bg-background border border-border flex items-center justify-center overflow-hidden">
                       <img
@@ -637,7 +638,7 @@ function Index() {
 
       {/* Education */}
       <Section id="education" label="Education" title="Academic" italic="background">
-        <div className="max-w-2xl mx-auto relative">
+        <div className="max-w-3xl mx-auto relative">
           <div className="absolute left-1/2 top-6 bottom-6 w-px bg-border -translate-x-1/2 hidden md:block" />
           <div className="space-y-6">
             {EDUCATION.map((e, i) => (
@@ -652,7 +653,7 @@ function Index() {
                     {e.year}
                   </span>
                 </div>
-                <div className="text-left">
+                <div className={`rounded-xl border border-border bg-card p-5 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left ${i % 2 === 0 ? "md:mr-10" : "md:ml-10"}`}>
                   <div className="flex items-start gap-5">
                     <div className="h-16 w-16 shrink-0 rounded-full bg-background border border-border flex items-center justify-center overflow-hidden">
                       <img
@@ -672,7 +673,7 @@ function Index() {
                           {e.dates}
                         </div>
                       </div>
-                      <div className="mt-3">
+                      <div className="mt-3 pt-3 border-t border-border/60">
                         <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/80 mb-1.5">
                           Key Modules
                         </div>
@@ -687,12 +688,12 @@ function Index() {
                     </div>
                   </div>
                 </div>
-
               </Reveal>
             ))}
           </div>
         </div>
       </Section>
+
 
       {/* Certifications */}
       <Section id="certifications" label="Certifications" title="Credentials" italic="earned">
