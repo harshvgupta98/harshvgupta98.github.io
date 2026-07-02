@@ -500,6 +500,7 @@ function Index() {
               </div>
               <div className="font-mono text-xs text-accent hidden md:block">{e.year}</div>
               <div>
+                <div className="font-mono text-xs text-accent md:hidden mb-1">{e.year}</div>
                 <h3 className="text-xl font-semibold">{e.degree}</h3>
                 <div className="text-sm text-muted-foreground mt-1">{e.school}</div>
                 <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{e.detail}</p>
