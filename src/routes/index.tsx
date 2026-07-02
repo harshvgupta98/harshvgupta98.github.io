@@ -492,7 +492,7 @@ function Index() {
       </section>
 
       {/* About */}
-      <Section id="about" n="01" label="about" title="The analyst" italic="behind the data">
+      <Section id="about" label="About" title="The analyst" italic="behind the data">
         <div className="grid md:grid-cols-[1fr_auto] gap-10 items-start max-w-5xl mx-auto">
           <div className="space-y-4 text-muted-foreground leading-relaxed">
             <p>
@@ -684,7 +684,7 @@ function Index() {
 
 
       {/* Contact */}
-      <Section id="contact" n="05" label="contact" title="Let's" italic="connect">
+      <Section id="contact" label="Contact" title="Let's" italic="connect">
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-muted-foreground leading-relaxed">
             I'm actively seeking Data Analyst, BI Analyst, Business Analyst or Reporting Analyst roles in Dublin.
