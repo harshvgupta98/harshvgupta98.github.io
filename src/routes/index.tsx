@@ -492,10 +492,13 @@ function Index() {
           {EDUCATION.map((e, i) => (
             <div
               key={e.degree}
-              className="grid md:grid-cols-[160px_1fr] gap-6 p-6 rounded-xl border border-border bg-card animate-fade-in text-left"
+              className="grid md:grid-cols-[96px_120px_1fr] grid-cols-[64px_1fr] gap-6 items-start p-6 rounded-xl border border-border bg-card animate-fade-in text-left"
               style={{ animationDelay: `${i * 80}ms`, animationFillMode: "both" }}
             >
-              <div className="font-mono text-xs text-accent">{e.year}</div>
+              <div className="h-16 w-16 md:h-20 md:w-20 rounded-md bg-background border border-border flex items-center justify-center overflow-hidden shrink-0">
+                <img src={e.logo} alt={`${e.school} logo`} className="max-h-full max-w-full object-contain p-1" />
+              </div>
+              <div className="font-mono text-xs text-accent hidden md:block">{e.year}</div>
               <div>
                 <h3 className="text-xl font-semibold">{e.degree}</h3>
                 <div className="text-sm text-muted-foreground mt-1">{e.school}</div>
