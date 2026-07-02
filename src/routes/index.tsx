@@ -508,7 +508,7 @@ function Index() {
       {/* About */}
       <Section id="about" label="About" title="The analyst" italic="behind the data">
         <div className="grid md:grid-cols-[1fr_auto] gap-10 items-start max-w-5xl mx-auto">
-          <div className="space-y-4 text-muted-foreground leading-relaxed">
+          <div className="rounded-xl border border-border bg-card p-6 shadow-sm space-y-4 text-muted-foreground leading-relaxed">
             <p>
               नमस्कार 🙏 I'm Harsh, a Data Analyst with 3+ years of experience streamlining reporting
               and inventory decisions across retail and project based environments. I work mainly in
@@ -660,13 +660,13 @@ function Index() {
                         loading="lazy"
                       />
                     </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0 flex-1">
+                      <div className="flex items-baseline justify-between gap-3">
                         <div className="min-w-0">
                           <h3 className="font-mono text-base font-semibold leading-tight truncate">{e.school}</h3>
                           <div className="text-sm text-muted-foreground mt-0.5">{e.degree}</div>
                         </div>
-                        <div className="font-mono text-[11px] text-muted-foreground/80 shrink-0 text-right whitespace-nowrap pt-1">
+                        <div className="font-mono text-[11px] text-muted-foreground/80 shrink-0 text-right whitespace-nowrap">
                           {e.dates}
                         </div>
                       </div>
