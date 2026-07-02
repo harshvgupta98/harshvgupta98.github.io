@@ -620,10 +620,10 @@ function Index() {
 
 
       {/* Education */}
-      <Section id="education" n="04" label="education" title="Academic" italic="background">
-        <div className="max-w-3xl mx-auto relative">
+      <Section id="education" label="Education" title="Academic" italic="background">
+        <div className="max-w-2xl mx-auto relative">
           <div className="absolute left-1/2 top-6 bottom-6 w-px bg-border -translate-x-1/2 hidden md:block" />
-          <div className="space-y-8">
+          <div className="space-y-6">
             {EDUCATION.map((e, i) => (
               <Reveal
                 key={e.degree}
@@ -631,33 +631,57 @@ function Index() {
                 delay={i * 100}
                 className="relative"
               >
-                <div className="flex justify-center mb-3 relative z-10">
-                  <span className="font-mono text-[11px] px-3 py-1 rounded-full bg-foreground text-background shadow-sm">
+                <div className="flex justify-center mb-2 relative z-10">
+                  <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-foreground text-background shadow-sm">
                     {e.year}
                   </span>
                 </div>
-                <div className="rounded-2xl border border-border bg-card p-5 md:p-6 hover:border-accent/60 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-left">
-                  <div className="flex items-start gap-4">
-                    <div className="h-14 w-14 shrink-0 rounded-full bg-background border border-border flex items-center justify-center overflow-hidden">
+                <div className="rounded-xl border border-border bg-card p-4 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left">
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 shrink-0 rounded-lg bg-background border border-border flex items-center justify-center overflow-hidden">
                       <img
                         src={e.logo}
                         alt={`${e.school} logo`}
-                        className="max-h-full max-w-full object-contain p-1.5"
+                        className="max-h-full max-w-full object-contain p-1"
                         loading="lazy"
                       />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h3 className="font-mono text-base md:text-lg font-semibold">{e.degree}</h3>
-                      <div className="text-sm text-muted-foreground mt-0.5">{e.school}</div>
-                      <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{e.detail}</p>
+                      <h3 className="font-mono text-sm font-semibold">{e.degree}</h3>
+                      <div className="text-xs text-muted-foreground">{e.school}</div>
                     </div>
                   </div>
+                  <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{e.detail}</p>
                 </div>
               </Reveal>
             ))}
           </div>
         </div>
       </Section>
+
+      {/* Certifications */}
+      <Section id="certifications" label="Certifications" title="Learning" italic="in progress">
+        <div className="max-w-3xl mx-auto grid sm:grid-cols-2 gap-4">
+          {CERTIFICATIONS.map((c, i) => (
+            <Reveal key={c.title} direction={i % 2 === 0 ? "left" : "right"} delay={i * 80}>
+              <div className="rounded-xl border border-border bg-card p-4 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 h-full">
+                <div className="flex items-start gap-3">
+                  <div className="h-9 w-9 shrink-0 rounded-lg bg-background border border-border flex items-center justify-center text-base">
+                    {c.icon}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-mono text-sm font-semibold leading-snug">{c.title}</h3>
+                    <div className="mt-1 text-xs text-muted-foreground">
+                      {c.issuer} · <span className="font-mono">{c.date}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
 
       {/* Contact */}
       <Section id="contact" n="05" label="contact" title="Let's" italic="connect">
