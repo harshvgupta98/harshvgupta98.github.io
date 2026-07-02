@@ -324,10 +324,10 @@ function Index() {
             <span className="text-accent">.py</span>
           </a>
           <div className="flex items-center gap-4 md:gap-8 text-sm font-mono">
-            <a href="#about" className="hover:text-accent transition">◆ About</a>
-            <a href="#projects" className="hidden sm:inline hover:text-accent transition">✦ Projects</a>
-            <a href="#experience" className="hidden sm:inline hover:text-accent transition">▣ Work</a>
-            <a href="#education" className="hidden sm:inline hover:text-accent transition">▲ Education</a>
+            <a href="#about" className="flex items-center gap-1.5 hover:text-accent transition"><User className="h-4 w-4" /> About</a>
+            <a href="#projects" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition"><Code2 className="h-4 w-4" /> Projects</a>
+            <a href="#experience" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition"><Briefcase className="h-4 w-4" /> Work</a>
+            <a href="#education" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition"><GraduationCap className="h-4 w-4" /> Education</a>
           </div>
         </nav>
       </header>
