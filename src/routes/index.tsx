@@ -510,7 +510,7 @@ function Index() {
       {/* About */}
       <Section id="about" label="About" title="The analyst" italic="behind the data">
         <div className="grid md:grid-cols-[1fr_auto] gap-10 items-start max-w-5xl mx-auto">
-          <div className="rounded-xl border border-border bg-card p-6 shadow-sm space-y-4 text-muted-foreground leading-relaxed">
+          <div className="rounded-xl border border-border bg-card p-6 shadow-sm space-y-4 font-mono text-[13px] text-foreground/80 leading-relaxed">
             <p>
               नमस्कार 🙏 I'm Harsh, a Data Analyst with 3+ years of experience streamlining reporting
               and inventory decisions across retail and project based environments. I work mainly in
