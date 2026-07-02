@@ -102,20 +102,24 @@ const SKILLS: { name: string; asset?: string; slug?: string; fallback?: string }
 ];
 
 // Extra skill icons used only inside tag chips
-const EXTRA_SKILL_ICONS: Record<string, { slug?: string; fallback?: string }> = {
+const EXTRA_SKILL_ICONS: Record<string, { asset?: string; slug?: string; fallback?: string; color?: boolean }> = {
   "Pivot Tables": { fallback: "▦" },
   "KPI Dashboards": { fallback: "📊" },
+  "LSTM": { asset: lstmLogo.url, color: true },
+  "GRU": { asset: lstmLogo.url, color: true },
+  "Relational DB": { asset: sqlLogo.url, color: true },
 };
 
 function SkillIcon({ name, className = "h-3.5 w-3.5" }: { name: string; className?: string }) {
   const s:
-    | { asset?: string; slug?: string; fallback?: string }
+    | { asset?: string; slug?: string; fallback?: string; color?: boolean }
     | undefined =
     SKILLS.find((x) => x.name.toLowerCase() === name.toLowerCase()) ||
     EXTRA_SKILL_ICONS[name];
   if (!s) return <span className="text-foreground/70">◆</span>;
   if (s.asset) {
-    const color = name === "Excel" || name === "SQL" ? "" : "grayscale brightness-0";
+    const keepColor = s.color || name === "Excel" || name === "SQL";
+    const color = keepColor ? "" : "grayscale brightness-0";
     return <img src={s.asset} alt="" className={`${className} object-contain ${color}`} loading="lazy" />;
   }
   if (s.slug) {
