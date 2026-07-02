@@ -150,7 +150,7 @@ const EDUCATION = [
 
 /* ------------------------------ TERMINAL ------------------------------ */
 
-type Lang = "python" | "javascript";
+type Lang = "python" | "sql";
 
 const SCRIPTS: Record<Lang, string[]> = {
   python: [
@@ -158,14 +158,15 @@ const SCRIPTS: Record<Lang, string[]> = {
     'print("Role: Data & BI Analyst · Dublin, IE")',
     'stack = ["Power BI", "DAX", "SQL", "Python"]',
     'summary = "3+ yrs turning fragmented data into dashboards"',
-    'status = "Open to Data / BI / Reporting roles"',
+    'status = "Open to Data / BI / --roles"',
   ],
-  javascript: [
-    'console.log("Hello, World! 👋 I\'m Harsh Gupta");',
-    'console.log("Role: Data & BI Analyst · Dublin, IE");',
-    'const stack = ["Power BI", "DAX", "SQL", "Python"];',
-    'const summary = "3+ yrs turning fragmented data into dashboards";',
-    'const status = "Open to Data / BI / Reporting roles";',
+  sql: [
+    "SELECT name, role, location",
+    "FROM portfolio",
+    "WHERE name = 'Harsh Gupta';",
+    "-- Role: Data & BI Analyst · Dublin, IE",
+    "-- Stack: Power BI, DAX, SQL, Python",
+    "-- Open to Data / BI / Reporting roles",
   ],
 };
 
@@ -204,14 +205,14 @@ function Terminal() {
     return () => clearTimeout(t);
   }, [charIdx, lineIdx, lines]);
 
-  const prefix = lang === "python" ? ">>>" : ">";
-  const cmd = lang === "python" ? "python" : "node";
+  const prefix = lang === "python" ? ">>>" : "sql>";
+  const cmd = lang === "python" ? "python" : "psql";
 
   return (
     <div className="w-full max-w-2xl mx-auto rounded-xl border border-border bg-card shadow-lg overflow-hidden">
       {/* Tabs */}
       <div className="flex items-center gap-1 px-3 pt-3 pb-0 bg-card">
-        {(["python", "javascript"] as Lang[]).map((l) => (
+        {(["python", "sql"] as Lang[]).map((l) => (
           <button
             key={l}
             onClick={() => setLang(l)}
@@ -221,7 +222,7 @@ function Terminal() {
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            {l === "python" ? "Python" : "Javascript"}
+            {l === "python" ? "Python" : "SQL"}
           </button>
         ))}
       </div>
