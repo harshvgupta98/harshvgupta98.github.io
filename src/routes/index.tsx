@@ -219,6 +219,27 @@ const EDUCATION = [
   },
 ];
 
+const CERTIFICATIONS = [
+  {
+    title: "Microsoft Power BI Desktop for Business Intelligence",
+    issuer: "Analyst Builder",
+    date: "May 2026",
+    icon: "📊",
+  },
+  {
+    title: "MySQL for Data Analytics",
+    issuer: "Analyst Builder",
+    date: "Apr 2026",
+    icon: "🗄️",
+  },
+  {
+    title: "Microsoft Power BI Data Analyst (PL-300)",
+    issuer: "Microsoft",
+    date: "In progress",
+    icon: "🎯",
+  },
+];
+
 /* ------------------------------ TERMINAL ------------------------------ */
 
 type Lang = "python" | "sql";
