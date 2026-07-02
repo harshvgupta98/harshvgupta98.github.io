@@ -14,7 +14,8 @@ import portraitAsset from "@/assets/harsh-portrait.jpg.asset.json";
 import certMysql from "@/assets/cert-mysql.png.asset.json";
 import certPowerbi from "@/assets/cert-powerbi.png.asset.json";
 import certPl300 from "@/assets/Cert_pl300_v2.png.asset.json";
-import sqlLogo from "@/assets/sql_logo.jpg.asset.json";
+import sqlLogo from "@/assets/relational-database.jpg.asset.json";
+import lstmLogo from "@/assets/lstm.png.asset.json";
 
 const portrait = portraitAsset.url;
 
