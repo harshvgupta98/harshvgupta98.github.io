@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { ReactNode } from "react";
 import { User, Code2, Briefcase, GraduationCap } from "lucide-react";
 import nciLogo from "@/assets/nci-logo.png.asset.json";
 import sppuLogo from "@/assets/sppu-logo.jpg.asset.json";
@@ -13,6 +14,59 @@ const portrait = portraitAsset.url;
 export const Route = createFileRoute("/")({
   component: Index,
 });
+
+/* ------------------------------ REVEAL ------------------------------ */
+
+function Reveal({
+  children,
+  as: Tag = "div",
+  className = "",
+  direction = "up",
+  delay = 0,
+  style,
+}: {
+  children: ReactNode;
+  as?: "div" | "section" | "li" | "article";
+  className?: string;
+  direction?: "up" | "left" | "right";
+  delay?: number;
+  style?: React.CSSProperties;
+}) {
+  const ref = useRef<HTMLElement | null>(null);
+  const [shown, setShown] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setShown(true);
+            io.disconnect();
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const dirClass =
+    direction === "left" ? "reveal-left" : direction === "right" ? "reveal-right" : "";
+
+  return (
+    <Tag
+      ref={ref as never}
+      className={`reveal ${dirClass} ${shown ? "reveal-in" : ""} ${className}`}
+      style={{ transitionDelay: `${delay}ms`, ...style }}
+    >
+      {children}
+    </Tag>
+  );
+}
+
 
 /* ------------------------------ DATA ------------------------------ */
 
@@ -422,30 +476,30 @@ function Index() {
       <Section id="projects" n="02" label="projects" title="What I've" italic="built">
         <div className="grid md:grid-cols-2 gap-5 max-w-5xl mx-auto">
           {PROJECTS.map((p, i) => (
-            <a
-              key={p.title}
-              href={p.href}
-              target="_blank"
-              rel="noreferrer"
-              className="group p-6 rounded-xl border border-border bg-card hover:border-accent hover:-translate-y-0.5 hover:shadow-md transition flex flex-col animate-fade-in text-left"
-              style={{ animationDelay: `${i * 60}ms`, animationFillMode: "both" }}
-            >
-              <div className="flex flex-wrap gap-1.5 font-mono text-[11px] mb-3">
-                {p.tags.map((t) => (
-                  <span key={t} className="px-2 py-0.5 rounded bg-secondary text-muted-foreground border border-border">
-                    {t}
-                  </span>
-                ))}
-              </div>
-              <h3 className="text-lg font-semibold group-hover:text-accent transition">{p.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
-              <p className="mt-3 text-xs text-foreground/90 leading-relaxed">
-                <span className="text-accent font-mono">insight →</span> {p.insight}
-              </p>
-              <div className="mt-4 font-mono text-xs text-accent opacity-70 group-hover:opacity-100">
-                View on GitHub →
-              </div>
-            </a>
+            <Reveal key={p.title} direction={i % 2 === 0 ? "left" : "right"} delay={i * 60}>
+              <a
+                href={p.href}
+                target="_blank"
+                rel="noreferrer"
+                className="group p-6 rounded-xl border border-border bg-card hover:border-accent hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col text-left h-full"
+              >
+                <div className="flex flex-wrap gap-1.5 font-mono text-[11px] mb-3">
+                  {p.tags.map((t) => (
+                    <span key={t} className="px-2 py-0.5 rounded bg-secondary text-muted-foreground border border-border">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <h3 className="text-lg font-semibold group-hover:text-accent transition">{p.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
+                <p className="mt-3 text-xs text-foreground/90 leading-relaxed">
+                  <span className="text-accent font-mono">insight →</span> {p.insight}
+                </p>
+                <div className="mt-4 font-mono text-xs text-accent opacity-70 group-hover:opacity-100">
+                  View on GitHub →
+                </div>
+              </a>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -465,18 +519,19 @@ function Index() {
                 .map((w) => w[0])
                 .join("");
               return (
-                <div
+                <Reveal
                   key={exp.role + exp.company}
-                  className="relative animate-fade-in"
-                  style={{ animationDelay: `${i * 80}ms`, animationFillMode: "both" }}
+                  direction={i % 2 === 0 ? "left" : "right"}
+                  delay={i * 100}
+                  className="relative"
                 >
                   {/* year badge */}
                   <div className="flex justify-center mb-3 relative z-10">
-                    <span className="font-mono text-[11px] px-3 py-1 rounded-full bg-foreground text-background">
+                    <span className="font-mono text-[11px] px-3 py-1 rounded-full bg-foreground text-background shadow-sm">
                       {exp.year}
                     </span>
                   </div>
-                  <div className="rounded-2xl border border-border bg-card p-5 md:p-6 hover:border-accent/60 hover:shadow-md transition text-left">
+                  <div className="rounded-2xl border border-border bg-card p-5 md:p-6 hover:border-accent/60 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-left">
                     <div className="flex items-start gap-4">
                       <div className="h-14 w-14 shrink-0 rounded-full bg-background border border-border flex items-center justify-center font-mono text-sm font-semibold text-foreground/80">
                         {initials}
@@ -500,9 +555,8 @@ function Index() {
                     <div className="mt-3 font-mono text-[11px] text-muted-foreground/80">
                       {exp.dates}
                     </div>
-
                   </div>
-                </div>
+                </Reveal>
               );
             })}
           </div>
@@ -514,10 +568,11 @@ function Index() {
       <Section id="education" n="04" label="education" title="Academic" italic="background">
         <div className="max-w-4xl mx-auto space-y-5">
           {EDUCATION.map((e, i) => (
-            <div
+            <Reveal
               key={e.degree}
-              className="grid md:grid-cols-[96px_120px_1fr] grid-cols-[64px_1fr] gap-6 items-start p-6 rounded-xl border border-border bg-card animate-fade-in text-left"
-              style={{ animationDelay: `${i * 80}ms`, animationFillMode: "both" }}
+              direction={i % 2 === 0 ? "left" : "right"}
+              delay={i * 100}
+              className="grid md:grid-cols-[96px_120px_1fr] grid-cols-[64px_1fr] gap-6 items-start p-6 rounded-xl border border-border bg-card text-left hover:border-accent/60 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
             >
               <div className="h-16 w-16 md:h-20 md:w-20 rounded-md bg-background border border-border flex items-center justify-center overflow-hidden shrink-0">
                 <img src={e.logo} alt={`${e.school} logo`} className="max-h-full max-w-full object-contain p-1" />
@@ -529,7 +584,7 @@ function Index() {
                 <div className="text-sm text-muted-foreground mt-1">{e.school}</div>
                 <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{e.detail}</p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -595,14 +650,14 @@ function Section({
 }) {
   return (
     <section id={id} className="mx-auto max-w-6xl px-6 py-20 md:py-24 border-t border-border">
-      <div className="text-center mb-10">
+      <Reveal className="text-center mb-10">
         <div className="font-mono text-xs text-muted-foreground tracking-widest">
           <span className="text-accent">//</span> {n} {label}
         </div>
         <h2 className="mt-3 text-3xl md:text-4xl font-bold">
           {title} <span className="italic text-accent">{italic}</span>
         </h2>
-      </div>
+      </Reveal>
       {children}
     </section>
   );
