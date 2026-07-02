@@ -500,26 +500,26 @@ function Index() {
 
       {/* Skills grid */}
       <section id="skills" className="mx-auto max-w-5xl px-6 pb-16">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
           {SKILLS.map((s, i) => (
             <div
               key={s.name}
-              className="group py-2 rounded-lg border border-border bg-card flex flex-col items-center justify-center gap-1 hover:border-accent hover:-translate-y-0.5 hover:shadow-md transition animate-fade-in"
+              className="group py-1.5 px-2 rounded-lg border border-border bg-card flex flex-col items-center justify-center gap-0.5 hover:border-accent hover:-translate-y-0.5 hover:shadow-md transition animate-fade-in"
               style={{ animationDelay: `${i * 30}ms`, animationFillMode: "both" }}
             >
-              <div className="h-6 w-6 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="h-5 w-5 flex items-center justify-center group-hover:scale-110 transition-transform">
                 {s.asset ? (
                   <img
                     src={s.asset}
                     alt={`${s.name} logo`}
-                    className={`h-6 w-6 object-contain ${s.name === "Excel" || s.name === "SQL" ? "" : "grayscale brightness-0"}`}
+                    className={`h-5 w-5 object-contain ${s.name === "Excel" || s.name === "SQL" ? "" : "grayscale brightness-0"}`}
                     loading="lazy"
                   />
                 ) : s.slug ? (
                   <img
                     src={`https://cdn.simpleicons.org/${s.slug}`}
                     alt={`${s.name} logo`}
-                    className="h-6 w-6 object-contain grayscale brightness-0"
+                    className="h-5 w-5 object-contain grayscale brightness-0"
                     loading="lazy"
                   />
                 ) : (
@@ -535,8 +535,8 @@ function Index() {
       </section>
 
       {/* About */}
-      <section id="about" className="mx-auto max-w-6xl px-6 py-16 md:py-20 border-t border-border">
-        <div className="grid md:grid-cols-[1fr_auto] gap-10 items-start max-w-5xl mx-auto">
+      <section id="about" className="mx-auto max-w-7xl px-6 py-16 md:py-20 border-t border-border">
+        <div className="grid xl:grid-cols-[1fr_auto] gap-10 items-start mx-auto">
           <div className="rounded-xl border border-border bg-card p-6 shadow-sm space-y-4 font-mono text-[13px] text-foreground/80 leading-relaxed">
             <h3 className="font-mono text-lg font-bold text-foreground">💡 About Me</h3>
             <p>
@@ -551,11 +551,11 @@ function Index() {
               actually holds up once it reaches a dashboard, and it's where I built the hybrid LSTM plus GRU model that
               still anchors my proudest project.
             </p>
-            <div className="rounded-lg bg-[#f2f2f2] p-5 mt-2 space-y-1.5">
+            <div className="rounded-lg bg-[#f2f2f2] p-4 mt-2 space-y-1">
               <p className="font-semibold text-foreground/90">When I'm not analysing dashboards, you might find me:</p>
-              <p>• 🏀 Playing competitive basketball, represented India at junior national level in 2014</p>
-              <p>• 🏍️ Planning the next motorcycle route, already conquered Umling La, the world's highest motorable road</p>
-              <p>• 💪 In the gym, training year round</p>
+              <p className="text-[11px] md:text-[13px]">• 🏀 Competitive basketball, represented India at junior national level, 2014</p>
+              <p className="text-[11px] md:text-[13px]">• 🏍️ Conquered Umling La, the world's highest motorable road</p>
+              <p className="text-[11px] md:text-[13px]">• 💪 In the gym, training year-round</p>
             </div>
             <p>
               Currently based in Dublin with full work authorisation, actively looking for Data Analyst, BI Analyst or
