@@ -96,6 +96,33 @@ const SKILLS: { name: string; asset?: string; slug?: string; fallback?: string }
   { name: "Star Schema", fallback: "✦" },
 ];
 
+// Extra skill icons used only inside tag chips
+const EXTRA_SKILL_ICONS: Record<string, { slug?: string; fallback?: string }> = {
+  "Pivot Tables": { fallback: "▦" },
+  "KPI Dashboards": { fallback: "📊" },
+};
+
+function SkillIcon({ name, className = "h-3.5 w-3.5" }: { name: string; className?: string }) {
+  const s =
+    SKILLS.find((x) => x.name.toLowerCase() === name.toLowerCase()) ||
+    EXTRA_SKILL_ICONS[name];
+  if (!s) return <span className="text-foreground/70">◆</span>;
+  if ("asset" in s && s.asset) {
+    return <img src={s.asset} alt="" className={`${className} object-contain grayscale brightness-0`} loading="lazy" />;
+  }
+  if (s.slug) {
+    return (
+      <img
+        src={`https://cdn.simpleicons.org/${s.slug}`}
+        alt=""
+        className={`${className} object-contain grayscale brightness-0`}
+        loading="lazy"
+      />
+    );
+  }
+  return <span className="text-foreground/70 text-[11px]">{s.fallback ?? "◆"}</span>;
+}
+
 const EXPERIENCE = [
   {
     year: "2024-Present",
