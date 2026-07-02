@@ -114,7 +114,8 @@ function SkillIcon({ name, className = "h-3.5 w-3.5" }: { name: string; classNam
     EXTRA_SKILL_ICONS[name];
   if (!s) return <span className="text-foreground/70">◆</span>;
   if (s.asset) {
-    return <img src={s.asset} alt="" className={`${className} object-contain grayscale brightness-0`} loading="lazy" />;
+    const color = name === "Excel" || name === "SQL" ? "" : "grayscale brightness-0";
+    return <img src={s.asset} alt="" className={`${className} object-contain ${color}`} loading="lazy" />;
   }
   if (s.slug) {
     return (
@@ -458,7 +459,7 @@ function Index() {
             >
               <div className="h-6 w-6 flex items-center justify-center group-hover:scale-110 transition-transform">
                 {s.asset ? (
-                  <img src={s.asset} alt={`${s.name} logo`} className="h-6 w-6 object-contain grayscale brightness-0" loading="lazy" />
+                  <img src={s.asset} alt={`${s.name} logo`} className={`h-6 w-6 object-contain ${s.name === "Excel" || s.name === "SQL" ? "" : "grayscale brightness-0"}`} loading="lazy" />
                 ) : s.slug ? (
                   <img
                     src={`https://cdn.simpleicons.org/${s.slug}`}
