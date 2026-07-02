@@ -451,7 +451,7 @@ function Index() {
           Harsh Gupta
         </h1>
         <p className="mt-4 font-mono text-lg md:text-xl text-muted-foreground">
-          Data &amp; BI Analyst
+          Data &amp; Business Intelligence Analyst
         </p>
 
         <div className="mt-10">
@@ -466,12 +466,14 @@ function Index() {
             About Me
           </a>
           <a
-            href="#contact"
+            href="/Harsh_Gupta_CV.docx"
+            download
             className="font-mono text-sm px-5 py-2.5 rounded-md border border-border hover:border-accent hover:text-accent transition"
           >
-            Get in touch
+            Resume
           </a>
         </div>
+
       </section>
 
       {/* Skills grid */}
