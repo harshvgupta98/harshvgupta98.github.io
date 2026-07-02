@@ -208,6 +208,13 @@ const EDUCATION = [
     school: "National College of Ireland, Dublin",
     dates: "Sep 2024 - Sep 2025",
     logo: nciLogo.url,
+    modules: [
+      "Business Intelligence & Business Analysis",
+      "Predictive Data Analytics",
+      "Data Mining & Machine Learning",
+      "Database & Analytics Programming",
+      "Statistical Models & Mathematics",
+    ],
   },
   {
     year: "2015–2019",
@@ -215,6 +222,13 @@ const EDUCATION = [
     school: "Savitribai Phule Pune University, India",
     dates: "Aug 2015 - Jun 2019",
     logo: sppuLogo.url,
+    modules: [
+      "Data Structures & Algorithms",
+      "Database Management Systems",
+      "Machine Learning",
+      "Cloud Computing",
+      "Software Modelling & Design",
+    ],
   },
 ];
 
@@ -408,7 +422,6 @@ function RightRail() {
 /* ------------------------------ PAGE ------------------------------ */
 
 function Index() {
-  const skillsDoubled = useMemo(() => [...SKILLS, ...SKILLS], []);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -489,16 +502,6 @@ function Index() {
               </div>
             </div>
           ))}
-        </div>
-        {/* Marquee ribbon */}
-        <div className="mt-10 overflow-hidden border-y border-border py-3 bg-secondary/40">
-          <div className="flex gap-3 animate-marquee whitespace-nowrap w-max font-mono text-xs">
-            {skillsDoubled.map((s, i) => (
-              <span key={i} className="px-3 py-1 rounded border border-border bg-card text-muted-foreground">
-                {s.name}
-              </span>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -648,7 +651,7 @@ function Index() {
                   </span>
                 </div>
                 <div className="rounded-xl border border-border bg-card p-5 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left">
-                  <div className="flex items-center gap-5">
+                  <div className="flex items-start gap-5">
                     <div className="h-16 w-16 shrink-0 rounded-full bg-background border border-border flex items-center justify-center overflow-hidden">
                       <img
                         src={e.logo}
@@ -658,9 +661,27 @@ function Index() {
                       />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h3 className="font-mono text-base font-semibold leading-tight">{e.degree}</h3>
-                      <div className="text-sm text-muted-foreground mt-0.5">{e.school}</div>
-                      <div className="font-mono text-[11px] text-muted-foreground/70 mt-1">{e.dates}</div>
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="min-w-0">
+                          <h3 className="font-mono text-base font-semibold leading-tight truncate">{e.school}</h3>
+                          <div className="text-sm text-muted-foreground mt-0.5">{e.degree}</div>
+                        </div>
+                        <div className="font-mono text-[11px] text-muted-foreground/80 shrink-0 text-right whitespace-nowrap pt-1">
+                          {e.dates}
+                        </div>
+                      </div>
+                      <div className="mt-3 pt-3 border-t border-border/60">
+                        <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/80 mb-1.5">
+                          Key Modules
+                        </div>
+                        <div className="flex flex-wrap gap-1.5">
+                          {e.modules.map((m) => (
+                            <span key={m} className="text-[11px] px-2 py-0.5 rounded-md bg-secondary/60 border border-border/60 text-foreground/80">
+                              {m}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
