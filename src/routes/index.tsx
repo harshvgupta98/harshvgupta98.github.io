@@ -533,11 +533,13 @@ function Index() {
               modelling and the kind of data governance that actually holds up once it reaches a dashboard,
               and it's where I built the hybrid LSTM plus GRU model that still anchors my proudest project.
             </p>
-            <p>When I'm not analysing dashboards, you might find me:</p>
-            <div className="pl-4 space-y-1">
-              <p>🏀 Playing competitive basketball, represented India at junior national level in 2014</p>
-              <p>🏍️ Planning the next motorcycle route, already conquered Umling La, the world's highest motorable road</p>
-              <p>💪 In the gym, training year round</p>
+            <div className="rounded-lg bg-[#f2f2f2] p-5 mt-2">
+              <p className="font-semibold text-foreground/90">When I'm not analysing dashboards, you might find me:</p>
+              <ul className="mt-2 list-disc pl-5 space-y-1.5 text-foreground/80">
+                <li>🏀 Playing competitive basketball, represented India at junior national level in 2014</li>
+                <li>🏍️ Planning the next motorcycle route, already conquered Umling La, the world's highest motorable road</li>
+                <li>💪 In the gym, training year round</li>
+              </ul>
             </div>
             <p>
               Currently based in Dublin with full work authorisation, actively looking for Data Analyst,
