@@ -45,51 +45,27 @@ const EXPERIENCE = [
     role: "Reporting Analyst",
     company: "Lenehans",
     location: "Dublin, Ireland",
-    tags: ["Power BI", "DAX", "Linnworks", "SQL"],
-    bullets: [
-      "Built Power BI dashboards for buying and procurement teams across 20,000+ SKUs · cutting buying cycle time by 15%.",
-      "Analysed Linnworks data to surface seasonal demand and dead stock, reducing excess stock by 8%.",
-      "Designed daily stock and pricing reconciliation reports, reducing pricing errors by 5%.",
-      "Leveraged AI-assisted analytics to accelerate cleaning, transformation and reporting workflows.",
-    ],
+    dates: "Aug 2024 - Present",
+    tags: ["Power BI", "DAX", "SQL", "Power Query", "Linnworks"],
   },
   {
     year: "2022–2023",
     role: "Data Analyst",
     company: "Ellora Infotech",
     location: "India",
-    tags: ["Power BI", "DAX", "Power Query", "Python"],
-    bullets: [
-      "Delivered dashboards tracking €11M in engineering contracts, eliminating 2 days of weekly manual reporting.",
-      "Engineered advanced DAX (CALCULATE, SUMX, time-intelligence) to surface cost variance 15% faster.",
-      "Built Power Query ETL pipelines and Python scripts to consolidate Excel/CSV/SQL sources, cutting prep time 20%.",
-      "Designed a unified KPI framework with Finance and Operations, standardising governance.",
-    ],
+    dates: "Sep 2022 - Dec 2023",
+    tags: ["Power BI", "DAX", "Power Query", "Python", "SQL"],
   },
   {
-    year: "2021–2022",
+    year: "2020–2022",
     role: "Junior Data Analyst",
     company: "Santosh & Associates",
     location: "India",
-    tags: ["MySQL", "Excel", "Pivot Tables"],
-    bullets: [
-      "Profiled and validated 5,000+ records monthly across 4 government-contracted locations.",
-      "Applied MySQL to cleanse and standardise data, lifting reporting accuracy by 10%.",
-      "Trend analysis contributed to an 8% reduction in facility costs.",
-    ],
-  },
-  {
-    year: "2019–2021",
-    role: "Admin Reporting Assistant",
-    company: "Ellora EPC Pvt. Ltd.",
-    location: "India",
-    tags: ["ERP", "Excel", "Reporting"],
-    bullets: [
-      "Centralised procurement data across 3+ project sites and 30+ vendors using an ERP system.",
-      "Reconciled material and vendor records weekly to maintain reporting accuracy for senior management.",
-    ],
+    dates: "Jun 2020 - Jul 2022",
+    tags: ["MySQL", "Excel", "Pivot Tables", "KPI Dashboards"],
   },
 ];
+
 
 const PROJECTS = [
   {
@@ -521,14 +497,10 @@ function Index() {
                         </span>
                       ))}
                     </div>
-                    <ul className="mt-4 space-y-1.5 text-sm text-muted-foreground">
-                      {exp.bullets.map((b, j) => (
-                        <li key={j} className="flex gap-2 leading-relaxed">
-                          <span className="text-accent font-mono mt-0.5">→</span>
-                          <span>{b}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="mt-3 font-mono text-[11px] text-muted-foreground/80">
+                      {exp.dates}
+                    </div>
+
                   </div>
                 </div>
               );
