@@ -764,7 +764,7 @@ function Index() {
       <footer className="border-t border-border">
         <div className="mx-auto max-w-6xl px-6 py-8 flex flex-wrap items-center justify-between gap-3 font-mono text-xs text-muted-foreground">
           <div>© {new Date().getFullYear()} Harsh Gupta · Dublin, Ireland</div>
-          <div>harsh.py · built with React + TanStack</div>
+          <a href="https://www.instagram.com/harsh_gupta004?igsh=MTJzaWk5ZnNscGd5ag==" target="_blank" rel="noreferrer" className="hover:text-accent transition">Instagram · @harsh_gupta004</a>
         </div>
       </footer>
     </div>
