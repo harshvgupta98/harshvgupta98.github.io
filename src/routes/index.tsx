@@ -7,6 +7,9 @@ import sppuLogo from "@/assets/sppu-logo.jpg.asset.json";
 import tableauLogo from "@/assets/tableau.png.asset.json";
 import excelLogo from "@/assets/excel.png.asset.json";
 import powerbiLogo from "@/assets/powerbi.png.asset.json";
+import lenehansLogo from "@/assets/lenehans.jpg.asset.json";
+import elloraLogo from "@/assets/ellora.jpg.asset.json";
+import santoshLogo from "@/assets/santosh.png.asset.json";
 import portraitAsset from "@/assets/harsh-portrait.jpg.asset.json";
 
 const portrait = portraitAsset.url;
@@ -95,25 +98,28 @@ const SKILLS: { name: string; asset?: string; slug?: string; fallback?: string }
 
 const EXPERIENCE = [
   {
-    year: "2024–Present",
+    year: "2024-Present",
     role: "Reporting Analyst",
     company: "Lenehans",
+    logo: lenehansLogo.url,
     location: "Dublin, Ireland",
     dates: "Aug 2024 - Present",
     tags: ["Power BI", "DAX", "SQL", "Power Query", "Linnworks"],
   },
   {
-    year: "2022–2023",
+    year: "2022-2023",
     role: "Data Analyst",
     company: "Ellora Infotech",
+    logo: elloraLogo.url,
     location: "India",
     dates: "Sep 2022 - Dec 2023",
     tags: ["Power BI", "DAX", "Power Query", "Python", "SQL"],
   },
   {
-    year: "2020–2022",
+    year: "2020-2022",
     role: "Junior Data Analyst",
     company: "Santosh & Associates",
+    logo: santoshLogo.url,
     location: "India",
     dates: "Jun 2020 - Jul 2022",
     tags: ["MySQL", "Excel", "Pivot Tables", "KPI Dashboards"],
@@ -405,16 +411,16 @@ function Index() {
             >
               <div className="h-6 w-6 flex items-center justify-center group-hover:scale-110 transition-transform">
                 {s.asset ? (
-                  <img src={s.asset} alt={`${s.name} logo`} className="h-6 w-6 object-contain" loading="lazy" />
+                  <img src={s.asset} alt={`${s.name} logo`} className="h-6 w-6 object-contain grayscale brightness-0" loading="lazy" />
                 ) : s.slug ? (
                   <img
                     src={`https://cdn.simpleicons.org/${s.slug}`}
                     alt={`${s.name} logo`}
-                    className="h-6 w-6 object-contain"
+                    className="h-6 w-6 object-contain grayscale brightness-0"
                     loading="lazy"
                   />
                 ) : (
-                  <span className="font-mono text-sm text-accent">{s.fallback}</span>
+                  <span className="font-mono text-sm text-foreground">{s.fallback}</span>
                 )}
               </div>
               <div className="font-mono text-[10px] text-muted-foreground group-hover:text-foreground transition">
@@ -510,55 +516,51 @@ function Index() {
           {/* vertical line */}
           <div className="absolute left-1/2 top-6 bottom-6 w-px bg-border -translate-x-1/2 hidden md:block" />
           <div className="space-y-8">
-            {EXPERIENCE.map((exp, i) => {
-              const initials = exp.company
-                .replace(/[^A-Za-z ]/g, "")
-                .split(" ")
-                .filter(Boolean)
-                .slice(0, 2)
-                .map((w) => w[0])
-                .join("");
-              return (
-                <Reveal
-                  key={exp.role + exp.company}
-                  direction={i % 2 === 0 ? "left" : "right"}
-                  delay={i * 100}
-                  className="relative"
-                >
-                  {/* year badge */}
-                  <div className="flex justify-center mb-3 relative z-10">
-                    <span className="font-mono text-[11px] px-3 py-1 rounded-full bg-foreground text-background shadow-sm">
-                      {exp.year}
-                    </span>
-                  </div>
-                  <div className="rounded-2xl border border-border bg-card p-5 md:p-6 hover:border-accent/60 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-left">
-                    <div className="flex items-start gap-4">
-                      <div className="h-14 w-14 shrink-0 rounded-full bg-background border border-border flex items-center justify-center font-mono text-sm font-semibold text-foreground/80">
-                        {initials}
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <h3 className="font-mono text-base md:text-lg font-semibold truncate">{exp.role}</h3>
-                        <div className="text-sm text-muted-foreground mt-0.5">{exp.company}</div>
-                        <div className="font-mono text-xs text-muted-foreground/80 mt-0.5">
-                          {exp.location}
-                        </div>
+            {EXPERIENCE.map((exp, i) => (
+              <Reveal
+                key={exp.role + exp.company}
+                direction={i % 2 === 0 ? "left" : "right"}
+                delay={i * 100}
+                className="relative"
+              >
+                {/* year badge */}
+                <div className="flex justify-center mb-3 relative z-10">
+                  <span className="font-mono text-[11px] px-3 py-1 rounded-full bg-foreground text-background shadow-sm">
+                    {exp.year}
+                  </span>
+                </div>
+                <div className="rounded-2xl border border-border bg-card p-5 md:p-6 hover:border-accent/60 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-left">
+                  <div className="flex items-start gap-4">
+                    <div className="h-14 w-14 shrink-0 rounded-full bg-background border border-border flex items-center justify-center overflow-hidden">
+                      <img
+                        src={exp.logo}
+                        alt={`${exp.company} logo`}
+                        className="max-h-full max-w-full object-contain p-1.5 grayscale brightness-0"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-mono text-base md:text-lg font-semibold truncate">{exp.role}</h3>
+                      <div className="text-sm text-muted-foreground mt-0.5">{exp.company}</div>
+                      <div className="font-mono text-xs text-muted-foreground/80 mt-0.5">
+                        {exp.location}
                       </div>
                     </div>
-                    <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[12px] text-muted-foreground">
-                      {exp.tags.map((t) => (
-                        <span key={t} className="inline-flex items-center gap-1.5">
-                          <span className="text-accent">◆</span>
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="mt-3 font-mono text-[11px] text-muted-foreground/80">
-                      {exp.dates}
-                    </div>
                   </div>
-                </Reveal>
-              );
-            })}
+                  <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[12px] text-muted-foreground">
+                    {exp.tags.map((t) => (
+                      <span key={t} className="inline-flex items-center gap-1.5">
+                        <span className="text-foreground">◆</span>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="mt-3 font-mono text-[11px] text-muted-foreground/80">
+                    {exp.dates}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </Section>
@@ -566,26 +568,41 @@ function Index() {
 
       {/* Education */}
       <Section id="education" n="04" label="education" title="Academic" italic="background">
-        <div className="max-w-4xl mx-auto space-y-5">
-          {EDUCATION.map((e, i) => (
-            <Reveal
-              key={e.degree}
-              direction={i % 2 === 0 ? "left" : "right"}
-              delay={i * 100}
-              className="grid md:grid-cols-[96px_120px_1fr] grid-cols-[64px_1fr] gap-6 items-start p-6 rounded-xl border border-border bg-card text-left hover:border-accent/60 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
-            >
-              <div className="h-16 w-16 md:h-20 md:w-20 rounded-md bg-background border border-border flex items-center justify-center overflow-hidden shrink-0">
-                <img src={e.logo} alt={`${e.school} logo`} className="max-h-full max-w-full object-contain p-1" />
-              </div>
-              <div className="font-mono text-xs text-accent hidden md:block">{e.year}</div>
-              <div>
-                <div className="font-mono text-xs text-accent md:hidden mb-1">{e.year}</div>
-                <h3 className="text-xl font-semibold">{e.degree}</h3>
-                <div className="text-sm text-muted-foreground mt-1">{e.school}</div>
-                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{e.detail}</p>
-              </div>
-            </Reveal>
-          ))}
+        <div className="max-w-3xl mx-auto relative">
+          <div className="absolute left-1/2 top-6 bottom-6 w-px bg-border -translate-x-1/2 hidden md:block" />
+          <div className="space-y-8">
+            {EDUCATION.map((e, i) => (
+              <Reveal
+                key={e.degree}
+                direction={i % 2 === 0 ? "left" : "right"}
+                delay={i * 100}
+                className="relative"
+              >
+                <div className="flex justify-center mb-3 relative z-10">
+                  <span className="font-mono text-[11px] px-3 py-1 rounded-full bg-foreground text-background shadow-sm">
+                    {e.year}
+                  </span>
+                </div>
+                <div className="rounded-2xl border border-border bg-card p-5 md:p-6 hover:border-accent/60 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-left">
+                  <div className="flex items-start gap-4">
+                    <div className="h-14 w-14 shrink-0 rounded-full bg-background border border-border flex items-center justify-center overflow-hidden">
+                      <img
+                        src={e.logo}
+                        alt={`${e.school} logo`}
+                        className="max-h-full max-w-full object-contain p-1.5 grayscale brightness-0"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-mono text-base md:text-lg font-semibold">{e.degree}</h3>
+                      <div className="text-sm text-muted-foreground mt-0.5">{e.school}</div>
+                      <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{e.detail}</p>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </Section>
 
