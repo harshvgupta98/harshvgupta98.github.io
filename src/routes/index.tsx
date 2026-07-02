@@ -423,9 +423,6 @@ function Index() {
 
       {/* Hero */}
       <section id="top" className="mx-auto max-w-4xl px-6 pt-16 md:pt-24 pb-16 text-center animate-fade-in">
-        <div className="font-mono text-xs text-muted-foreground tracking-widest mb-4">
-          // available for work · dublin, ireland
-        </div>
         <h1 className="font-mono text-5xl md:text-7xl font-bold tracking-tight">
           Harsh Gupta
         </h1>
