@@ -96,6 +96,35 @@ const SKILLS: { name: string; asset?: string; slug?: string; fallback?: string }
   { name: "Star Schema", fallback: "✦" },
 ];
 
+// Extra skill icons used only inside tag chips
+const EXTRA_SKILL_ICONS: Record<string, { slug?: string; fallback?: string }> = {
+  "Pivot Tables": { fallback: "▦" },
+  "KPI Dashboards": { fallback: "📊" },
+};
+
+function SkillIcon({ name, className = "h-3.5 w-3.5" }: { name: string; className?: string }) {
+  const s:
+    | { asset?: string; slug?: string; fallback?: string }
+    | undefined =
+    SKILLS.find((x) => x.name.toLowerCase() === name.toLowerCase()) ||
+    EXTRA_SKILL_ICONS[name];
+  if (!s) return <span className="text-foreground/70">◆</span>;
+  if (s.asset) {
+    return <img src={s.asset} alt="" className={`${className} object-contain grayscale brightness-0`} loading="lazy" />;
+  }
+  if (s.slug) {
+    return (
+      <img
+        src={`https://cdn.simpleicons.org/${s.slug}`}
+        alt=""
+        className={`${className} object-contain grayscale brightness-0`}
+        loading="lazy"
+      />
+    );
+  }
+  return <span className="text-foreground/70 text-[11px]">{s.fallback ?? "◆"}</span>;
+}
+
 const EXPERIENCE = [
   {
     year: "2024-Present",
@@ -187,6 +216,27 @@ const EDUCATION = [
     school: "Savitribai Phule Pune University, India",
     logo: sppuLogo.url,
     detail: "Foundation in data structures, algorithms, DBMS, OOP and data analytics.",
+  },
+];
+
+const CERTIFICATIONS = [
+  {
+    title: "Microsoft Power BI Desktop for Business Intelligence",
+    issuer: "Analyst Builder",
+    date: "May 2026",
+    icon: "📊",
+  },
+  {
+    title: "MySQL for Data Analytics",
+    issuer: "Analyst Builder",
+    date: "Apr 2026",
+    icon: "🗄️",
+  },
+  {
+    title: "Microsoft Power BI Data Analyst (PL-300)",
+    issuer: "Microsoft",
+    date: "In progress",
+    icon: "🎯",
   },
 ];
 
@@ -364,6 +414,7 @@ function Index() {
             <a href="#projects" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition"><Code2 className="h-4 w-4" /> Projects</a>
             <a href="#experience" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition"><Briefcase className="h-4 w-4" /> Work</a>
             <a href="#education" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition"><GraduationCap className="h-4 w-4" /> Education</a>
+            <a href="#certifications" className="hidden md:flex items-center gap-1.5 hover:text-accent transition"><Code2 className="h-4 w-4" /> Certifications</a>
           </div>
         </nav>
       </header>
@@ -442,7 +493,7 @@ function Index() {
       </section>
 
       {/* About */}
-      <Section id="about" n="01" label="about" title="The analyst" italic="behind the data">
+      <Section id="about" label="About" title="The analyst" italic="behind the data">
         <div className="grid md:grid-cols-[1fr_auto] gap-10 items-start max-w-5xl mx-auto">
           <div className="space-y-4 text-muted-foreground leading-relaxed">
             <p>
@@ -486,7 +537,7 @@ function Index() {
       </Section>
 
       {/* Projects */}
-      <Section id="projects" n="02" label="projects" title="What I've" italic="built">
+      <Section id="projects" label="Projects" title="What I've" italic="built">
         <div className="grid md:grid-cols-2 gap-5 max-w-5xl mx-auto">
           {PROJECTS.map((p, i) => (
             <Reveal key={p.title} direction={i % 2 === 0 ? "left" : "right"} delay={i * 60}>
@@ -494,21 +545,19 @@ function Index() {
                 href={p.href}
                 target="_blank"
                 rel="noreferrer"
-                className="group p-6 rounded-xl border border-border bg-card hover:border-accent hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col text-left h-full"
+                className="group p-6 rounded-xl border border-border bg-card hover:border-foreground/40 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col text-left h-full"
               >
                 <div className="flex flex-wrap gap-1.5 font-mono text-[11px] mb-3">
                   {p.tags.map((t) => (
-                    <span key={t} className="px-2 py-0.5 rounded bg-secondary text-muted-foreground border border-border">
+                    <span key={t} className="px-2 py-0.5 rounded bg-secondary text-muted-foreground border border-border inline-flex items-center gap-1">
+                      <SkillIcon name={t} />
                       {t}
                     </span>
                   ))}
                 </div>
-                <h3 className="text-lg font-semibold group-hover:text-accent transition">{p.title}</h3>
+                <h3 className="text-lg font-semibold">{p.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
-                <p className="mt-3 text-xs text-foreground/90 leading-relaxed">
-                  <span className="text-accent font-mono">insight →</span> {p.insight}
-                </p>
-                <div className="mt-4 font-mono text-xs text-accent opacity-70 group-hover:opacity-100">
+                <div className="mt-4 font-mono text-xs text-foreground/70 opacity-70 group-hover:opacity-100">
                   View on GitHub →
                 </div>
               </a>
@@ -518,11 +567,10 @@ function Index() {
       </Section>
 
       {/* Experience */}
-      <Section id="experience" n="03" label="work" title="Work" italic="Experience">
-        <div className="max-w-3xl mx-auto relative">
-          {/* vertical line */}
+      <Section id="experience" label="Work" title="Work" italic="experience">
+        <div className="max-w-2xl mx-auto relative">
           <div className="absolute left-1/2 top-6 bottom-6 w-px bg-border -translate-x-1/2 hidden md:block" />
-          <div className="space-y-8">
+          <div className="space-y-6">
             {EXPERIENCE.map((exp, i) => (
               <Reveal
                 key={exp.role + exp.company}
@@ -530,40 +578,38 @@ function Index() {
                 delay={i * 100}
                 className="relative"
               >
-                {/* year badge */}
-                <div className="flex justify-center mb-3 relative z-10">
-                  <span className="font-mono text-[11px] px-3 py-1 rounded-full bg-foreground text-background shadow-sm">
+                <div className="flex justify-center mb-2 relative z-10">
+                  <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-foreground text-background shadow-sm">
                     {exp.year}
                   </span>
                 </div>
-                <div className="rounded-2xl border border-border bg-card p-5 md:p-6 hover:border-accent/60 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-left">
-                  <div className="flex items-start gap-4">
-                    <div className="h-14 w-14 shrink-0 rounded-full bg-background border border-border flex items-center justify-center overflow-hidden">
+                <div className="rounded-xl border border-border bg-card p-4 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left">
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 shrink-0 rounded-lg bg-background border border-border flex items-center justify-center overflow-hidden">
                       <img
                         src={exp.logo}
                         alt={`${exp.company} logo`}
-                        className="max-h-full max-w-full object-contain p-1.5"
+                        className="max-h-full max-w-full object-contain p-1"
                         loading="lazy"
                       />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h3 className="font-mono text-base md:text-lg font-semibold truncate">{exp.role}</h3>
-                      <div className="text-sm text-muted-foreground mt-0.5">{exp.company}</div>
-                      <div className="font-mono text-xs text-muted-foreground/80 mt-0.5">
-                        {exp.location}
+                      <h3 className="font-mono text-sm font-semibold truncate">{exp.role}</h3>
+                      <div className="text-xs text-muted-foreground truncate">
+                        {exp.company} · {exp.location}
                       </div>
                     </div>
+                    <div className="font-mono text-[10px] text-muted-foreground/80 shrink-0 hidden sm:block">
+                      {exp.dates}
+                    </div>
                   </div>
-                  <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[12px] text-muted-foreground">
+                  <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1.5 font-mono text-[11px] text-muted-foreground">
                     {exp.tags.map((t) => (
-                      <span key={t} className="inline-flex items-center gap-1.5">
-                        <span className="text-foreground">◆</span>
+                      <span key={t} className="inline-flex items-center gap-1">
+                        <SkillIcon name={t} />
                         {t}
                       </span>
                     ))}
-                  </div>
-                  <div className="mt-3 font-mono text-[11px] text-muted-foreground/80">
-                    {exp.dates}
                   </div>
                 </div>
               </Reveal>
@@ -573,11 +619,12 @@ function Index() {
       </Section>
 
 
+
       {/* Education */}
-      <Section id="education" n="04" label="education" title="Academic" italic="background">
-        <div className="max-w-3xl mx-auto relative">
+      <Section id="education" label="Education" title="Academic" italic="background">
+        <div className="max-w-2xl mx-auto relative">
           <div className="absolute left-1/2 top-6 bottom-6 w-px bg-border -translate-x-1/2 hidden md:block" />
-          <div className="space-y-8">
+          <div className="space-y-6">
             {EDUCATION.map((e, i) => (
               <Reveal
                 key={e.degree}
@@ -585,27 +632,27 @@ function Index() {
                 delay={i * 100}
                 className="relative"
               >
-                <div className="flex justify-center mb-3 relative z-10">
-                  <span className="font-mono text-[11px] px-3 py-1 rounded-full bg-foreground text-background shadow-sm">
+                <div className="flex justify-center mb-2 relative z-10">
+                  <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-foreground text-background shadow-sm">
                     {e.year}
                   </span>
                 </div>
-                <div className="rounded-2xl border border-border bg-card p-5 md:p-6 hover:border-accent/60 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-left">
-                  <div className="flex items-start gap-4">
-                    <div className="h-14 w-14 shrink-0 rounded-full bg-background border border-border flex items-center justify-center overflow-hidden">
+                <div className="rounded-xl border border-border bg-card p-4 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left">
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 shrink-0 rounded-lg bg-background border border-border flex items-center justify-center overflow-hidden">
                       <img
                         src={e.logo}
                         alt={`${e.school} logo`}
-                        className="max-h-full max-w-full object-contain p-1.5"
+                        className="max-h-full max-w-full object-contain p-1"
                         loading="lazy"
                       />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h3 className="font-mono text-base md:text-lg font-semibold">{e.degree}</h3>
-                      <div className="text-sm text-muted-foreground mt-0.5">{e.school}</div>
-                      <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{e.detail}</p>
+                      <h3 className="font-mono text-sm font-semibold">{e.degree}</h3>
+                      <div className="text-xs text-muted-foreground">{e.school}</div>
                     </div>
                   </div>
+                  <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{e.detail}</p>
                 </div>
               </Reveal>
             ))}
@@ -613,8 +660,32 @@ function Index() {
         </div>
       </Section>
 
+      {/* Certifications */}
+      <Section id="certifications" label="Certifications" title="Learning" italic="in progress">
+        <div className="max-w-3xl mx-auto grid sm:grid-cols-2 gap-4">
+          {CERTIFICATIONS.map((c, i) => (
+            <Reveal key={c.title} direction={i % 2 === 0 ? "left" : "right"} delay={i * 80}>
+              <div className="rounded-xl border border-border bg-card p-4 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 h-full">
+                <div className="flex items-start gap-3">
+                  <div className="h-9 w-9 shrink-0 rounded-lg bg-background border border-border flex items-center justify-center text-base">
+                    {c.icon}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-mono text-sm font-semibold leading-snug">{c.title}</h3>
+                    <div className="mt-1 text-xs text-muted-foreground">
+                      {c.issuer} · <span className="font-mono">{c.date}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+
       {/* Contact */}
-      <Section id="contact" n="05" label="contact" title="Let's" italic="connect">
+      <Section id="contact" label="Contact" title="Let's" italic="connect">
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-muted-foreground leading-relaxed">
             I'm actively seeking Data Analyst, BI Analyst, Business Analyst or Reporting Analyst roles in Dublin.
@@ -659,30 +730,31 @@ function Index() {
 
 function Section({
   id,
-  n,
   label,
   title,
   italic,
   children,
 }: {
   id: string;
-  n: string;
+  n?: string;
   label: string;
   title: string;
   italic: string;
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="mx-auto max-w-6xl px-6 py-20 md:py-24 border-t border-border">
+    <section id={id} className="mx-auto max-w-6xl px-6 py-16 md:py-20 border-t border-border">
       <Reveal className="text-center mb-10">
-        <div className="font-mono text-xs text-muted-foreground tracking-widest">
-          <span className="text-accent">//</span> {n} {label}
-        </div>
-        <h2 className="mt-3 text-3xl md:text-4xl font-bold">
-          {title} <span className="italic text-accent">{italic}</span>
+        <h2 className="font-mono text-3xl md:text-4xl font-bold flex items-center justify-center gap-3 tracking-tight">
+          <span className="text-foreground/70">&lt;/&gt;</span>
+          <span className="capitalize">{label}</span>
         </h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          {title} <span className="italic">{italic}</span>
+        </p>
       </Reveal>
       {children}
     </section>
   );
 }
+
