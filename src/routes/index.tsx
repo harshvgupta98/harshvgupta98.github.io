@@ -476,7 +476,7 @@ function Index() {
       </header>
 
       {/* Hero */}
-      <section id="top" className="mx-auto max-w-4xl px-6 pt-16 md:pt-24 pb-16 text-center animate-fade-in">
+      <section id="top" className="mx-auto max-w-4xl px-6 pt-10 md:pt-14 pb-16 text-center animate-fade-in">
         <h1 className="font-mono text-5xl md:text-7xl font-bold tracking-tight">Harsh Gupta</h1>
         <p className="mt-4 font-mono text-lg md:text-xl text-muted-foreground">
           Data &amp; Business Intelligence Analyst
