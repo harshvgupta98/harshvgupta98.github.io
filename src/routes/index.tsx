@@ -263,9 +263,13 @@ const SCRIPTS: Record<Lang, { text: string; bold?: string }[]> = {
       text: 'print("Professional Summary: Data & BI Analyst with 3+ years of experience turning fragmented data into decision-ready dashboards using Power BI, DAX, SQL and Python.")',
       bold: "Professional Summary:",
     },
+    {
+      text: 'print("Open to work: Actively seeking Data Analyst · BI Analyst · Reporting Analyst roles across Ireland")',
+      bold: "Open to work:",
+    },
   ],
   sql: [
-    { text: "SELECT name, role, location, summary" },
+    { text: "SELECT name, role, location, summary, status" },
     { text: "FROM portfolio" },
     { text: "WHERE name = 'Harsh Gupta';" },
     { text: "-- Role: Data & Business Intelligence Analyst · Dublin, IE", bold: "Role:" },
@@ -273,6 +277,7 @@ const SCRIPTS: Record<Lang, { text: string; bold?: string }[]> = {
       text: "-- Summary: 3+ yrs turning fragmented data into decision-ready dashboards with Power BI, DAX, SQL and Python.",
       bold: "Summary:",
     },
+    { text: "-- Status: Open to work · Data Analyst · BI Analyst · Reporting Analyst · Ireland", bold: "Status:" },
   ],
 };
 
