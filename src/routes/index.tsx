@@ -135,6 +135,7 @@ const EDUCATION = [
     year: "2024–2025",
     degree: "MSc in Data Analytics",
     school: "National College of Ireland, Dublin",
+    logo: nciLogo.url,
     detail:
       "NFQ Level 9. Dissertation: Predicting E-commerce Sales Using Deep Learning — LSTM, GRU and a novel Hybrid on 100,000+ records; Hybrid R² of 0.91.",
   },
@@ -142,6 +143,7 @@ const EDUCATION = [
     year: "2015–2019",
     degree: "B.E., Computer Science",
     school: "Savitribai Phule Pune University, India",
+    logo: sppuLogo.url,
     detail: "Foundation in data structures, algorithms, DBMS, OOP and data analytics.",
   },
 ];
