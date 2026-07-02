@@ -519,18 +519,19 @@ function Index() {
                 .map((w) => w[0])
                 .join("");
               return (
-                <div
+                <Reveal
                   key={exp.role + exp.company}
-                  className="relative animate-fade-in"
-                  style={{ animationDelay: `${i * 80}ms`, animationFillMode: "both" }}
+                  direction={i % 2 === 0 ? "left" : "right"}
+                  delay={i * 100}
+                  className="relative"
                 >
                   {/* year badge */}
                   <div className="flex justify-center mb-3 relative z-10">
-                    <span className="font-mono text-[11px] px-3 py-1 rounded-full bg-foreground text-background">
+                    <span className="font-mono text-[11px] px-3 py-1 rounded-full bg-foreground text-background shadow-sm">
                       {exp.year}
                     </span>
                   </div>
-                  <div className="rounded-2xl border border-border bg-card p-5 md:p-6 hover:border-accent/60 hover:shadow-md transition text-left">
+                  <div className="rounded-2xl border border-border bg-card p-5 md:p-6 hover:border-accent/60 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-left">
                     <div className="flex items-start gap-4">
                       <div className="h-14 w-14 shrink-0 rounded-full bg-background border border-border flex items-center justify-center font-mono text-sm font-semibold text-foreground/80">
                         {initials}
@@ -554,9 +555,8 @@ function Index() {
                     <div className="mt-3 font-mono text-[11px] text-muted-foreground/80">
                       {exp.dates}
                     </div>
-
                   </div>
-                </div>
+                </Reveal>
               );
             })}
           </div>
