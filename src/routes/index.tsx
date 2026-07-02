@@ -411,16 +411,16 @@ function Index() {
             >
               <div className="h-6 w-6 flex items-center justify-center group-hover:scale-110 transition-transform">
                 {s.asset ? (
-                  <img src={s.asset} alt={`${s.name} logo`} className="h-6 w-6 object-contain" loading="lazy" />
+                  <img src={s.asset} alt={`${s.name} logo`} className="h-6 w-6 object-contain grayscale brightness-0" loading="lazy" />
                 ) : s.slug ? (
                   <img
                     src={`https://cdn.simpleicons.org/${s.slug}`}
                     alt={`${s.name} logo`}
-                    className="h-6 w-6 object-contain"
+                    className="h-6 w-6 object-contain grayscale brightness-0"
                     loading="lazy"
                   />
                 ) : (
-                  <span className="font-mono text-sm text-accent">{s.fallback}</span>
+                  <span className="font-mono text-sm text-foreground">{s.fallback}</span>
                 )}
               </div>
               <div className="font-mono text-[10px] text-muted-foreground group-hover:text-foreground transition">
@@ -516,55 +516,51 @@ function Index() {
           {/* vertical line */}
           <div className="absolute left-1/2 top-6 bottom-6 w-px bg-border -translate-x-1/2 hidden md:block" />
           <div className="space-y-8">
-            {EXPERIENCE.map((exp, i) => {
-              const initials = exp.company
-                .replace(/[^A-Za-z ]/g, "")
-                .split(" ")
-                .filter(Boolean)
-                .slice(0, 2)
-                .map((w) => w[0])
-                .join("");
-              return (
-                <Reveal
-                  key={exp.role + exp.company}
-                  direction={i % 2 === 0 ? "left" : "right"}
-                  delay={i * 100}
-                  className="relative"
-                >
-                  {/* year badge */}
-                  <div className="flex justify-center mb-3 relative z-10">
-                    <span className="font-mono text-[11px] px-3 py-1 rounded-full bg-foreground text-background shadow-sm">
-                      {exp.year}
-                    </span>
-                  </div>
-                  <div className="rounded-2xl border border-border bg-card p-5 md:p-6 hover:border-accent/60 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-left">
-                    <div className="flex items-start gap-4">
-                      <div className="h-14 w-14 shrink-0 rounded-full bg-background border border-border flex items-center justify-center font-mono text-sm font-semibold text-foreground/80">
-                        {initials}
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <h3 className="font-mono text-base md:text-lg font-semibold truncate">{exp.role}</h3>
-                        <div className="text-sm text-muted-foreground mt-0.5">{exp.company}</div>
-                        <div className="font-mono text-xs text-muted-foreground/80 mt-0.5">
-                          {exp.location}
-                        </div>
+            {EXPERIENCE.map((exp, i) => (
+              <Reveal
+                key={exp.role + exp.company}
+                direction={i % 2 === 0 ? "left" : "right"}
+                delay={i * 100}
+                className="relative"
+              >
+                {/* year badge */}
+                <div className="flex justify-center mb-3 relative z-10">
+                  <span className="font-mono text-[11px] px-3 py-1 rounded-full bg-foreground text-background shadow-sm">
+                    {exp.year}
+                  </span>
+                </div>
+                <div className="rounded-2xl border border-border bg-card p-5 md:p-6 hover:border-accent/60 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-left">
+                  <div className="flex items-start gap-4">
+                    <div className="h-14 w-14 shrink-0 rounded-full bg-background border border-border flex items-center justify-center overflow-hidden">
+                      <img
+                        src={exp.logo}
+                        alt={`${exp.company} logo`}
+                        className="max-h-full max-w-full object-contain p-1.5 grayscale brightness-0"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-mono text-base md:text-lg font-semibold truncate">{exp.role}</h3>
+                      <div className="text-sm text-muted-foreground mt-0.5">{exp.company}</div>
+                      <div className="font-mono text-xs text-muted-foreground/80 mt-0.5">
+                        {exp.location}
                       </div>
                     </div>
-                    <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[12px] text-muted-foreground">
-                      {exp.tags.map((t) => (
-                        <span key={t} className="inline-flex items-center gap-1.5">
-                          <span className="text-accent">◆</span>
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="mt-3 font-mono text-[11px] text-muted-foreground/80">
-                      {exp.dates}
-                    </div>
                   </div>
-                </Reveal>
-              );
-            })}
+                  <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[12px] text-muted-foreground">
+                    {exp.tags.map((t) => (
+                      <span key={t} className="inline-flex items-center gap-1.5">
+                        <span className="text-foreground">◆</span>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="mt-3 font-mono text-[11px] text-muted-foreground/80">
+                    {exp.dates}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </Section>
