@@ -515,7 +515,7 @@ function Index() {
       </Section>
 
       {/* Projects */}
-      <Section id="projects" n="02" label="projects" title="What I've" italic="built">
+      <Section id="projects" label="Projects" title="What I've" italic="built">
         <div className="grid md:grid-cols-2 gap-5 max-w-5xl mx-auto">
           {PROJECTS.map((p, i) => (
             <Reveal key={p.title} direction={i % 2 === 0 ? "left" : "right"} delay={i * 60}>
@@ -523,21 +523,19 @@ function Index() {
                 href={p.href}
                 target="_blank"
                 rel="noreferrer"
-                className="group p-6 rounded-xl border border-border bg-card hover:border-accent hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col text-left h-full"
+                className="group p-6 rounded-xl border border-border bg-card hover:border-foreground/40 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col text-left h-full"
               >
                 <div className="flex flex-wrap gap-1.5 font-mono text-[11px] mb-3">
                   {p.tags.map((t) => (
-                    <span key={t} className="px-2 py-0.5 rounded bg-secondary text-muted-foreground border border-border">
+                    <span key={t} className="px-2 py-0.5 rounded bg-secondary text-muted-foreground border border-border inline-flex items-center gap-1">
+                      <SkillIcon name={t} />
                       {t}
                     </span>
                   ))}
                 </div>
-                <h3 className="text-lg font-semibold group-hover:text-accent transition">{p.title}</h3>
+                <h3 className="text-lg font-semibold">{p.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
-                <p className="mt-3 text-xs text-foreground/90 leading-relaxed">
-                  <span className="text-accent font-mono">insight →</span> {p.insight}
-                </p>
-                <div className="mt-4 font-mono text-xs text-accent opacity-70 group-hover:opacity-100">
+                <div className="mt-4 font-mono text-xs text-foreground/70 opacity-70 group-hover:opacity-100">
                   View on GitHub →
                 </div>
               </a>
@@ -547,11 +545,10 @@ function Index() {
       </Section>
 
       {/* Experience */}
-      <Section id="experience" n="03" label="work" title="Work" italic="Experience">
-        <div className="max-w-3xl mx-auto relative">
-          {/* vertical line */}
+      <Section id="experience" label="Work" title="Work" italic="experience">
+        <div className="max-w-2xl mx-auto relative">
           <div className="absolute left-1/2 top-6 bottom-6 w-px bg-border -translate-x-1/2 hidden md:block" />
-          <div className="space-y-8">
+          <div className="space-y-6">
             {EXPERIENCE.map((exp, i) => (
               <Reveal
                 key={exp.role + exp.company}
@@ -559,40 +556,38 @@ function Index() {
                 delay={i * 100}
                 className="relative"
               >
-                {/* year badge */}
-                <div className="flex justify-center mb-3 relative z-10">
-                  <span className="font-mono text-[11px] px-3 py-1 rounded-full bg-foreground text-background shadow-sm">
+                <div className="flex justify-center mb-2 relative z-10">
+                  <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-foreground text-background shadow-sm">
                     {exp.year}
                   </span>
                 </div>
-                <div className="rounded-2xl border border-border bg-card p-5 md:p-6 hover:border-accent/60 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-left">
-                  <div className="flex items-start gap-4">
-                    <div className="h-14 w-14 shrink-0 rounded-full bg-background border border-border flex items-center justify-center overflow-hidden">
+                <div className="rounded-xl border border-border bg-card p-4 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left">
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 shrink-0 rounded-lg bg-background border border-border flex items-center justify-center overflow-hidden">
                       <img
                         src={exp.logo}
                         alt={`${exp.company} logo`}
-                        className="max-h-full max-w-full object-contain p-1.5"
+                        className="max-h-full max-w-full object-contain p-1"
                         loading="lazy"
                       />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h3 className="font-mono text-base md:text-lg font-semibold truncate">{exp.role}</h3>
-                      <div className="text-sm text-muted-foreground mt-0.5">{exp.company}</div>
-                      <div className="font-mono text-xs text-muted-foreground/80 mt-0.5">
-                        {exp.location}
+                      <h3 className="font-mono text-sm font-semibold truncate">{exp.role}</h3>
+                      <div className="text-xs text-muted-foreground truncate">
+                        {exp.company} · {exp.location}
                       </div>
                     </div>
+                    <div className="font-mono text-[10px] text-muted-foreground/80 shrink-0 hidden sm:block">
+                      {exp.dates}
+                    </div>
                   </div>
-                  <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[12px] text-muted-foreground">
+                  <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1.5 font-mono text-[11px] text-muted-foreground">
                     {exp.tags.map((t) => (
-                      <span key={t} className="inline-flex items-center gap-1.5">
-                        <span className="text-foreground">◆</span>
+                      <span key={t} className="inline-flex items-center gap-1">
+                        <SkillIcon name={t} />
                         {t}
                       </span>
                     ))}
-                  </div>
-                  <div className="mt-3 font-mono text-[11px] text-muted-foreground/80">
-                    {exp.dates}
                   </div>
                 </div>
               </Reveal>
@@ -600,6 +595,7 @@ function Index() {
           </div>
         </div>
       </Section>
+
 
 
       {/* Education */}
