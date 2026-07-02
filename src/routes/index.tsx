@@ -150,7 +150,7 @@ const EDUCATION = [
 
 /* ------------------------------ TERMINAL ------------------------------ */
 
-type Lang = "python" | "javascript";
+type Lang = "python" | "sql";
 
 const SCRIPTS: Record<Lang, string[]> = {
   python: [
@@ -158,14 +158,15 @@ const SCRIPTS: Record<Lang, string[]> = {
     'print("Role: Data & BI Analyst · Dublin, IE")',
     'stack = ["Power BI", "DAX", "SQL", "Python"]',
     'summary = "3+ yrs turning fragmented data into dashboards"',
-    'status = "Open to Data / BI / Reporting roles"',
+    'status = "Open to Data / BI / --roles"',
   ],
-  javascript: [
-    'console.log("Hello, World! 👋 I\'m Harsh Gupta");',
-    'console.log("Role: Data & BI Analyst · Dublin, IE");',
-    'const stack = ["Power BI", "DAX", "SQL", "Python"];',
-    'const summary = "3+ yrs turning fragmented data into dashboards";',
-    'const status = "Open to Data / BI / Reporting roles";',
+  sql: [
+    "SELECT name, role, location",
+    "FROM portfolio",
+    "WHERE name = 'Harsh Gupta';",
+    "-- Role: Data & BI Analyst · Dublin, IE",
+    "-- Stack: Power BI, DAX, SQL, Python",
+    "-- Open to Data / BI / Reporting roles",
   ],
 };
 
@@ -204,14 +205,14 @@ function Terminal() {
     return () => clearTimeout(t);
   }, [charIdx, lineIdx, lines]);
 
-  const prefix = lang === "python" ? ">>>" : ">";
-  const cmd = lang === "python" ? "python" : "node";
+  const prefix = lang === "python" ? ">>>" : "sql>";
+  const cmd = lang === "python" ? "python" : "psql";
 
   return (
     <div className="w-full max-w-2xl mx-auto rounded-xl border border-border bg-card shadow-lg overflow-hidden">
       {/* Tabs */}
       <div className="flex items-center gap-1 px-3 pt-3 pb-0 bg-card">
-        {(["python", "javascript"] as Lang[]).map((l) => (
+        {(["python", "sql"] as Lang[]).map((l) => (
           <button
             key={l}
             onClick={() => setLang(l)}
@@ -221,7 +222,7 @@ function Terminal() {
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            {l === "python" ? "Python" : "Javascript"}
+            {l === "python" ? "Python" : "SQL"}
           </button>
         ))}
       </div>
@@ -359,26 +360,26 @@ function Index() {
 
       {/* Skills grid */}
       <section id="skills" className="mx-auto max-w-5xl px-6 pb-16">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2">
           {SKILLS.map((s, i) => (
             <div
               key={s.name}
-              className="group aspect-[3/2] rounded-lg border border-border bg-card flex flex-col items-center justify-center gap-2 hover:border-accent hover:-translate-y-0.5 hover:shadow-md transition animate-fade-in"
+              className="group py-2 rounded-lg border border-border bg-card flex flex-col items-center justify-center gap-1 hover:border-accent hover:-translate-y-0.5 hover:shadow-md transition animate-fade-in"
               style={{ animationDelay: `${i * 30}ms`, animationFillMode: "both" }}
             >
-              <div className="h-8 w-8 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="h-6 w-6 flex items-center justify-center group-hover:scale-110 transition-transform">
                 {s.slug ? (
                   <img
                     src={`https://cdn.simpleicons.org/${s.slug}`}
                     alt={`${s.name} logo`}
-                    className="h-8 w-8 object-contain"
+                    className="h-6 w-6 object-contain"
                     loading="lazy"
                   />
                 ) : (
-                  <span className="font-mono text-lg text-accent">{s.fallback}</span>
+                  <span className="font-mono text-sm text-accent">{s.fallback}</span>
                 )}
               </div>
-              <div className="font-mono text-xs text-muted-foreground group-hover:text-foreground transition">
+              <div className="font-mono text-[10px] text-muted-foreground group-hover:text-foreground transition">
                 {s.name}
               </div>
             </div>
