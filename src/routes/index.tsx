@@ -7,27 +7,28 @@ export const Route = createFileRoute("/")({
 
 /* ------------------------------ DATA ------------------------------ */
 
-const SKILLS: { name: string; icon: string }[] = [
-  { name: "Power BI", icon: "📊" },
-  { name: "DAX", icon: "λ" },
-  { name: "Power Query", icon: "⚡" },
-  { name: "SQL", icon: "🗄️" },
-  { name: "MySQL", icon: "🐬" },
-  { name: "PostgreSQL", icon: "🐘" },
-  { name: "Python", icon: "🐍" },
-  { name: "Pandas", icon: "🐼" },
-  { name: "NumPy", icon: "∑" },
-  { name: "Scikit-learn", icon: "🔬" },
-  { name: "Matplotlib", icon: "📈" },
-  { name: "Seaborn", icon: "🌊" },
-  { name: "Tableau", icon: "📉" },
-  { name: "Excel", icon: "🟢" },
-  { name: "VBA", icon: "⚙️" },
-  { name: "Linnworks", icon: "📦" },
-  { name: "Jupyter", icon: "📓" },
-  { name: "Git", icon: "🔀" },
-  { name: "GA4", icon: "📡" },
-  { name: "Star Schema", icon: "✦" },
+// Skill logos via simpleicons.org (colored brand SVGs). `slug` empty → text/emoji fallback.
+const SKILLS: { name: string; slug?: string; fallback?: string }[] = [
+  { name: "Power BI", slug: "powerbi" },
+  { name: "DAX", fallback: "λ" },
+  { name: "Power Query", fallback: "⚡" },
+  { name: "SQL", fallback: "SQL" },
+  { name: "MySQL", slug: "mysql" },
+  { name: "PostgreSQL", slug: "postgresql" },
+  { name: "Python", slug: "python" },
+  { name: "Pandas", slug: "pandas" },
+  { name: "NumPy", slug: "numpy" },
+  { name: "Scikit-learn", slug: "scikitlearn" },
+  { name: "Matplotlib", fallback: "📈" },
+  { name: "Seaborn", fallback: "🌊" },
+  { name: "Tableau", slug: "tableau" },
+  { name: "Excel", slug: "microsoftexcel" },
+  { name: "VBA", fallback: "⚙️" },
+  { name: "Linnworks", fallback: "📦" },
+  { name: "Jupyter", slug: "jupyter" },
+  { name: "Git", slug: "git" },
+  { name: "GA4", slug: "googleanalytics" },
+  { name: "Star Schema", fallback: "✦" },
 ];
 
 const EXPERIENCE = [
