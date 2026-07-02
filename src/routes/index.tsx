@@ -258,7 +258,7 @@ type Lang = "python" | "sql";
 const SCRIPTS: Record<Lang, { text: string; bold?: string }[]> = {
   python: [
     { text: 'print("Hello, World! 👋 I\'m Harsh Gupta")' },
-    { text: 'print("Current status: Data & Business Intelligence Analyst · Dublin, IE")', bold: "Current status:" },
+    { text: 'print("Current status: Data Analyst · Dublin, IE")', bold: "Current status:" },
     {
       text: 'print("Professional Summary: Data & BI Analyst with 3+ years of experience turning fragmented data into decision-ready dashboards using Power BI, DAX, SQL and Python.")',
       bold: "Professional Summary:",
@@ -272,7 +272,7 @@ const SCRIPTS: Record<Lang, { text: string; bold?: string }[]> = {
     { text: "SELECT name, role, location, summary, status" },
     { text: "FROM portfolio" },
     { text: "WHERE name = 'Harsh Gupta';" },
-    { text: "-- Role: Data & Business Intelligence Analyst · Dublin, IE", bold: "Role:" },
+    { text: "-- Role: Data Analyst · Dublin, IE", bold: "Role:" },
     {
       text: "-- Summary: 3+ yrs turning fragmented data into decision-ready dashboards with Power BI, DAX, SQL and Python.",
       bold: "Summary:",
@@ -479,7 +479,7 @@ function Index() {
       <section id="top" className="mx-auto max-w-4xl px-6 pt-10 md:pt-14 pb-16 text-center animate-fade-in">
         <h1 className="font-mono text-5xl md:text-7xl font-bold tracking-tight">Harsh Gupta</h1>
         <p className="mt-4 font-mono text-lg md:text-xl text-muted-foreground">
-          Data &amp; Business Intelligence Analyst
+          Data Analyst
         </p>
 
         <div className="mt-10">
