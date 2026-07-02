@@ -533,23 +533,6 @@ function Index() {
               modelling and the kind of data governance that actually holds up once it reaches a dashboard,
               and it's where I built the hybrid LSTM plus GRU model that still anchors my proudest project.
             </p>
-            <div className="rounded-lg bg-[#f2f2f2] p-5 mt-2 overflow-x-auto scrollbar-hide">
-              <p className="font-semibold text-foreground/90 whitespace-nowrap">When I'm not analysing dashboards, you might find me:</p>
-              <ul className="mt-2 space-y-1.5 text-foreground/80">
-                <li className="flex items-start gap-2 whitespace-nowrap">
-                  <span className="select-none mt-0.5">•</span>
-                  <span>🏀 Playing competitive basketball, represented India at junior national level in 2014</span>
-                </li>
-                <li className="flex items-start gap-2 whitespace-nowrap">
-                  <span className="select-none mt-0.5">•</span>
-                  <span>🏍️ Planning the next motorcycle route, already conquered Umling La, the world's highest motorable road</span>
-                </li>
-                <li className="flex items-start gap-2 whitespace-nowrap">
-                  <span className="select-none mt-0.5">•</span>
-                  <span>💪 In the gym, training year round</span>
-                </li>
-              </ul>
-            </div>
             <p>
               Currently based in Dublin with full work authorisation, actively looking for Data Analyst,
               BI Analyst or Reporting Analyst roles across Ireland.
