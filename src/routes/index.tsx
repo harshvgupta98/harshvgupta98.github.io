@@ -175,31 +175,21 @@ const PROJECTS = [
     href: "https://github.com/harshvgupta98/PYTHON_SQL_POWERBI_Customer_Behavior_Dashboard",
   },
   {
-    title: "HR Attrition Dashboard",
-    tags: ["Power BI", "DAX", "HR Analytics"],
-    desc: "Attrition dashboard across 1,480 employees · rate, salary bands, roles, and tenure by department on a star schema.",
-    insight: "68% attrition sits in the under-€5K band; Year 1 spike of 59 employees.",
-    href: "https://github.com/harshvgupta98/POWERBI_HR_Analytics_Dashboard",
+    title: "Predicting E-commerce Sales with Deep Learning",
+    tags: ["Python", "LSTM", "GRU"],
+    desc: "MSc dissertation · built LSTM, GRU and a novel Hybrid LSTM+GRU model on 100,000+ Rossmann sales records to forecast daily store revenue.",
+    href: "https://github.com/harshvgupta98",
   },
   {
     title: "Online Bookstore SQL",
     tags: ["SQL", "EDA", "Relational DB"],
     desc: "Exploratory SQL on a bookstore dataset · sales, customer behaviour, inventory and revenue across Books, Customers and Orders.",
-    insight: "JOINs, GROUP BY, HAVING, LEFT JOIN, COALESCE, window functions, subqueries.",
     href: "https://github.com/harshvgupta98/SQL_Project_Online_Bookstore",
-  },
-  {
-    title: "World Life Expectancy SQL",
-    tags: ["SQL", "Cleaning", "EDA"],
-    desc: "SQL cleaning and EDA on life expectancy across 193 countries (2007–2022) · trends and outlier regions.",
-    insight: "193 countries · 15 years · full cleaning pipeline.",
-    href: "https://github.com/harshvgupta98/SQL_Project_World_Life_Expectancy",
   },
   {
     title: "Sales Performance Dashboard",
     tags: ["Excel", "VBA", "Dashboard"],
     desc: "End-to-end Excel dashboard analysing 141 executives across 8 regions · advanced formulas, pivots, dynamic charts, slicers, VBA macros.",
-    insight: "VBA automation · 4 pivots · dynamic charts · single-screen layout.",
     href: "https://github.com/harshvgupta98/EXCEL_Sales_Performance_Dashboard",
   },
 ];
@@ -209,16 +199,15 @@ const EDUCATION = [
     year: "2024–2025",
     degree: "MSc in Data Analytics",
     school: "National College of Ireland, Dublin",
+    dates: "Sep 2024 - Sep 2025",
     logo: nciLogo.url,
-    detail:
-      "NFQ Level 9. Dissertation: Predicting E-commerce Sales Using Deep Learning · LSTM, GRU and a novel Hybrid on 100,000+ records; Hybrid R² of 0.91.",
   },
   {
     year: "2015–2019",
     degree: "B.E., Computer Science",
     school: "Savitribai Phule Pune University, India",
+    dates: "Aug 2015 - Jun 2019",
     logo: sppuLogo.url,
-    detail: "Foundation in data structures, algorithms, DBMS, OOP and data analytics.",
   },
 ];
 
@@ -226,20 +215,20 @@ const CERTIFICATIONS = [
   {
     title: "Microsoft Power BI Desktop for Business Intelligence",
     issuer: "Analyst Builder",
-    date: "May 2026",
-    icon: "📊",
+    date: "3rd May 2026",
+    image: certPowerbi.url,
   },
   {
     title: "MySQL for Data Analytics",
     issuer: "Analyst Builder",
-    date: "Apr 2026",
-    icon: "🗄️",
+    date: "8th Apr 2026",
+    image: certMysql.url,
   },
   {
-    title: "Microsoft Power BI Data Analyst (PL-300)",
+    title: "Microsoft Certified: Power BI Data Analyst Associate (PL-300)",
     issuer: "Microsoft",
-    date: "In progress",
-    icon: "🎯",
+    date: "Earned Jun 2026",
+    image: certPl300.url,
   },
 ];
 
