@@ -422,7 +422,6 @@ function RightRail() {
 /* ------------------------------ PAGE ------------------------------ */
 
 function Index() {
-  const skillsDoubled = useMemo(() => [...SKILLS, ...SKILLS], []);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
