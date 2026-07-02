@@ -1,11 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
+import { User, Code2, Briefcase, GraduationCap } from "lucide-react";
 import nciLogo from "@/assets/nci-logo.png.asset.json";
 import sppuLogo from "@/assets/sppu-logo.jpg.asset.json";
 import tableauLogo from "@/assets/tableau.png.asset.json";
 import excelLogo from "@/assets/excel.png.asset.json";
 import powerbiLogo from "@/assets/powerbi.png.asset.json";
-import portrait from "@/assets/harsh-portrait.jpg";
+import portraitAsset from "@/assets/harsh-portrait.jpg.asset.json";
+
+const portrait = portraitAsset.url;
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -33,7 +36,6 @@ const SKILLS: { name: string; asset?: string; slug?: string; fallback?: string }
   { name: "Linnworks", fallback: "📦" },
   { name: "Jupyter", slug: "jupyter" },
   { name: "Git", slug: "git" },
-  { name: "GA4", slug: "googleanalytics" },
   { name: "Star Schema", fallback: "✦" },
 ];
 
@@ -45,7 +47,7 @@ const EXPERIENCE = [
     location: "Dublin, Ireland",
     tags: ["Power BI", "DAX", "Linnworks", "SQL"],
     bullets: [
-      "Built Power BI dashboards for buying and procurement teams across 20,000+ SKUs — cutting buying cycle time by 15%.",
+      "Built Power BI dashboards for buying and procurement teams across 20,000+ SKUs · cutting buying cycle time by 15%.",
       "Analysed Linnworks data to surface seasonal demand and dead stock, reducing excess stock by 8%.",
       "Designed daily stock and pricing reconciliation reports, reducing pricing errors by 5%.",
       "Leveraged AI-assisted analytics to accelerate cleaning, transformation and reporting workflows.",
@@ -93,43 +95,43 @@ const PROJECTS = [
   {
     title: "Meta Ad Performance Dashboard",
     tags: ["Power BI", "DAX", "Star Schema"],
-    desc: "Multi-page Power BI dashboard analysing 400K ad events across 50 campaigns and 9,841 users — impressions, CTR, engagement, and conversion via 12 DAX measures.",
-    insight: "CTR 11.76% vs 0.61% purchase rate — flagged a leaking funnel and retargeting play.",
+    desc: "Multi-page Power BI dashboard analysing 400K ad events across 50 campaigns and 9,841 users · impressions, CTR, engagement, and conversion via 12 DAX measures.",
+    insight: "CTR 11.76% vs 0.61% purchase rate · flagged a leaking funnel and retargeting play.",
     href: "https://github.com/harshvgupta98/POWERBI_Meta_Ad_Performance_Dashboard",
   },
   {
     title: "Customer Shopping Behaviour",
     tags: ["Python", "PostgreSQL", "Power BI"],
-    desc: "End-to-end pipeline — Python wrangling, SQLAlchemy load into PostgreSQL, and 10 SQL queries with CTEs and window functions on 3,900 transactions.",
+    desc: "End-to-end pipeline · Python wrangling, SQLAlchemy load into PostgreSQL, and 10 SQL queries with CTEs and window functions on 3,900 transactions.",
     insight: "Segmented 3,116 loyal vs 83 new; ~50% discount dependency on key lines.",
     href: "https://github.com/harshvgupta98/PYTHON_SQL_POWERBI_Customer_Behavior_Dashboard",
   },
   {
     title: "HR Attrition Dashboard",
     tags: ["Power BI", "DAX", "HR Analytics"],
-    desc: "Attrition dashboard across 1,480 employees — rate, salary bands, roles, and tenure by department on a star schema.",
+    desc: "Attrition dashboard across 1,480 employees · rate, salary bands, roles, and tenure by department on a star schema.",
     insight: "68% attrition sits in the under-€5K band; Year 1 spike of 59 employees.",
     href: "https://github.com/harshvgupta98/POWERBI_HR_Analytics_Dashboard",
   },
   {
     title: "Online Bookstore SQL",
     tags: ["SQL", "EDA", "Relational DB"],
-    desc: "Exploratory SQL on a bookstore dataset — sales, customer behaviour, inventory and revenue across Books, Customers and Orders.",
+    desc: "Exploratory SQL on a bookstore dataset · sales, customer behaviour, inventory and revenue across Books, Customers and Orders.",
     insight: "JOINs, GROUP BY, HAVING, LEFT JOIN, COALESCE, window functions, subqueries.",
     href: "https://github.com/harshvgupta98/SQL_Project_Online_Bookstore",
   },
   {
     title: "World Life Expectancy SQL",
     tags: ["SQL", "Cleaning", "EDA"],
-    desc: "SQL cleaning and EDA on life expectancy across 193 countries (2007–2022) — trends and outlier regions.",
+    desc: "SQL cleaning and EDA on life expectancy across 193 countries (2007–2022) · trends and outlier regions.",
     insight: "193 countries · 15 years · full cleaning pipeline.",
     href: "https://github.com/harshvgupta98/SQL_Project_World_Life_Expectancy",
   },
   {
     title: "Sales Performance Dashboard",
     tags: ["Excel", "VBA", "Dashboard"],
-    desc: "End-to-end Excel dashboard analysing 141 executives across 8 regions — advanced formulas, pivots, dynamic charts, slicers, VBA macros.",
-    insight: "VBA automation · 4 pivots · dynamic charts — single-screen layout.",
+    desc: "End-to-end Excel dashboard analysing 141 executives across 8 regions · advanced formulas, pivots, dynamic charts, slicers, VBA macros.",
+    insight: "VBA automation · 4 pivots · dynamic charts · single-screen layout.",
     href: "https://github.com/harshvgupta98/EXCEL_Sales_Performance_Dashboard",
   },
 ];
@@ -141,7 +143,7 @@ const EDUCATION = [
     school: "National College of Ireland, Dublin",
     logo: nciLogo.url,
     detail:
-      "NFQ Level 9. Dissertation: Predicting E-commerce Sales Using Deep Learning — LSTM, GRU and a novel Hybrid on 100,000+ records; Hybrid R² of 0.91.",
+      "NFQ Level 9. Dissertation: Predicting E-commerce Sales Using Deep Learning · LSTM, GRU and a novel Hybrid on 100,000+ records; Hybrid R² of 0.91.",
   },
   {
     year: "2015–2019",
@@ -322,10 +324,10 @@ function Index() {
             <span className="text-accent">.py</span>
           </a>
           <div className="flex items-center gap-4 md:gap-8 text-sm font-mono">
-            <a href="#about" className="hover:text-accent transition">◆ About</a>
-            <a href="#projects" className="hidden sm:inline hover:text-accent transition">✦ Projects</a>
-            <a href="#experience" className="hidden sm:inline hover:text-accent transition">▣ Work</a>
-            <a href="#education" className="hidden sm:inline hover:text-accent transition">▲ Education</a>
+            <a href="#about" className="flex items-center gap-1.5 hover:text-accent transition"><User className="h-4 w-4" /> About</a>
+            <a href="#projects" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition"><Code2 className="h-4 w-4" /> Projects</a>
+            <a href="#experience" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition"><Briefcase className="h-4 w-4" /> Work</a>
+            <a href="#education" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition"><GraduationCap className="h-4 w-4" /> Education</a>
           </div>
         </nav>
       </header>
@@ -408,7 +410,7 @@ function Index() {
         <div className="grid md:grid-cols-[1fr_auto] gap-10 items-start max-w-5xl mx-auto">
           <div className="space-y-4 text-muted-foreground leading-relaxed">
             <p>
-              नमस्कार 🙏 I'm Harsh — a Data & BI Analyst who turns fragmented, inconsistent data into
+              नमस्कार 🙏 I'm Harsh · a Data & BI Analyst who turns fragmented, inconsistent data into
               dashboards, KPI frameworks and analytical pipelines that help commercial and operational
               teams make faster decisions.
             </p>
@@ -420,7 +422,7 @@ function Index() {
               <span className="text-accent font-medium">5%</span> through data validation at scale.
             </p>
             <p>
-              MSc in Data Analytics, National College of Ireland. Dublin-based with full work authorisation —
+              MSc in Data Analytics, National College of Ireland. Dublin-based with full work authorisation -
               actively seeking Data Analyst, BI Analyst, Business Analyst or Reporting Analyst roles across Ireland.
             </p>
           </div>
@@ -473,40 +475,68 @@ function Index() {
       </Section>
 
       {/* Experience */}
-      <Section id="experience" n="03" label="work" title="Where I've" italic="worked">
-        <div className="max-w-4xl mx-auto space-y-5">
-          {EXPERIENCE.map((exp, i) => (
-            <div
-              key={exp.role + exp.company}
-              className="grid md:grid-cols-[160px_1fr] gap-6 p-6 rounded-xl border border-border bg-card hover:border-accent/60 transition animate-fade-in text-left"
-              style={{ animationDelay: `${i * 80}ms`, animationFillMode: "both" }}
-            >
-              <div className="font-mono text-xs text-accent">{exp.year}</div>
-              <div>
-                <h3 className="text-xl font-semibold">{exp.role}</h3>
-                <div className="text-sm text-muted-foreground mt-1">
-                  {exp.company} · {exp.location}
-                </div>
-                <div className="mt-3 flex flex-wrap gap-1.5 font-mono text-[11px]">
-                  {exp.tags.map((t) => (
-                    <span key={t} className="px-2 py-0.5 rounded bg-secondary text-muted-foreground border border-border">
-                      {t}
+      <Section id="experience" n="03" label="work" title="Work" italic="Experience">
+        <div className="max-w-3xl mx-auto relative">
+          {/* vertical line */}
+          <div className="absolute left-1/2 top-6 bottom-6 w-px bg-border -translate-x-1/2 hidden md:block" />
+          <div className="space-y-8">
+            {EXPERIENCE.map((exp, i) => {
+              const initials = exp.company
+                .replace(/[^A-Za-z ]/g, "")
+                .split(" ")
+                .filter(Boolean)
+                .slice(0, 2)
+                .map((w) => w[0])
+                .join("");
+              return (
+                <div
+                  key={exp.role + exp.company}
+                  className="relative animate-fade-in"
+                  style={{ animationDelay: `${i * 80}ms`, animationFillMode: "both" }}
+                >
+                  {/* year badge */}
+                  <div className="flex justify-center mb-3 relative z-10">
+                    <span className="font-mono text-[11px] px-3 py-1 rounded-full bg-foreground text-background">
+                      {exp.year}
                     </span>
-                  ))}
+                  </div>
+                  <div className="rounded-2xl border border-border bg-card p-5 md:p-6 hover:border-accent/60 hover:shadow-md transition text-left">
+                    <div className="flex items-start gap-4">
+                      <div className="h-14 w-14 shrink-0 rounded-full bg-background border border-border flex items-center justify-center font-mono text-sm font-semibold text-foreground/80">
+                        {initials}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="font-mono text-base md:text-lg font-semibold truncate">{exp.role}</h3>
+                        <div className="text-sm text-muted-foreground mt-0.5">{exp.company}</div>
+                        <div className="font-mono text-xs text-muted-foreground/80 mt-0.5">
+                          {exp.location}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[12px] text-muted-foreground">
+                      {exp.tags.map((t) => (
+                        <span key={t} className="inline-flex items-center gap-1.5">
+                          <span className="text-accent">◆</span>
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                    <ul className="mt-4 space-y-1.5 text-sm text-muted-foreground">
+                      {exp.bullets.map((b, j) => (
+                        <li key={j} className="flex gap-2 leading-relaxed">
+                          <span className="text-accent font-mono mt-0.5">→</span>
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                  {exp.bullets.map((b, j) => (
-                    <li key={j} className="flex gap-3 leading-relaxed">
-                      <span className="text-accent font-mono mt-1">→</span>
-                      <span>{b}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
+              );
+            })}
+          </div>
         </div>
       </Section>
+
 
       {/* Education */}
       <Section id="education" n="04" label="education" title="Academic" italic="background">
@@ -569,7 +599,7 @@ function Index() {
       <footer className="border-t border-border">
         <div className="mx-auto max-w-6xl px-6 py-8 flex flex-wrap items-center justify-between gap-3 font-mono text-xs text-muted-foreground">
           <div>© {new Date().getFullYear()} Harsh Gupta · Dublin, Ireland</div>
-          <div>harsh.py — built with React + TanStack</div>
+          <div>harsh.py · built with React + TanStack</div>
         </div>
       </footer>
     </div>
