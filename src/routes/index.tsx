@@ -55,14 +55,13 @@ function Reveal({
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
   }, []);
 
-  const dirClass =
-    direction === "left" ? "reveal-left" : direction === "right" ? "reveal-right" : "";
+  const dirClass = direction === "left" ? "reveal-left" : direction === "right" ? "reveal-right" : "";
 
   return (
     <Tag
@@ -74,7 +73,6 @@ function Reveal({
     </Tag>
   );
 }
-
 
 /* ------------------------------ DATA ------------------------------ */
 
@@ -105,17 +103,14 @@ const SKILLS: { name: string; asset?: string; slug?: string; fallback?: string }
 const EXTRA_SKILL_ICONS: Record<string, { asset?: string; slug?: string; fallback?: string; color?: boolean }> = {
   "Pivot Tables": { fallback: "▦" },
   "KPI Dashboards": { fallback: "📊" },
-  "LSTM": { asset: lstmLogo.url, color: true },
-  "GRU": { asset: lstmLogo.url, color: true },
+  LSTM: { asset: lstmLogo.url, color: true },
+  GRU: { asset: lstmLogo.url, color: true },
   "Relational DB": { asset: sqlLogo.url, color: true },
 };
 
 function SkillIcon({ name, className = "h-3.5 w-3.5" }: { name: string; className?: string }) {
-  const s:
-    | { asset?: string; slug?: string; fallback?: string; color?: boolean }
-    | undefined =
-    SKILLS.find((x) => x.name.toLowerCase() === name.toLowerCase()) ||
-    EXTRA_SKILL_ICONS[name];
+  const s: { asset?: string; slug?: string; fallback?: string; color?: boolean } | undefined =
+    SKILLS.find((x) => x.name.toLowerCase() === name.toLowerCase()) || EXTRA_SKILL_ICONS[name];
   if (!s) return <span className="text-foreground/70">◆</span>;
   if (s.asset) {
     const keepColor = s.color || name === "Excel" || name === "SQL";
@@ -164,7 +159,6 @@ const EXPERIENCE = [
     tags: ["MySQL", "Excel", "Pivot Tables", "KPI Dashboards"],
   },
 ];
-
 
 const PROJECTS = [
   {
@@ -264,14 +258,20 @@ const SCRIPTS: Record<Lang, { text: string; bold?: string }[]> = {
   python: [
     { text: 'print("Hello, World! 👋 I\'m Harsh Gupta")' },
     { text: 'print("Current status: Data & Business Intelligence Analyst · Dublin, IE")', bold: "Current status:" },
-    { text: 'print("Professional Summary: Data & BI Analyst with 3+ years of experience turning fragmented data into decision-ready dashboards using Power BI, DAX, SQL and Python.")', bold: "Professional Summary:" },
+    {
+      text: 'print("Professional Summary: Data & BI Analyst with 3+ years of experience turning fragmented data into decision-ready dashboards using Power BI, DAX, SQL and Python.")',
+      bold: "Professional Summary:",
+    },
   ],
   sql: [
     { text: "SELECT name, role, location, summary" },
     { text: "FROM portfolio" },
     { text: "WHERE name = 'Harsh Gupta';" },
     { text: "-- Role: Data & Business Intelligence Analyst · Dublin, IE", bold: "Role:" },
-    { text: "-- Summary: 3+ yrs turning fragmented data into decision-ready dashboards with Power BI, DAX, SQL and Python.", bold: "Summary:" },
+    {
+      text: "-- Summary: 3+ yrs turning fragmented data into decision-ready dashboards with Power BI, DAX, SQL and Python.",
+      bold: "Summary:",
+    },
   ],
 };
 
@@ -334,9 +334,7 @@ function Terminal() {
             key={l}
             onClick={() => setLang(l)}
             className={`text-xs font-mono px-3 py-1.5 rounded-md transition ${
-              lang === l
-                ? "bg-foreground text-background"
-                : "text-muted-foreground hover:text-foreground"
+              lang === l ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"
             }`}
           >
             {l === "python" ? "Python" : "SQL"}
@@ -352,16 +350,13 @@ function Terminal() {
         {typed.map((line, i) => (
           <div key={i} className="text-foreground/80">
             <span className="text-accent">{prefix}</span>{" "}
-            <span className="whitespace-pre-wrap break-words">
-              {renderLine(line, lines[i]?.bold)}
-            </span>
+            <span className="whitespace-pre-wrap break-words">{renderLine(line, lines[i]?.bold)}</span>
             {i === lineIdx && <span className="cursor-blink text-primary">▊</span>}
           </div>
         ))}
         {lineIdx >= lines.length && (
           <div className="text-foreground/60 pt-1">
-            <span className="text-accent">{prefix}</span>{" "}
-            <span className="cursor-blink text-primary">▊</span>
+            <span className="text-accent">{prefix}</span> <span className="cursor-blink text-primary">▊</span>
           </div>
         )}
       </div>
@@ -381,7 +376,9 @@ function LeftRail() {
         className="text-muted-foreground hover:text-accent hover:-translate-y-0.5 transition"
         aria-label="GitHub"
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.53-1.35-1.29-1.71-1.29-1.71-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.72-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.39-5.25 5.67.41.35.78 1.05.78 2.12v3.14c0 .3.21.67.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.53-1.35-1.29-1.71-1.29-1.71-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.72-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.39-5.25 5.67.41.35.78 1.05.78 2.12v3.14c0 .3.21.67.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+        </svg>
       </a>
       <a
         href="https://linkedin.com/in/1harsh-gupta"
@@ -390,7 +387,9 @@ function LeftRail() {
         className="text-muted-foreground hover:text-accent hover:-translate-y-0.5 transition"
         aria-label="LinkedIn"
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.4v1.56h.05a3.73 3.73 0 0 1 3.36-1.85c3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.23 0H1.77C.79 0 0 .78 0 1.73v20.53C0 23.22.79 24 1.77 24h20.46c.98 0 1.77-.78 1.77-1.74V1.73C24 .78 23.21 0 22.23 0Z"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.4v1.56h.05a3.73 3.73 0 0 1 3.36-1.85c3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.23 0H1.77C.79 0 0 .78 0 1.73v20.53C0 23.22.79 24 1.77 24h20.46c.98 0 1.77-.78 1.77-1.74V1.73C24 .78 23.21 0 22.23 0Z" />
+        </svg>
       </a>
       <a
         href="https://www.instagram.com/harsh_gupta004?igsh=MTJzaWk5ZnNscGd5ag=="
@@ -399,14 +398,21 @@ function LeftRail() {
         className="text-muted-foreground hover:text-accent hover:-translate-y-0.5 transition"
         aria-label="Instagram"
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <rect x="3" y="3" width="18" height="18" rx="5" />
+          <circle cx="12" cy="12" r="4" />
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+        </svg>
       </a>
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         className="text-muted-foreground hover:text-accent hover:-translate-y-0.5 transition"
         aria-label="Back to top"
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M12 19V5" />
+          <path d="m5 12 7-7 7 7" />
+        </svg>
       </button>
       <div className="w-px h-24 bg-border" />
     </div>
@@ -431,7 +437,6 @@ function RightRail() {
 /* ------------------------------ PAGE ------------------------------ */
 
 function Index() {
-
   return (
     <div className="min-h-screen bg-background text-foreground">
       <LeftRail />
@@ -445,20 +450,28 @@ function Index() {
             <span className="text-accent">.py</span>
           </a>
           <div className="flex items-center gap-4 md:gap-8 text-sm font-mono">
-            <a href="#about" className="flex items-center gap-1.5 hover:text-accent transition"><User className="h-4 w-4" /> About</a>
-            <a href="#projects" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition"><Code2 className="h-4 w-4" /> Projects</a>
-            <a href="#experience" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition"><Briefcase className="h-4 w-4" /> Work</a>
-            <a href="#education" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition"><GraduationCap className="h-4 w-4" /> Education</a>
-            <a href="#certifications" className="hidden md:flex items-center gap-1.5 hover:text-accent transition"><Code2 className="h-4 w-4" /> Certifications</a>
+            <a href="#about" className="flex items-center gap-1.5 hover:text-accent transition">
+              <User className="h-4 w-4" /> About
+            </a>
+            <a href="#projects" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition">
+              <Code2 className="h-4 w-4" /> Projects
+            </a>
+            <a href="#experience" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition">
+              <Briefcase className="h-4 w-4" /> Work
+            </a>
+            <a href="#education" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition">
+              <GraduationCap className="h-4 w-4" /> Education
+            </a>
+            <a href="#certifications" className="hidden md:flex items-center gap-1.5 hover:text-accent transition">
+              <Code2 className="h-4 w-4" /> Certifications
+            </a>
           </div>
         </nav>
       </header>
 
       {/* Hero */}
       <section id="top" className="mx-auto max-w-4xl px-6 pt-16 md:pt-24 pb-16 text-center animate-fade-in">
-        <h1 className="font-mono text-5xl md:text-7xl font-bold tracking-tight">
-          Harsh Gupta
-        </h1>
+        <h1 className="font-mono text-5xl md:text-7xl font-bold tracking-tight">Harsh Gupta</h1>
         <p className="mt-4 font-mono text-lg md:text-xl text-muted-foreground">
           Data &amp; Business Intelligence Analyst
         </p>
@@ -482,7 +495,6 @@ function Index() {
             Resume
           </a>
         </div>
-
       </section>
 
       {/* Skills grid */}
@@ -496,7 +508,12 @@ function Index() {
             >
               <div className="h-6 w-6 flex items-center justify-center group-hover:scale-110 transition-transform">
                 {s.asset ? (
-                  <img src={s.asset} alt={`${s.name} logo`} className={`h-6 w-6 object-contain ${s.name === "Excel" || s.name === "SQL" ? "" : "grayscale brightness-0"}`} loading="lazy" />
+                  <img
+                    src={s.asset}
+                    alt={`${s.name} logo`}
+                    className={`h-6 w-6 object-contain ${s.name === "Excel" || s.name === "SQL" ? "" : "grayscale brightness-0"}`}
+                    loading="lazy"
+                  />
                 ) : s.slug ? (
                   <img
                     src={`https://cdn.simpleicons.org/${s.slug}`}
@@ -521,29 +538,28 @@ function Index() {
         <div className="grid md:grid-cols-[1fr_auto] gap-10 items-start max-w-5xl mx-auto">
           <div className="rounded-xl border border-border bg-card p-6 shadow-sm space-y-4 font-mono text-[13px] text-foreground/80 leading-relaxed">
             <p>
-              नमस्कार 🙏 I'm Harsh, a Data Analyst with 3+ years of experience streamlining reporting
-              and inventory decisions across retail and project based environments. I work mainly in
-              Power BI, SQL and Python, with a focus on DAX modelling, ETL/ELT pipelines, KPI framework
-              design and AI assisted analytics.
+              नमस्कार 🙏 I'm Harsh, a Data Analyst with 3+ years of experience streamlining reporting and inventory
+              decisions across retail and project based environments. I work mainly in Power BI, SQL and Python, with a
+              focus on DAX modelling, ETL/ELT pipelines, KPI framework design and AI assisted analytics.
             </p>
             <p>
-              After three years working as a data analyst across project based and administrative
-              environments in India, I moved to Dublin to pursue an MSc in Data Analytics at the National
-              College of Ireland. That year sharpened my grip on predictive analytics, statistical
-              modelling and the kind of data governance that actually holds up once it reaches a dashboard,
-              and it's where I built the hybrid LSTM plus GRU model that still anchors my proudest project.
+              After three years working as a data analyst across project based and administrative environments in India,
+              I moved to Dublin to pursue an MSc in Data Analytics at the National College of Ireland. That year
+              sharpened my grip on predictive analytics, statistical modelling and the kind of data governance that
+              actually holds up once it reaches a dashboard, and it's where I built the hybrid LSTM plus GRU model that
+              still anchors my proudest project.
             </p>
             <div className="rounded-lg bg-[#f2f2f2] p-5 mt-2">
               <p className="font-semibold text-foreground/90">When I'm not analysing dashboards, you might find me:</p>
               <ul className="mt-2 list-disc pl-5 space-y-1.5 text-foreground/80">
-                <li>🏀 Playing competitive basketball, represented India at junior national level in 2014</li>
-                <li>🏍️ Planning the next motorcycle route, already conquered Umling La, the world's highest motorable road</li>
-                <li>💪 In the gym, training year round</li>
+                🏀 Playing competitive basketball, represented India at junior national level in 2014 🏍️ Planning the
+                next motorcycle route, already conquered Umling La, the world's highest motorable road 💪 In the gym,
+                training year round
               </ul>
             </div>
             <p>
-              Currently based in Dublin with full work authorisation, actively looking for Data Analyst,
-              BI Analyst or Reporting Analyst roles across Ireland.
+              Currently based in Dublin with full work authorisation, actively looking for Data Analyst, BI Analyst or
+              Reporting Analyst roles across Ireland.
             </p>
           </div>
           <div className="mx-auto md:mx-0 md:mt-6">
@@ -575,7 +591,10 @@ function Index() {
               >
                 <div className="flex flex-wrap gap-1.5 font-mono text-[11px] mb-3">
                   {p.tags.map((t) => (
-                    <span key={t} className="px-2 py-0.5 rounded bg-secondary text-muted-foreground border border-border inline-flex items-center gap-1">
+                    <span
+                      key={t}
+                      className="px-2 py-0.5 rounded bg-secondary text-muted-foreground border border-border inline-flex items-center gap-1"
+                    >
                       <SkillIcon name={t} />
                       {t}
                     </span>
@@ -609,8 +628,9 @@ function Index() {
                     {exp.year}
                   </span>
                 </div>
-                <div className={`rounded-xl border border-border bg-card p-4 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left ${i % 2 === 0 ? "md:mr-10" : "md:ml-10"}`}>
-
+                <div
+                  className={`rounded-xl border border-border bg-card p-4 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left ${i % 2 === 0 ? "md:mr-10" : "md:ml-10"}`}
+                >
                   <div className="flex items-center gap-3">
                     <div className="h-10 w-10 shrink-0 rounded-lg bg-background border border-border flex items-center justify-center overflow-hidden">
                       <img
@@ -645,26 +665,21 @@ function Index() {
         </div>
       </Section>
 
-
-
       {/* Education */}
       <Section id="education" label="Education" title="Academic" italic="background">
         <div className="max-w-3xl mx-auto relative">
           <div className="absolute left-1/2 top-6 bottom-6 w-px bg-border -translate-x-1/2 hidden md:block" />
           <div className="space-y-6">
             {EDUCATION.map((e, i) => (
-              <Reveal
-                key={e.degree}
-                direction={i % 2 === 0 ? "left" : "right"}
-                delay={i * 100}
-                className="relative"
-              >
+              <Reveal key={e.degree} direction={i % 2 === 0 ? "left" : "right"} delay={i * 100} className="relative">
                 <div className="flex justify-center mb-2 relative z-10">
                   <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-foreground text-background shadow-sm">
                     {e.year}
                   </span>
                 </div>
-                <div className={`rounded-xl border border-border bg-card p-5 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left ${i % 2 === 0 ? "md:mr-10" : "md:ml-10"}`}>
+                <div
+                  className={`rounded-xl border border-border bg-card p-5 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left ${i % 2 === 0 ? "md:mr-10" : "md:ml-10"}`}
+                >
                   <div className="flex items-start gap-5">
                     <div className="h-16 w-16 shrink-0 rounded-full bg-background border border-border flex items-center justify-center overflow-hidden">
                       <img
@@ -690,7 +705,10 @@ function Index() {
                         </div>
                         <div className="flex flex-wrap gap-1.5">
                           {e.modules.map((m) => (
-                            <span key={m} className="text-[11px] px-2 py-0.5 rounded-md bg-secondary/60 border border-border/60 text-foreground/80">
+                            <span
+                              key={m}
+                              className="text-[11px] px-2 py-0.5 rounded-md bg-secondary/60 border border-border/60 text-foreground/80"
+                            >
                               {m}
                             </span>
                           ))}
@@ -704,7 +722,6 @@ function Index() {
           </div>
         </div>
       </Section>
-
 
       {/* Certifications */}
       <Section id="certifications" label="Certifications" title="Credentials" italic="earned">
@@ -737,11 +754,11 @@ function Index() {
         </div>
       </Section>
 
-
       <footer className="border-t border-border">
         <div className="mx-auto max-w-4xl px-6 py-8 text-center font-mono text-xs text-muted-foreground">
           <p className="italic leading-relaxed">
-            "Between the highest motorable road and the free throw line, I learned the same lesson twice. Show up prepared, trust the process and let the numbers do the talking."
+            "Between the highest motorable road and the free throw line, I learned the same lesson twice. Show up
+            prepared, trust the process and let the numbers do the talking."
           </p>
           <div className="mt-3">© {new Date().getFullYear()} Harsh Gupta · Dublin, Ireland</div>
         </div>
@@ -779,4 +796,3 @@ function Section({
     </section>
   );
 }
-
