@@ -103,11 +103,13 @@ const EXTRA_SKILL_ICONS: Record<string, { slug?: string; fallback?: string }> = 
 };
 
 function SkillIcon({ name, className = "h-3.5 w-3.5" }: { name: string; className?: string }) {
-  const s =
+  const s:
+    | { asset?: string; slug?: string; fallback?: string }
+    | undefined =
     SKILLS.find((x) => x.name.toLowerCase() === name.toLowerCase()) ||
     EXTRA_SKILL_ICONS[name];
   if (!s) return <span className="text-foreground/70">◆</span>;
-  if ("asset" in s && s.asset) {
+  if (s.asset) {
     return <img src={s.asset} alt="" className={`${className} object-contain grayscale brightness-0`} loading="lazy" />;
   }
   if (s.slug) {
