@@ -277,7 +277,7 @@ function Terminal() {
 
   useEffect(() => {
     if (lineIdx >= lines.length) return;
-    const target = lines[lineIdx];
+    const target = lines[lineIdx].text;
     if (charIdx <= target.length) {
       const t = setTimeout(() => {
         setTyped((prev) => {
@@ -286,52 +286,66 @@ function Terminal() {
           return next;
         });
         setCharIdx((c) => c + 1);
-      }, 22);
+      }, 18);
       return () => clearTimeout(t);
     }
     const t = setTimeout(() => {
       setLineIdx((i) => i + 1);
       setCharIdx(0);
-    }, 380);
+    }, 320);
     return () => clearTimeout(t);
   }, [charIdx, lineIdx, lines]);
 
-  const prefix = lang === "python" ? ">>>" : "sql>";
+  const prefix = lang === "python" ? ">>" : "sql>";
   const cmd = lang === "python" ? "python" : "psql";
 
+  const renderLine = (text: string, boldPart?: string) => {
+    if (!boldPart || !text.includes(boldPart)) return <>{text}</>;
+    const idx = text.indexOf(boldPart);
+    return (
+      <>
+        {text.slice(0, idx)}
+        <span className="font-semibold text-foreground">{boldPart}</span>
+        {text.slice(idx + boldPart.length)}
+      </>
+    );
+  };
+
   return (
-    <div className="w-full max-w-2xl mx-auto rounded-xl border border-border bg-card shadow-lg overflow-hidden">
+    <div className="w-full max-w-3xl mx-auto rounded-xl border border-border bg-white shadow-sm overflow-hidden">
       {/* Tabs */}
-      <div className="flex items-center gap-1 px-3 pt-3 pb-0 bg-card">
+      <div className="flex items-center gap-1 px-3 pt-3 pb-0 bg-white">
         {(["python", "sql"] as Lang[]).map((l) => (
           <button
             key={l}
             onClick={() => setLang(l)}
             className={`text-xs font-mono px-3 py-1.5 rounded-md transition ${
               lang === l
-                ? "bg-primary text-primary-foreground"
+                ? "bg-foreground text-background"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            {l === "python" ? "Python" : "SQL"}
+            {l === "python" ? "Python" : "Javascript"}
           </button>
         ))}
       </div>
-      <div className="mx-3 mt-2 rounded-lg bg-secondary/50 border border-border font-mono text-[13px] leading-relaxed p-4 min-h-[220px] mb-3">
-        <div className="flex items-center gap-2 text-muted-foreground pb-2">
-          <span>✉</span>
+      <div className="mx-3 mt-2 rounded-lg bg-white border border-border/60 font-mono text-[13px] leading-relaxed p-4 min-h-[200px] mb-3">
+        <div className="flex items-center gap-2 text-foreground/70 pb-2">
+          <span>▪</span>
           <span>harsh@portfolio:~$</span>
-          <span className="text-accent">{cmd}</span>
+          <span className="text-accent">&gt;&gt;{cmd}</span>
         </div>
         {typed.map((line, i) => (
-          <div key={i} className="text-foreground/90">
+          <div key={i} className="text-foreground/80">
             <span className="text-accent">{prefix}</span>{" "}
-            <span className="whitespace-pre-wrap break-words">{line}</span>
+            <span className="whitespace-pre-wrap break-words">
+              {renderLine(line, lines[i]?.bold)}
+            </span>
             {i === lineIdx && <span className="cursor-blink text-primary">▊</span>}
           </div>
         ))}
         {lineIdx >= lines.length && (
-          <div className="text-muted-foreground pt-1">
+          <div className="text-foreground/60 pt-1">
             <span className="text-accent">{prefix}</span>{" "}
             <span className="cursor-blink text-primary">▊</span>
           </div>
