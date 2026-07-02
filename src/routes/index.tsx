@@ -771,9 +771,11 @@ function Index() {
       </Section>
 
       <footer className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-6 py-8 flex flex-wrap items-center justify-between gap-3 font-mono text-xs text-muted-foreground">
-          <div>© {new Date().getFullYear()} Harsh Gupta · Dublin, Ireland</div>
-          <a href="https://www.instagram.com/harsh_gupta004?igsh=MTJzaWk5ZnNscGd5ag==" target="_blank" rel="noreferrer" className="hover:text-accent transition">Instagram · @harsh_gupta004</a>
+        <div className="mx-auto max-w-4xl px-6 py-8 text-center font-mono text-xs text-muted-foreground">
+          <p className="italic leading-relaxed">
+            "Between the highest motorable road and the free throw line, I learned the same lesson twice. Show up prepared, trust the process and let the numbers do the talking."
+          </p>
+          <div className="mt-3">© {new Date().getFullYear()} Harsh Gupta · Dublin, Ireland</div>
         </div>
       </footer>
     </div>
