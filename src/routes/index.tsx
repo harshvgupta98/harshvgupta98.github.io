@@ -7,6 +7,9 @@ import sppuLogo from "@/assets/sppu-logo.jpg.asset.json";
 import tableauLogo from "@/assets/tableau.png.asset.json";
 import excelLogo from "@/assets/excel.png.asset.json";
 import powerbiLogo from "@/assets/powerbi.png.asset.json";
+import lenehansLogo from "@/assets/lenehans.jpg.asset.json";
+import elloraLogo from "@/assets/ellora.jpg.asset.json";
+import santoshLogo from "@/assets/santosh.png.asset.json";
 import portraitAsset from "@/assets/harsh-portrait.jpg.asset.json";
 
 const portrait = portraitAsset.url;
@@ -95,25 +98,28 @@ const SKILLS: { name: string; asset?: string; slug?: string; fallback?: string }
 
 const EXPERIENCE = [
   {
-    year: "2024–Present",
+    year: "2024-Present",
     role: "Reporting Analyst",
     company: "Lenehans",
+    logo: lenehansLogo.url,
     location: "Dublin, Ireland",
     dates: "Aug 2024 - Present",
     tags: ["Power BI", "DAX", "SQL", "Power Query", "Linnworks"],
   },
   {
-    year: "2022–2023",
+    year: "2022-2023",
     role: "Data Analyst",
     company: "Ellora Infotech",
+    logo: elloraLogo.url,
     location: "India",
     dates: "Sep 2022 - Dec 2023",
     tags: ["Power BI", "DAX", "Power Query", "Python", "SQL"],
   },
   {
-    year: "2020–2022",
+    year: "2020-2022",
     role: "Junior Data Analyst",
     company: "Santosh & Associates",
+    logo: santoshLogo.url,
     location: "India",
     dates: "Jun 2020 - Jul 2022",
     tags: ["MySQL", "Excel", "Pivot Tables", "KPI Dashboards"],
