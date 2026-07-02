@@ -476,30 +476,30 @@ function Index() {
       <Section id="projects" n="02" label="projects" title="What I've" italic="built">
         <div className="grid md:grid-cols-2 gap-5 max-w-5xl mx-auto">
           {PROJECTS.map((p, i) => (
-            <a
-              key={p.title}
-              href={p.href}
-              target="_blank"
-              rel="noreferrer"
-              className="group p-6 rounded-xl border border-border bg-card hover:border-accent hover:-translate-y-0.5 hover:shadow-md transition flex flex-col animate-fade-in text-left"
-              style={{ animationDelay: `${i * 60}ms`, animationFillMode: "both" }}
-            >
-              <div className="flex flex-wrap gap-1.5 font-mono text-[11px] mb-3">
-                {p.tags.map((t) => (
-                  <span key={t} className="px-2 py-0.5 rounded bg-secondary text-muted-foreground border border-border">
-                    {t}
-                  </span>
-                ))}
-              </div>
-              <h3 className="text-lg font-semibold group-hover:text-accent transition">{p.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
-              <p className="mt-3 text-xs text-foreground/90 leading-relaxed">
-                <span className="text-accent font-mono">insight →</span> {p.insight}
-              </p>
-              <div className="mt-4 font-mono text-xs text-accent opacity-70 group-hover:opacity-100">
-                View on GitHub →
-              </div>
-            </a>
+            <Reveal key={p.title} direction={i % 2 === 0 ? "left" : "right"} delay={i * 60}>
+              <a
+                href={p.href}
+                target="_blank"
+                rel="noreferrer"
+                className="group p-6 rounded-xl border border-border bg-card hover:border-accent hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col text-left h-full"
+              >
+                <div className="flex flex-wrap gap-1.5 font-mono text-[11px] mb-3">
+                  {p.tags.map((t) => (
+                    <span key={t} className="px-2 py-0.5 rounded bg-secondary text-muted-foreground border border-border">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <h3 className="text-lg font-semibold group-hover:text-accent transition">{p.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
+                <p className="mt-3 text-xs text-foreground/90 leading-relaxed">
+                  <span className="text-accent font-mono">insight →</span> {p.insight}
+                </p>
+                <div className="mt-4 font-mono text-xs text-accent opacity-70 group-hover:opacity-100">
+                  View on GitHub →
+                </div>
+              </a>
+            </Reveal>
           ))}
         </div>
       </Section>
