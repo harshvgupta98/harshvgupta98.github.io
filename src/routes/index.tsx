@@ -629,22 +629,22 @@ function Index() {
                     {e.year}
                   </span>
                 </div>
-                <div className="rounded-xl border border-border bg-card p-4 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 shrink-0 rounded-lg bg-background border border-border flex items-center justify-center overflow-hidden">
+                <div className="rounded-xl border border-border bg-card p-5 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left">
+                  <div className="flex items-center gap-5">
+                    <div className="h-16 w-16 shrink-0 rounded-full bg-background border border-border flex items-center justify-center overflow-hidden">
                       <img
                         src={e.logo}
                         alt={`${e.school} logo`}
-                        className="max-h-full max-w-full object-contain p-1"
+                        className="max-h-full max-w-full object-contain p-1.5"
                         loading="lazy"
                       />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h3 className="font-mono text-sm font-semibold">{e.degree}</h3>
-                      <div className="text-xs text-muted-foreground">{e.school}</div>
+                      <h3 className="font-mono text-base font-semibold leading-tight">{e.degree}</h3>
+                      <div className="text-sm text-muted-foreground mt-0.5">{e.school}</div>
+                      <div className="font-mono text-[11px] text-muted-foreground/70 mt-1">{e.dates}</div>
                     </div>
                   </div>
-                  <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{e.detail}</p>
                 </div>
               </Reveal>
             ))}
@@ -653,23 +653,31 @@ function Index() {
       </Section>
 
       {/* Certifications */}
-      <Section id="certifications" label="Certifications" title="Learning" italic="in progress">
-        <div className="max-w-3xl mx-auto grid sm:grid-cols-2 gap-4">
+      <Section id="certifications" label="Certifications" title="Credentials" italic="earned">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-5">
           {CERTIFICATIONS.map((c, i) => (
-            <Reveal key={c.title} direction={i % 2 === 0 ? "left" : "right"} delay={i * 80}>
-              <div className="rounded-xl border border-border bg-card p-4 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 h-full">
-                <div className="flex items-start gap-3">
-                  <div className="h-9 w-9 shrink-0 rounded-lg bg-background border border-border flex items-center justify-center text-base">
-                    {c.icon}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="font-mono text-sm font-semibold leading-snug">{c.title}</h3>
-                    <div className="mt-1 text-xs text-muted-foreground">
-                      {c.issuer} · <span className="font-mono">{c.date}</span>
-                    </div>
+            <Reveal key={c.title} direction={i === 1 ? "up" : i === 0 ? "left" : "right"} delay={i * 80}>
+              <a
+                href={c.image}
+                target="_blank"
+                rel="noreferrer"
+                className="group block rounded-xl border border-border bg-card overflow-hidden hover:border-foreground/40 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 h-full"
+              >
+                <div className="aspect-[4/3] bg-background overflow-hidden border-b border-border">
+                  <img
+                    src={c.image}
+                    alt={`${c.title} certificate`}
+                    className="h-full w-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-mono text-sm font-semibold leading-snug">{c.title}</h3>
+                  <div className="mt-1.5 text-xs text-muted-foreground">
+                    {c.issuer} · <span className="font-mono">{c.date}</span>
                   </div>
                 </div>
-              </div>
+              </a>
             </Reveal>
           ))}
         </div>
