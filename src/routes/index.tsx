@@ -414,6 +414,7 @@ function Index() {
             <a href="#projects" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition"><Code2 className="h-4 w-4" /> Projects</a>
             <a href="#experience" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition"><Briefcase className="h-4 w-4" /> Work</a>
             <a href="#education" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition"><GraduationCap className="h-4 w-4" /> Education</a>
+            <a href="#certifications" className="hidden md:flex items-center gap-1.5 hover:text-accent transition"><Code2 className="h-4 w-4" /> Certifications</a>
           </div>
         </nav>
       </header>
