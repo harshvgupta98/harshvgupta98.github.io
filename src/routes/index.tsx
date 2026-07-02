@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
+import nciLogo from "@/assets/nci-logo.png.asset.json";
+import sppuLogo from "@/assets/sppu-logo.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
