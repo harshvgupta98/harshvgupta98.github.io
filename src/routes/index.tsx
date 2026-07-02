@@ -13,7 +13,8 @@ import santoshLogo from "@/assets/santosh.png.asset.json";
 import portraitAsset from "@/assets/harsh-portrait.jpg.asset.json";
 import certMysql from "@/assets/cert-mysql.png.asset.json";
 import certPowerbi from "@/assets/cert-powerbi.png.asset.json";
-import certPl300 from "@/assets/cert-pl300.png.asset.json";
+import certPl300 from "@/assets/Cert_pl300_v2.png.asset.json";
+import sqlLogo from "@/assets/sql_logo.jpg.asset.json";
 
 const portrait = portraitAsset.url;
 
