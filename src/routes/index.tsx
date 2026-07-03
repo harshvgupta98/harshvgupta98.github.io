@@ -113,7 +113,7 @@ function SkillIcon({ name, className = "h-3.5 w-3.5" }: { name: string; classNam
     SKILLS.find((x) => x.name.toLowerCase() === name.toLowerCase()) || EXTRA_SKILL_ICONS[name];
   if (!s) return <span className="text-foreground/70">◆</span>;
   if (s.asset) {
-    const keepColor = s.color || name === "Excel" || name === "SQL";
+    const keepColor = s.color || name === "Excel" || name === "SQL" || name === "Azure";
     const color = keepColor ? "" : "grayscale brightness-0";
     return <img src={s.asset} alt="" className={`${className} object-contain ${color}`} loading="lazy" />;
   }
@@ -512,7 +512,7 @@ function Index() {
                   <img
                     src={s.asset}
                     alt={`${s.name} logo`}
-                    className={`h-6 w-6 object-contain ${s.name === "Excel" || s.name === "SQL" ? "" : "grayscale brightness-0"}`}
+                    className={`h-6 w-6 object-contain ${s.name === "Excel" || s.name === "SQL" || s.name === "Azure" ? "" : "grayscale brightness-0"}`}
                     loading="lazy"
                   />
                 ) : s.slug ? (
