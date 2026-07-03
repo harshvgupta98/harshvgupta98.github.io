@@ -16,6 +16,7 @@ import certPowerbi from "@/assets/cert-powerbi.png";
 import certPl300 from "@/assets/Cert_pl300_v2.png";
 import sqlLogo from "@/assets/relational-database.jpg";
 import lstmLogo from "@/assets/lstm.png";
+import azureLogo from "@/assets/azure-logo.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -95,7 +96,7 @@ const SKILLS: { name: string; asset?: string; slug?: string; fallback?: string }
   { name: "Jupyter", slug: "jupyter" },
   { name: "Git", slug: "git" },
   { name: "Star Schema", fallback: "✦" },
-  { name: "Azure", slug: "azure" },
+  { name: "Azure", asset: azureLogo },
 ];
 
 // Extra skill icons used only inside tag chips
