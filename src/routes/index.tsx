@@ -491,13 +491,9 @@ function Index() {
           >
             About Me
           </a>
-          <a
-            href="/Harsh_Gupta_CV.docx"
-            download
-            className="font-mono text-sm px-5 py-2.5 rounded-md border border-border hover:border-accent hover:text-accent transition"
-          >
+          <span className="font-mono text-sm px-5 py-2.5 rounded-md border border-border hover:border-accent hover:text-accent transition">
             Resume
-          </a>
+          </span>
         </div>
       </section>
 
