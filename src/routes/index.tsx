@@ -2,22 +2,20 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { User, Code2, Briefcase, GraduationCap } from "lucide-react";
-import nciLogo from "@/assets/nci-logo.png.asset.json";
-import sppuLogo from "@/assets/sppu-logo.jpg.asset.json";
-import tableauLogo from "@/assets/tableau.png.asset.json";
-import excelLogo from "@/assets/excel.png.asset.json";
-import powerbiLogo from "@/assets/powerbi.png.asset.json";
-import lenehansLogo from "@/assets/lenehans.jpg.asset.json";
-import elloraLogo from "@/assets/ellora.jpg.asset.json";
-import santoshLogo from "@/assets/santosh.png.asset.json";
-import portraitAsset from "@/assets/harsh-portrait.jpg.asset.json";
-import certMysql from "@/assets/cert-mysql.png.asset.json";
-import certPowerbi from "@/assets/cert-powerbi.png.asset.json";
-import certPl300 from "@/assets/Cert_pl300_v2.png.asset.json";
-import sqlLogo from "@/assets/relational-database.jpg.asset.json";
-import lstmLogo from "@/assets/lstm.png.asset.json";
-
-const portrait = portraitAsset.url;
+import nciLogo from "@/assets/nci-logo.png";
+import sppuLogo from "@/assets/sppu-logo.jpg";
+import tableauLogo from "@/assets/tableau.png";
+import excelLogo from "@/assets/excel.png";
+import powerbiLogo from "@/assets/powerbi.png";
+import lenehansLogo from "@/assets/lenehans.jpg";
+import elloraLogo from "@/assets/ellora.jpg";
+import santoshLogo from "@/assets/santosh.png";
+import portrait from "@/assets/harsh-portrait.jpg";
+import certMysql from "@/assets/cert-mysql.png";
+import certPowerbi from "@/assets/cert-powerbi.png";
+import certPl300 from "@/assets/Cert_pl300_v2.png";
+import sqlLogo from "@/assets/relational-database.jpg";
+import lstmLogo from "@/assets/lstm.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -78,10 +76,10 @@ function Reveal({
 
 // Skill logos: `asset` (local CDN) → `slug` (simpleicons) → `fallback` text/emoji.
 const SKILLS: { name: string; asset?: string; slug?: string; fallback?: string }[] = [
-  { name: "Power BI", asset: powerbiLogo.url },
+  { name: "Power BI", asset: powerbiLogo },
   { name: "DAX", fallback: "λ" },
   { name: "Power Query", fallback: "⚡" },
-  { name: "SQL", asset: sqlLogo.url },
+  { name: "SQL", asset: sqlLogo },
   { name: "MySQL", slug: "mysql" },
   { name: "PostgreSQL", slug: "postgresql" },
   { name: "Python", slug: "python" },
@@ -90,8 +88,8 @@ const SKILLS: { name: string; asset?: string; slug?: string; fallback?: string }
   { name: "Scikit-learn", slug: "scikitlearn" },
   { name: "Matplotlib", fallback: "📈" },
   { name: "Seaborn", fallback: "🌊" },
-  { name: "Tableau", asset: tableauLogo.url },
-  { name: "Excel", asset: excelLogo.url },
+  { name: "Tableau", asset: tableauLogo },
+  { name: "Excel", asset: excelLogo },
   { name: "VBA", fallback: "⚙️" },
   { name: "Linnworks", fallback: "📦" },
   { name: "Jupyter", slug: "jupyter" },
@@ -104,9 +102,9 @@ const SKILLS: { name: string; asset?: string; slug?: string; fallback?: string }
 const EXTRA_SKILL_ICONS: Record<string, { asset?: string; slug?: string; fallback?: string; color?: boolean }> = {
   "Pivot Tables": { fallback: "▦" },
   "KPI Dashboards": { fallback: "📊" },
-  LSTM: { asset: lstmLogo.url, color: true },
-  GRU: { asset: lstmLogo.url, color: true },
-  "Relational DB": { asset: sqlLogo.url, color: true },
+  LSTM: { asset: lstmLogo, color: true },
+  GRU: { asset: lstmLogo, color: true },
+  "Relational DB": { asset: sqlLogo, color: true },
 };
 
 function SkillIcon({ name, className = "h-3.5 w-3.5" }: { name: string; className?: string }) {
@@ -136,7 +134,7 @@ const EXPERIENCE = [
     year: "2024-Present",
     role: "Reporting Analyst",
     company: "Lenehans",
-    logo: lenehansLogo.url,
+    logo: lenehansLogo,
     location: "Dublin, Ireland",
     dates: "Aug 2024 - Present",
     tags: ["Power BI", "DAX", "SQL", "Power Query", "Linnworks"],
@@ -145,7 +143,7 @@ const EXPERIENCE = [
     year: "2022-2023",
     role: "Data Analyst",
     company: "Ellora Infotech",
-    logo: elloraLogo.url,
+    logo: elloraLogo,
     location: "India",
     dates: "Sep 2022 - Dec 2023",
     tags: ["Power BI", "DAX", "Power Query", "Python", "SQL"],
@@ -154,7 +152,7 @@ const EXPERIENCE = [
     year: "2020-2022",
     role: "Junior Data Analyst",
     company: "Santosh & Associates",
-    logo: santoshLogo.url,
+    logo: santoshLogo,
     location: "India",
     dates: "Jun 2020 - Jul 2022",
     tags: ["MySQL", "Excel", "Pivot Tables", "KPI Dashboards"],
@@ -202,7 +200,7 @@ const EDUCATION = [
     degree: "MSc in Data Analytics",
     school: "National College of Ireland, Dublin",
     dates: "Sep 2024 - Sep 2025",
-    logo: nciLogo.url,
+    logo: nciLogo,
     modules: [
       "Business Intelligence & Business Analysis",
       "Predictive Data Analytics",
@@ -216,7 +214,7 @@ const EDUCATION = [
     degree: "B.E., Computer Science",
     school: "Savitribai Phule Pune University, India",
     dates: "Aug 2015 - Jun 2019",
-    logo: sppuLogo.url,
+    logo: sppuLogo,
     modules: [
       "Data Structures & Algorithms",
       "Database Management Systems",
@@ -232,21 +230,21 @@ const CERTIFICATIONS = [
     title: "Microsoft Certified: Power BI Data Analyst Associate (PL-300)",
     issuer: "Microsoft",
     date: "Earned Jun 2026",
-    image: certPl300.url,
+    image: certPl300,
     link: "https://learn.microsoft.com/en-us/users/harshgupta-5102/credentials/b2ce069000c10d44?ref=https%3A%2F%2Fwww.linkedin.com%2F",
   },
   {
     title: "Microsoft Power BI Desktop for Business Intelligence",
     issuer: "Analyst Builder",
     date: "3rd May 2026",
-    image: certPowerbi.url,
+    image: certPowerbi,
     link: "https://www.analystbuilder.com/achievements/verify/B27WFRSDNJ?r=clwtf6zrRshS59Mxarcn5lGef",
   },
   {
     title: "MySQL for Data Analytics",
     issuer: "Analyst Builder",
     date: "8th Apr 2026",
-    image: certMysql.url,
+    image: certMysql,
     link: "https://www.analystbuilder.com/achievements/verify/TEMQA05H13?r=jNEE8Oy1I0ecBqNn8PiFpBoX1",
   },
 ];

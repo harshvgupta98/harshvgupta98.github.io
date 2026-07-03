@@ -20,6 +20,9 @@ dist-ssr
 .wrangler/
 .dev.vars
 
+.claude/
+logos for github/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
