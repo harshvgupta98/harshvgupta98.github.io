@@ -178,7 +178,7 @@ const PROJECTS = [
   {
     title: "Predicting E-commerce Sales with Deep Learning",
     tags: ["Python", "LSTM", "GRU"],
-    desc: "MSc dissertation · built LSTM, GRU and a novel Hybrid LSTM+GRU model on the Olist Brazilian e-commerce dataset to forecast sales.",
+    desc: "MSc dissertation · built LSTM, GRU and a novel Hybrid LSTM+GRU model on the Olist Brazilian e-commerce dataset to forecast sales, enabling data-driven inventory management, demand forecasting, and strategic planning decisions.",
     insight: "Hybrid LSTM+GRU outperformed standalone models (R² 0.91), capturing both short-term fluctuations and long-term sales trends.",
     href: "https://norma.ncirl.ie/8705/",
   },
