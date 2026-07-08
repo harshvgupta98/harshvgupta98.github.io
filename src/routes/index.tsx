@@ -178,8 +178,9 @@ const PROJECTS = [
   {
     title: "Predicting E-commerce Sales with Deep Learning",
     tags: ["Python", "LSTM", "GRU"],
-    desc: "MSc dissertation · built LSTM, GRU and a novel Hybrid LSTM+GRU model on 100,000+ Rossmann sales records to forecast daily store revenue.",
-    href: "https://github.com/harshvgupta98",
+    desc: "MSc dissertation · built LSTM, GRU and a novel Hybrid LSTM+GRU model on the Olist Brazilian e-commerce dataset to forecast sales.",
+    insight: "Hybrid LSTM+GRU outperformed standalone models (R² 0.91), capturing both short-term fluctuations and long-term sales trends.",
+    href: "https://norma.ncirl.ie/8705/",
   },
   {
     title: "Online Bookstore SQL",
@@ -605,7 +606,7 @@ function Index() {
                 <h3 className="text-lg font-semibold">{p.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
                 <div className="mt-4 font-mono text-xs text-foreground/70 opacity-70 group-hover:opacity-100">
-                  View on GitHub →
+                  {p.href.includes("github.com") ? "View on GitHub →" : "View thesis →"}
                 </div>
               </a>
             </Reveal>
