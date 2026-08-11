@@ -162,6 +162,14 @@ const EXPERIENCE = [
 
 const PROJECTS = [
   {
+    title: "Paediatric Hospital Waiting List Dashboard",
+    featured: true,
+    tags: ["Power BI", "DAX", "Power Query"],
+    desc: "Power BI dashboard tracking Ireland's paediatric outpatient waiting list · monthly NTPF snapshots (Jan 2023-Jun 2026) across 45 specialities · dynamic TOPN/CONCATENATEX DAX rankings.",
+    insight: "Long waits down 25.7% YoY to 5,560 (17.0% rate) · Dermatology highest long-wait rate at 36.9%; Paediatric ENT most improved.",
+    href: "https://github.com/harshvgupta98/POWERBI_Hospital_Speciality_Dashboard",
+  },
+  {
     title: "Meta Ad Performance Dashboard",
     tags: ["Power BI", "DAX", "Star Schema"],
     desc: "Multi-page Power BI dashboard analysing 400K ad events across 50 campaigns and 9,841 users · impressions, CTR, engagement, and conversion via 12 DAX measures.",
@@ -590,9 +598,14 @@ function Index() {
                 href={p.href}
                 target="_blank"
                 rel="noreferrer"
-                className="group p-6 rounded-xl border border-border bg-card hover:border-foreground/40 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col text-left h-full"
+                className={`group p-6 rounded-xl border bg-card hover:border-foreground/40 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col text-left h-full ${
+                  p.featured ? "border-foreground/30 shadow-sm" : "border-border"
+                }`}
               >
-                <div className="flex flex-wrap gap-1.5 font-mono text-[11px] mb-3">
+                <div className="flex flex-wrap items-center gap-1.5 font-mono text-[11px] mb-3">
+                  {p.featured && (
+                    <span className="px-2.5 py-0.5 rounded-full bg-foreground text-background">Featured</span>
+                  )}
                   {p.tags.map((t) => (
                     <span
                       key={t}
