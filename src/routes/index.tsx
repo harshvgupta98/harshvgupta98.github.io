@@ -572,7 +572,7 @@ function Index() {
                 • 🏀 Competitive basketball · India junior national level
               </p>
               <p className="text-[11px] md:text-[13px]">
-                • 🏍️ Riding motorcycles · conquered Umling La, the world's highest motorable road
+                • 🏍️ Motorcycles · conquered Umling La, world's highest motorable road
               </p>
               <p className="text-[11px] md:text-[13px]">• 💪 In the gym, training year-round</p>
             </div>
