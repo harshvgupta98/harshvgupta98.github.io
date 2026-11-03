@@ -133,7 +133,7 @@ function SkillIcon({ name, className = "h-3.5 w-3.5" }: { name: string; classNam
 const EXPERIENCE = [
   {
     year: "2024-Present",
-    role: "Reporting Analyst",
+    role: "Data Reporting Analyst",
     company: "Lenehans",
     logo: lenehansLogo,
     location: "Dublin, Ireland",
@@ -268,7 +268,7 @@ const SCRIPTS: Record<Lang, { text: string; bold?: string }[]> = {
     { text: 'print("Hello, World! 👋 I\'m Harsh Gupta")' },
     { text: 'print("Current status: Data Analyst · Dublin, IE")', bold: "Current status:" },
     {
-      text: 'print("Professional Summary: Data & BI Analyst with 3+ years of experience turning fragmented data into decision-ready dashboards using Power BI, DAX, SQL and Python.")',
+      text: 'print("Professional Summary: Data & BI Analyst with 4+ years of experience turning fragmented data into decision-ready dashboards using Power BI, DAX, SQL and Python.")',
       bold: "Professional Summary:",
     },
     {
@@ -282,7 +282,7 @@ const SCRIPTS: Record<Lang, { text: string; bold?: string }[]> = {
     { text: "WHERE name = 'Harsh Gupta';" },
     { text: "-- Role: Data Analyst · Dublin, IE", bold: "Role:" },
     {
-      text: "-- Summary: 3+ yrs turning fragmented data into decision-ready dashboards with Power BI, DAX, SQL and Python.",
+      text: "-- Summary: 4+ yrs turning fragmented data into decision-ready dashboards with Power BI, DAX, SQL and Python.",
       bold: "Summary:",
     },
     { text: "-- Status: Open to work · Data Analyst · BI Analyst · Reporting Analyst · Ireland", bold: "Status:" },
@@ -549,7 +549,7 @@ function Index() {
           <div className="rounded-xl border border-border bg-card p-6 shadow-sm space-y-4 font-mono text-[13px] text-foreground/80 leading-relaxed">
             <h3 className="font-mono text-lg font-bold text-foreground">💡 About Me</h3>
             <p>
-              नमस्कार 🙏 I'm Harsh, a Data Analyst with 3+ years of experience streamlining reporting and inventory
+              नमस्कार 🙏 I'm Harsh, a Data Analyst with 4+ years of experience streamlining reporting and inventory
               decisions across retail and project based environments. I work mainly in Power BI, SQL and Python, with a
               focus on DAX modelling, ETL/ELT pipelines, KPI framework design and AI assisted analytics.
             </p>
