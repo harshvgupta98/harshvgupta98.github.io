@@ -544,7 +544,7 @@ function Index() {
       </section>
 
       {/* About */}
-      <section id="about" className="mx-auto max-w-5xl px-6 py-16 md:py-20 border-t border-border">
+      <section id="about" className="mx-auto max-w-5xl px-6 py-12 md:py-16 border-t border-border">
         <div className="grid xl:grid-cols-[1fr_auto] gap-10 items-start mx-auto">
           <div className="rounded-xl border border-border bg-card p-6 shadow-sm space-y-4 font-mono text-[13px] text-foreground/80 leading-relaxed">
             <h3 className="font-mono text-lg font-bold text-foreground">💡 About Me</h3>
@@ -806,7 +806,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="mx-auto max-w-6xl px-6 py-16 md:py-20 border-t border-border">
+    <section id={id} className="mx-auto max-w-6xl px-6 py-12 md:py-16 border-t border-border">
       <Reveal className="text-center mb-10">
         <h2 className="font-mono text-3xl md:text-4xl font-bold flex items-center justify-center gap-3 tracking-tight">
           <span className="text-foreground/70">&lt;/&gt;</span>
