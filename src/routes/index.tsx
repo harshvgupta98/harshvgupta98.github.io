@@ -569,7 +569,7 @@ function Index() {
             <div className="rounded-lg bg-[#f2f2f2] p-4 mt-2 space-y-1">
               <p className="font-semibold text-foreground/90">When I'm not analysing dashboards, you might find me:</p>
               <p className="text-[11px] md:text-[13px]">
-                • 🏀 Playing competitive basketball · represented India at junior national level
+                • 🏀 Competitive basketball · India junior national level
               </p>
               <p className="text-[11px] md:text-[13px]">
                 • 🏍️ Riding motorcycles · conquered Umling La, the world's highest motorable road
