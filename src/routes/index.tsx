@@ -797,12 +797,12 @@ function Index() {
                       />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <div className="flex items-baseline justify-between gap-3">
+                      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-3">
                         <div className="min-w-0">
-                          <h3 className="font-mono text-base font-semibold leading-tight truncate">{e.school}</h3>
+                          <h3 className="font-mono text-base font-semibold leading-tight">{e.school}</h3>
                           <div className="text-sm text-muted-foreground mt-0.5">{e.degree}</div>
                         </div>
-                        <div className="font-mono text-[11px] text-muted-foreground/80 shrink-0 text-right whitespace-nowrap">
+                        <div className="font-mono text-[11px] text-muted-foreground/80 shrink-0 sm:text-right whitespace-nowrap">
                           {e.dates}
                         </div>
                       </div>
