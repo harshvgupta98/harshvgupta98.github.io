@@ -80,23 +80,24 @@ const SKILLS: { name: string; asset?: string; slug?: string; fallback?: string }
   { name: "Power BI", asset: powerbiLogo },
   { name: "DAX", fallback: "λ" },
   { name: "Power Query", fallback: "⚡" },
+  { name: "Tableau", asset: tableauLogo },
+  { name: "Data Modelling", fallback: "🧩" },
   { name: "SQL", asset: sqlLogo },
   { name: "MySQL", slug: "mysql" },
   { name: "PostgreSQL", slug: "postgresql" },
+  { name: "Excel", asset: excelLogo },
   { name: "Python", slug: "python" },
   { name: "Pandas", slug: "pandas" },
   { name: "NumPy", slug: "numpy" },
-  { name: "Scikit-learn", slug: "scikitlearn" },
   { name: "Matplotlib", fallback: "📈" },
-  { name: "Seaborn", fallback: "🌊" },
-  { name: "Tableau", asset: tableauLogo },
-  { name: "Excel", asset: excelLogo },
-  { name: "VBA", fallback: "⚙️" },
-  { name: "Linnworks", fallback: "📦" },
-  { name: "Jupyter", slug: "jupyter" },
-  { name: "Git", slug: "git" },
   { name: "Star Schema", fallback: "✦" },
+  { name: "ETL/ELT", fallback: "🔁" },
+  { name: "Data Warehousing", fallback: "🗄️" },
   { name: "Azure", asset: azureLogo },
+  { name: "Data Governance", fallback: "🛡️" },
+  { name: "Git", slug: "git" },
+  { name: "KPI Development", fallback: "🎯" },
+  { name: "AI-Assisted Analytics", fallback: "🤖" },
 ];
 
 // Extra skill icons used only inside tag chips
@@ -106,6 +107,8 @@ const EXTRA_SKILL_ICONS: Record<string, { asset?: string; slug?: string; fallbac
   LSTM: { asset: lstmLogo, color: true },
   GRU: { asset: lstmLogo, color: true },
   "Relational DB": { asset: sqlLogo, color: true },
+  VBA: { fallback: "⚙️" },
+  Linnworks: { fallback: "📦" },
 };
 
 function SkillIcon({ name, className = "h-3.5 w-3.5" }: { name: string; className?: string }) {
