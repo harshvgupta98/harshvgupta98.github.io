@@ -549,23 +549,31 @@ function Index() {
           <div className="rounded-xl border border-border bg-card p-6 shadow-sm space-y-4 font-mono text-[13px] text-foreground/80 leading-relaxed">
             <h3 className="font-mono text-lg font-bold text-foreground">💡 About Me</h3>
             <p>
-              नमस्कार 🙏 I'm Harsh, a Data Analyst with 4+ years of experience streamlining reporting and inventory
-              decisions across retail and project based environments. I work mainly in Power BI, SQL and Python, with a
-              focus on DAX modelling, ETL/ELT pipelines, KPI framework design and AI assisted analytics.
+              नमस्कार 🙏 I'm Harsh, a Data Analyst with 4+ years of experience across retail, multi-sector client
+              analytics and public-sector reporting. I work mainly in Power BI, SQL and Python, with a focus on DAX
+              modelling, ETL/ELT pipelines, KPI framework design and AI-assisted analytics. I turn complex data into
+              insights that improve operational efficiency, forecasting accuracy and reporting reliability.
             </p>
             <p>
-              After three years working as a data analyst across project based and administrative environments in India,
-              I moved to Dublin to pursue an MSc in Data Analytics at the National College of Ireland. That year
-              sharpened my grip on predictive analytics, statistical modelling and the kind of data governance that
-              actually holds up once it reaches a dashboard, and it's where I built the hybrid LSTM plus GRU model that
-              still anchors my proudest project.
+              At Lenehans in Dublin, I work with the Supply Chain, Procurement, Inventory and Finance teams on sales,
+              inventory and supplier data. That work has helped cut dead stock by 22%, reduce manual reporting
+              turnaround by 75% and improve forecast accuracy for inventory planning by 25%.
+            </p>
+            <p>
+              Before Dublin, I spent three and a half years as a data analyst in India. I started by building KPI
+              reporting for government-contracted facilities at Santosh & Associates, then delivered end-to-end BI
+              solutions for Retail, Financial Services, Healthcare and Technology clients at Ellora Infotech. I then
+              moved to Ireland for an MSc in Data Analytics at the National College of Ireland. That's where I built
+              the hybrid LSTM+GRU sales forecasting model (R² = 0.91) behind the project I'm proudest of.
             </p>
             <div className="rounded-lg bg-[#f2f2f2] p-4 mt-2 space-y-1">
               <p className="font-semibold text-foreground/90">When I'm not analysing dashboards, you might find me:</p>
               <p className="text-[11px] md:text-[13px]">
-                • 🏀 Competitive basketball · represented India at junior national level
+                • 🏀 Playing competitive basketball · represented India at junior national level
               </p>
-              <p className="text-[11px] md:text-[13px]">• 🏍️ Conquered Umling La, the world's highest motorable road</p>
+              <p className="text-[11px] md:text-[13px]">
+                • 🏍️ Riding motorcycles · conquered Umling La, the world's highest motorable road
+              </p>
               <p className="text-[11px] md:text-[13px]">• 💪 In the gym, training year-round</p>
             </div>
             <p>
