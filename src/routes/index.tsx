@@ -116,8 +116,9 @@ function SkillIcon({ name, className = "h-3.5 w-3.5" }: { name: string; classNam
     SKILLS.find((x) => x.name.toLowerCase() === name.toLowerCase()) || EXTRA_SKILL_ICONS[name];
   if (!s) return <span className="text-foreground/70">◆</span>;
   if (s.asset) {
+    const isSqlAsset = name === "SQL" || s.asset === sqlLogo;
     const keepColor = s.color || name === "Excel" || name === "SQL" || name === "Azure";
-    const color = keepColor ? "" : "grayscale brightness-0";
+    const color = isSqlAsset ? "bg-white rounded-sm p-0.5" : keepColor ? "" : "grayscale brightness-0 dark:invert";
     return <img src={s.asset} alt="" className={`${className} object-contain ${color}`} loading="lazy" />;
   }
   if (s.slug) {
@@ -125,7 +126,7 @@ function SkillIcon({ name, className = "h-3.5 w-3.5" }: { name: string; classNam
       <img
         src={`https://cdn.simpleicons.org/${s.slug}`}
         alt=""
-        className={`${className} object-contain grayscale brightness-0`}
+        className={`${className} object-contain grayscale brightness-0 dark:invert`}
         loading="lazy"
       />
     );
@@ -343,9 +344,9 @@ function Terminal() {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto rounded-xl border border-border bg-white shadow-sm overflow-hidden">
+    <div className="w-full max-w-3xl mx-auto rounded-xl border border-border bg-card shadow-sm overflow-hidden">
       {/* Tabs */}
-      <div className="flex items-center gap-1 px-3 pt-3 pb-0 bg-white">
+      <div className="flex items-center gap-1 px-3 pt-3 pb-0 bg-card">
         {(["python", "sql"] as Lang[]).map((l) => (
           <button
             key={l}
@@ -358,7 +359,7 @@ function Terminal() {
           </button>
         ))}
       </div>
-      <div className="mx-3 mt-2 rounded-lg bg-white border border-border/60 font-mono text-[13px] leading-relaxed p-4 min-h-[200px] mb-3 text-left">
+      <div className="mx-3 mt-2 rounded-lg bg-card border border-border/60 font-mono text-[13px] leading-relaxed p-4 min-h-[200px] mb-3 text-left">
         <div className="flex items-center gap-2 text-foreground/70 pb-2">
           <span>▪</span>
           <span>harsh@portfolio:~$</span>
@@ -451,6 +452,46 @@ function RightRail() {
   );
 }
 
+/* ------------------------------ THEME TOGGLE ------------------------------ */
+
+function ThemeToggle() {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    setIsDark(document.documentElement.classList.contains("dark"));
+  }, []);
+
+  function toggle() {
+    const next = !isDark;
+    setIsDark(next);
+    document.documentElement.classList.toggle("dark", next);
+    try {
+      localStorage.setItem("theme", next ? "dark" : "light");
+    } catch {
+      // localStorage unavailable (e.g. private browsing) — theme just won't persist
+    }
+  }
+
+  return (
+    <button
+      onClick={toggle}
+      className="text-muted-foreground hover:text-accent transition"
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+    >
+      {isDark ? (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+        </svg>
+      ) : (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+        </svg>
+      )}
+    </button>
+  );
+}
+
 /* ------------------------------ PAGE ------------------------------ */
 
 function Index() {
@@ -485,22 +526,25 @@ function Index() {
               <Code2 className="h-4 w-4" /> Certifications
             </a>
           </div>
-          <button
-            onClick={() => setMenuOpen((v) => !v)}
-            className="md:hidden flex items-center justify-center text-foreground"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={menuOpen}
-          >
-            {menuOpen ? (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M18 6 6 18M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M3 6h18M3 12h18M3 18h18" />
-              </svg>
-            )}
-          </button>
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+            <button
+              onClick={() => setMenuOpen((v) => !v)}
+              className="md:hidden flex items-center justify-center text-foreground"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+            >
+              {menuOpen ? (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 6h18M3 12h18M3 18h18" />
+                </svg>
+              )}
+            </button>
+          </div>
         </nav>
         {menuOpen && (
           <div className="md:hidden border-t border-border bg-background px-6 py-5 flex flex-col gap-4 text-sm font-mono">
@@ -604,14 +648,20 @@ function Index() {
                   <img
                     src={s.asset}
                     alt={`${s.name} logo`}
-                    className={`h-6 w-6 object-contain ${s.name === "Excel" || s.name === "SQL" || s.name === "Azure" ? "" : "grayscale brightness-0"}`}
+                    className={`h-6 w-6 object-contain ${
+                      s.name === "SQL"
+                        ? "bg-white rounded-sm p-0.5"
+                        : s.name === "Excel" || s.name === "Azure"
+                          ? ""
+                          : "grayscale brightness-0 dark:invert"
+                    }`}
                     loading="lazy"
                   />
                 ) : s.slug ? (
                   <img
                     src={`https://cdn.simpleicons.org/${s.slug}`}
                     alt={`${s.name} logo`}
-                    className="h-6 w-6 object-contain grayscale brightness-0"
+                    className="h-6 w-6 object-contain grayscale brightness-0 dark:invert"
                     loading="lazy"
                   />
                 ) : (
@@ -649,7 +699,7 @@ function Index() {
               moved to Ireland for an MSc in Data Analytics at the National College of Ireland. That's where I built
               the hybrid LSTM+GRU sales forecasting model (R² = 0.91) behind the project I'm proudest of.
             </p>
-            <div className="rounded-lg bg-[#f2f2f2] p-4 mt-2 space-y-1">
+            <div className="rounded-lg bg-secondary p-4 mt-2 space-y-1">
               <p className="font-semibold text-foreground/90">When I'm not analysing dashboards, you might find me:</p>
               <p className="text-[11px] md:text-[13px]">
                 • 🏀 Competitive basketball · India junior national level
@@ -739,7 +789,7 @@ function Index() {
                   className={`rounded-xl border border-border bg-card p-4 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left ${i % 2 === 0 ? "md:mr-10" : "md:ml-10"}`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 shrink-0 rounded-lg bg-background border border-border flex items-center justify-center overflow-hidden">
+                    <div className="h-10 w-10 shrink-0 rounded-lg bg-white border border-border flex items-center justify-center overflow-hidden">
                       <img
                         src={exp.logo}
                         alt={`${exp.company} logo`}
@@ -788,7 +838,7 @@ function Index() {
                   className={`rounded-xl border border-border bg-card p-5 hover:border-foreground/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-left ${i % 2 === 0 ? "md:mr-10" : "md:ml-10"}`}
                 >
                   <div className="flex items-start gap-5">
-                    <div className="h-16 w-16 shrink-0 rounded-full bg-background border border-border flex items-center justify-center overflow-hidden">
+                    <div className="h-16 w-16 shrink-0 rounded-full bg-white border border-border flex items-center justify-center overflow-hidden">
                       <img
                         src={e.logo}
                         alt={`${e.school} logo`}
