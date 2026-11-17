@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { User, Code2, Briefcase, GraduationCap } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import nciLogo from "@/assets/nci-logo.png";
 import sppuLogo from "@/assets/sppu-logo.jpg";
 import tableauLogo from "@/assets/tableau.png";
@@ -975,6 +976,140 @@ function BackgroundCharts() {
   );
 }
 
+/* ------------------------------ PROJECT CASE STUDY ------------------------------ */
+
+/** Wraps numbers / percentages / R² values in an accent highlight, like KPI callouts. */
+function HighlightNumbers({ text }: { text: string }) {
+  const parts = text.split(/(R² ?[\d.]+|[~]?\d[\d,.]*\s?(?:%|K\b)?)/g);
+  return (
+    <>
+      {parts.map((part, i) =>
+        // Odd parts are the numeric matches; skip plain years like 2023 so only real metrics stand out.
+        i % 2 === 1 && !/^(19|20)\d{2}$/.test(part.trim()) ? (
+          <span key={i} className="font-semibold text-accent">
+            {part}
+          </span>
+        ) : (
+          <span key={i}>{part}</span>
+        ),
+      )}
+    </>
+  );
+}
+
+const splitPoints = (s: string) =>
+  s
+    .split(/\s·\s|;\s/)
+    .map((x) => x.trim().replace(/\.$/, ""))
+    .filter(Boolean);
+
+function ProjectCaseStudy({ index, onChange }: { index: number | null; onChange: (i: number | null) => void }) {
+  const p = index === null ? null : PROJECTS[index];
+  const total = PROJECTS.length;
+  const go = (d: number) => index !== null && onChange((index + d + total) % total);
+
+  return (
+    <Dialog open={p !== null} onOpenChange={(o) => !o && onChange(null)}>
+      <DialogContent
+        className="max-w-2xl max-h-[90vh] overflow-y-auto rounded-xl border-border bg-card p-0 gap-0"
+        onKeyDown={(e) => {
+          if (e.key === "ArrowRight") go(1);
+          if (e.key === "ArrowLeft") go(-1);
+        }}
+      >
+        {p && (
+          <>
+            <div className="border-b border-border px-6 pt-6 pb-5">
+              <div className="mb-3 flex flex-wrap items-center gap-1.5 font-mono text-[11px]">
+                <span className="text-muted-foreground mr-1">
+                  case_study {String(index! + 1).padStart(2, "0")}/{String(total).padStart(2, "0")}
+                </span>
+                {p.featured && <span className="rounded-full bg-foreground px-2.5 py-0.5 text-background">Featured</span>}
+              </div>
+              <DialogTitle className="pr-8 text-xl md:text-2xl leading-tight">{p.title}</DialogTitle>
+              <DialogDescription className="sr-only">Case study for {p.title}</DialogDescription>
+              <div className="mt-3 flex flex-wrap gap-1.5 font-mono text-[11px]">
+                {p.tags.map((t) => (
+                  <span
+                    key={t}
+                    className="inline-flex items-center gap-1 rounded border border-border bg-secondary px-2 py-0.5 text-muted-foreground"
+                  >
+                    <SkillIcon name={t} />
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-6 px-6 py-5">
+              <section>
+                <h4 className="mb-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+                  What I built
+                </h4>
+                <ol className="space-y-2">
+                  {splitPoints(p.desc).map((pt, i) => (
+                    <li key={i} className="flex gap-3 text-sm leading-relaxed text-foreground/90">
+                      <span className="mt-0.5 font-mono text-[11px] text-accent">{String(i + 1).padStart(2, "0")}</span>
+                      <span>
+                        <HighlightNumbers text={pt} />
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+
+              {p.insight && (
+                <section className="rounded-lg border border-accent/40 bg-accent/5 p-4">
+                  <h4 className="mb-2 font-mono text-[10px] uppercase tracking-[0.14em] text-accent">
+                    Key findings
+                  </h4>
+                  <ul className="space-y-1.5">
+                    {splitPoints(p.insight).map((pt, i) => (
+                      <li key={i} className="flex gap-2 text-sm leading-relaxed text-foreground/90">
+                        <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                        <span>
+                          <HighlightNumbers text={pt} />
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border px-6 py-4 font-mono text-xs">
+              <div className="flex gap-2">
+                <button
+                  onClick={() => go(-1)}
+                  className="rounded border border-border px-3 py-1.5 text-muted-foreground transition hover:border-foreground/40 hover:text-foreground"
+                  aria-label="Previous project"
+                >
+                  ← Prev
+                </button>
+                <button
+                  onClick={() => go(1)}
+                  className="rounded border border-border px-3 py-1.5 text-muted-foreground transition hover:border-foreground/40 hover:text-foreground"
+                  aria-label="Next project"
+                >
+                  Next →
+                </button>
+              </div>
+              <a
+                href={p.href}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded bg-foreground px-4 py-1.5 text-background transition hover:opacity-90"
+              >
+                {p.href.includes("github.com") ? "View on GitHub →" : "Read thesis →"}
+              </a>
+            </div>
+          </>
+        )}
+      </DialogContent>
+    </Dialog>
+  );
+}
+
 /* ------------------------------ THEME TOGGLE ------------------------------ */
 
 function ThemeToggle() {
@@ -1059,6 +1194,7 @@ function ThemeToggle() {
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [toolFilter] = useToolFilter();
+  const [caseStudy, setCaseStudy] = useState<number | null>(null);
 
   return (
     <div className="relative isolate min-h-screen overflow-x-clip bg-background text-foreground">
@@ -1312,6 +1448,13 @@ function Index() {
                 target="_blank"
                 rel="noreferrer"
                 aria-disabled={!match || undefined}
+                aria-haspopup="dialog"
+                onClick={(e) => {
+                  // Plain click opens the case study; ctrl/cmd/shift/middle-click still opens the link.
+                  if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+                  e.preventDefault();
+                  setCaseStudy(i);
+                }}
                 className={`group p-6 rounded-xl border bg-card hover:border-foreground/40 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col text-left h-full ${
                   toolFilter && match
                     ? "border-accent ring-1 ring-accent/40 shadow-md"
@@ -1337,13 +1480,14 @@ function Index() {
                 <h3 className="text-lg font-semibold">{p.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
                 <div className="mt-4 font-mono text-xs text-foreground/70 opacity-70 group-hover:opacity-100">
-                  {p.href.includes("github.com") ? "View on GitHub →" : "View thesis →"}
+                  Read case study →
                 </div>
               </a>
             </Reveal>
             );
           })}
         </div>
+        <ProjectCaseStudy index={caseStudy} onChange={setCaseStudy} />
       </Section>
 
       {/* Experience */}
