@@ -18,6 +18,14 @@ import certPl300 from "@/assets/Cert_pl300_v2.png";
 import sqlLogo from "@/assets/relational-database.jpg";
 import lstmLogo from "@/assets/lstm.png";
 import azureLogo from "@/assets/azure-logo.jpg";
+import hospitalSummaryShot from "@/assets/hospital-summary.jpg";
+import hospitalSpecialityShot from "@/assets/hospital-speciality.jpg";
+import metaFacebookShot from "@/assets/meta-facebook.jpg";
+import metaInstagramShot from "@/assets/meta-instagram.jpg";
+import customerBehaviourShot from "@/assets/customer-behaviour.jpg";
+import excelSalesShot from "@/assets/excel-sales.png";
+
+type Screenshot = { src: string; label: string; alt: string; width: number; height: number };
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -165,11 +173,35 @@ const EXPERIENCE = [
   },
 ];
 
-const PROJECTS = [
+const PROJECTS: {
+  title: string;
+  featured?: boolean;
+  tags: string[];
+  desc: string;
+  insight?: string;
+  href: string;
+  screenshots?: Screenshot[];
+}[] = [
   {
     title: "Paediatric Hospital Waiting List Dashboard",
     featured: true,
     tags: ["Power BI", "DAX", "Power Query"],
+    screenshots: [
+      {
+        src: hospitalSummaryShot,
+        width: 1400,
+        height: 810,
+        label: "Hospital Summary",
+        alt: "Power BI Hospital Summary page: KPI cards for total waiting list 32,620 and long-wait rate 17.0%, waiting list trend, over-12-month trend, waiting time mix and year-on-year waiting bands",
+      },
+      {
+        src: hospitalSpecialityShot,
+        width: 1400,
+        height: 810,
+        label: "Speciality Analysis",
+        alt: "Power BI Speciality Analysis page: top 10 specialities by waiting list and by long-wait rate, scatter of waiting list vs long-wait rate, and a speciality performance table",
+      },
+    ],
     desc: "Power BI dashboard tracking Ireland's paediatric outpatient waiting list · monthly NTPF snapshots (Jan 2023-Jun 2026) across 45 specialities · dynamic TOPN/CONCATENATEX DAX rankings.",
     insight: "Long waits down 25.7% YoY to 5,560 (17.0% rate) · Dermatology highest long-wait rate at 36.9%; Paediatric ENT most improved.",
     href: "https://github.com/harshvgupta98/POWERBI_Hospital_Speciality_Dashboard",
@@ -177,6 +209,22 @@ const PROJECTS = [
   {
     title: "Meta Ad Performance Dashboard",
     tags: ["Power BI", "DAX", "Star Schema"],
+    screenshots: [
+      {
+        src: metaFacebookShot,
+        width: 1396,
+        height: 797,
+        label: "Facebook",
+        alt: "Power BI Meta Ad Performance dashboard filtered to Facebook: KPI cards for impressions, clicks, CTR 11.76% and purchase rate 0.61%, engagement by gender, age, country, week and hour, and an ad-type table",
+      },
+      {
+        src: metaInstagramShot,
+        width: 1395,
+        height: 795,
+        label: "Instagram",
+        alt: "Power BI Meta Ad Performance dashboard filtered to Instagram: KPI cards, engagement by gender, age, country, week and hour, and an ad-type table",
+      },
+    ],
     desc: "Multi-page Power BI dashboard analysing 400K ad events across 50 campaigns and 9,841 users · impressions, CTR, engagement, and conversion via 12 DAX measures.",
     insight: "CTR 11.76% vs 0.61% purchase rate · flagged a leaking funnel and retargeting play.",
     href: "https://github.com/harshvgupta98/POWERBI_Meta_Ad_Performance_Dashboard",
@@ -184,6 +232,15 @@ const PROJECTS = [
   {
     title: "Customer Shopping Behaviour",
     tags: ["Python", "PostgreSQL", "Power BI"],
+    screenshots: [
+      {
+        src: customerBehaviourShot,
+        width: 1458,
+        height: 798,
+        label: "Customer Behavior",
+        alt: "Power BI Customer Behavior dashboard: 3.9K customers, €59.76 average purchase, 3.75 average rating, subscription split, revenue and sales by category and by age group, with slicers",
+      },
+    ],
     desc: "End-to-end pipeline · Python wrangling, SQLAlchemy load into PostgreSQL, and 10 SQL queries with CTEs and window functions on 3,900 transactions.",
     insight: "Segmented 3,116 loyal vs 83 new; ~50% discount dependency on key lines.",
     href: "https://github.com/harshvgupta98/PYTHON_SQL_POWERBI_Customer_Behavior_Dashboard",
@@ -204,6 +261,15 @@ const PROJECTS = [
   {
     title: "Sales Performance Dashboard",
     tags: ["Excel", "VBA", "Dashboard"],
+    screenshots: [
+      {
+        src: excelSalesShot,
+        width: 1441,
+        height: 744,
+        label: "Sales Performance",
+        alt: "Excel Sales Performance dashboard: city selector, four linked dashboards with sales executive totals, target-hit percentages, bar, pie and line charts",
+      },
+    ],
     desc: "End-to-end Excel dashboard analysing 141 executives across 8 regions · advanced formulas, pivots, dynamic charts, slicers, VBA macros.",
     href: "https://github.com/harshvgupta98/EXCEL_Sales_Performance_Dashboard",
   },
@@ -1020,6 +1086,56 @@ function HighlightNumbers({ text }: { text: string }) {
   );
 }
 
+/** Dashboard screenshots with page tabs (like Power BI report pages). Click opens full size. */
+function ScreenshotGallery({ shots }: { shots: Screenshot[] }) {
+  const [active, setActive] = useState(0);
+  const shot = shots[active];
+  return (
+    <section>
+      <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+        <h4 className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Dashboard</h4>
+        {shots.length > 1 && (
+          <div className="flex gap-1 font-mono text-[11px]" role="tablist" aria-label="Dashboard pages">
+            {shots.map((s, i) => (
+              <button
+                key={s.label}
+                role="tab"
+                aria-selected={i === active}
+                onClick={() => setActive(i)}
+                className={`rounded px-2.5 py-1 transition ${
+                  i === active
+                    ? "bg-foreground text-background"
+                    : "border border-border text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+      <a
+        href={shot.src}
+        target="_blank"
+        rel="noreferrer"
+        className="group relative block overflow-hidden rounded-lg border border-border bg-white"
+        title="Open full size"
+      >
+        <img
+          src={shot.src}
+          alt={shot.alt}
+          width={shot.width}
+          height={shot.height}
+          className="block h-auto w-full transition duration-300 group-hover:scale-[1.01]"
+        />
+        <span className="absolute bottom-2 right-2 rounded bg-foreground/80 px-2 py-0.5 font-mono text-[10px] text-background opacity-0 transition group-hover:opacity-100">
+          open full size ↗
+        </span>
+      </a>
+    </section>
+  );
+}
+
 const splitPoints = (s: string) =>
   s
     .split(/\s·\s|;\s/)
@@ -1034,7 +1150,7 @@ function ProjectCaseStudy({ index, onChange }: { index: number | null; onChange:
   return (
     <Dialog open={p !== null} onOpenChange={(o) => !o && onChange(null)}>
       <DialogContent
-        className="max-w-2xl max-h-[90vh] overflow-y-auto rounded-xl border-border bg-card p-0 gap-0"
+        className={`${p?.screenshots?.length ? "max-w-4xl" : "max-w-2xl"} max-h-[90vh] overflow-y-auto rounded-xl border-border bg-card p-0 gap-0`}
         onKeyDown={(e) => {
           if (e.key === "ArrowRight") go(1);
           if (e.key === "ArrowLeft") go(-1);
@@ -1065,6 +1181,8 @@ function ProjectCaseStudy({ index, onChange }: { index: number | null; onChange:
             </div>
 
             <div className="space-y-6 px-6 py-5">
+              {p.screenshots?.length ? <ScreenshotGallery key={index} shots={p.screenshots} /> : null}
+
               <section>
                 <h4 className="mb-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
                   What I built
