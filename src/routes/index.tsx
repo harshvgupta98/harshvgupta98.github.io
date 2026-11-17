@@ -536,6 +536,85 @@ function BigStat({ value, suffix, sub, p, index }: { value: number; suffix?: str
   );
 }
 
+/* ---- Project tool filter (Power BI-style slicer), shared by the slicer bar and the KPI card ---- */
+
+const TOOL_MATCH: Record<string, string[]> = {
+  "Power BI": ["Power BI"],
+  Python: ["Python"],
+  SQL: ["SQL", "PostgreSQL", "MySQL"],
+  Excel: ["Excel"],
+};
+
+const toolFilterStore = {
+  value: null as string | null,
+  listeners: new Set<() => void>(),
+  set(v: string | null) {
+    this.value = v;
+    this.listeners.forEach((l) => l());
+  },
+};
+
+function useToolFilter(): [string | null, (v: string | null) => void] {
+  const [value, setValue] = useState(toolFilterStore.value);
+  useEffect(() => {
+    const l = () => setValue(toolFilterStore.value);
+    toolFilterStore.listeners.add(l);
+    return () => {
+      toolFilterStore.listeners.delete(l);
+    };
+  }, []);
+  return [value, (v) => toolFilterStore.set(v)];
+}
+
+const projectMatches = (tags: string[], tool: string | null) =>
+  !tool || tags.some((t) => TOOL_MATCH[tool]?.includes(t));
+
+function ProjectSlicer({ total, shown }: { total: number; shown: number }) {
+  const [tool, setTool] = useToolFilter();
+  const options = [null, ...Object.keys(TOOL_MATCH)];
+  return (
+    <div className="max-w-5xl mx-auto mb-6 rounded-lg border border-border bg-card px-4 py-3 font-mono shadow-sm">
+      <div className="flex items-center justify-between mb-2 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+        <span>Slicer · Main tool</span>
+        <span className="flex items-center gap-3 normal-case tracking-normal">
+          <span>
+            Showing <span className="text-foreground">{shown}</span> of {total}
+          </span>
+          {tool && (
+            <button onClick={() => setTool(null)} className="hover:text-accent transition" aria-label="Clear filter">
+              ✕ clear
+            </button>
+          )}
+        </span>
+      </div>
+      <div className="flex flex-wrap gap-2" role="group" aria-label="Filter projects by tool">
+        {options.map((o) => {
+          const active = tool === o;
+          return (
+            <button
+              key={o ?? "All"}
+              onClick={() => setTool(o)}
+              aria-pressed={active}
+              className={`flex items-center gap-1.5 rounded border px-3 py-1.5 text-xs transition ${
+                active
+                  ? "border-accent bg-accent text-accent-foreground"
+                  : "border-border bg-background text-muted-foreground hover:border-foreground/40 hover:text-foreground"
+              }`}
+            >
+              <span
+                className={`inline-block h-3 w-3 rounded-sm border ${
+                  active ? "border-accent-foreground bg-accent-foreground/90" : "border-muted-foreground/50"
+                }`}
+              />
+              {o ?? "All"}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 const KPI_SMALL = "mt-1 text-[11px] leading-snug text-muted-foreground";
 const PROJECT_TOOLS: [string, number][] = [
   ["Power BI", 3],
@@ -546,6 +625,7 @@ const PROJECT_TOOLS: [string, number][] = [
 
 function KpiPanels() {
   const p = useIntroProgress();
+  const [tool, setTool] = useToolFilter();
   const lineT = ease((p - 0.3) / 0.5);
   const dotT = ease((p - 0.7) / 0.2);
   const column =
@@ -605,9 +685,16 @@ function KpiPanels() {
         <KpiCard label="Projects" index={3} p={p}>
           <BigStat value={6} sub="by main tool" p={p} index={1} />
           {PROJECT_TOOLS.map(([name, count], i) => (
-            <div
+            <button
               key={name}
-              className="mt-1.5 grid grid-cols-[52px_1fr_10px] items-center gap-1.5 text-[10px] text-muted-foreground"
+              onClick={() => {
+                setTool(tool === name ? null : name);
+                document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              title={`Filter projects by ${name}`}
+              className={`pointer-events-auto mt-1.5 grid w-full grid-cols-[52px_1fr_10px] items-center gap-1.5 text-left text-[10px] transition hover:text-foreground ${
+                tool === name ? "text-foreground" : "text-muted-foreground"
+              } ${tool && tool !== name ? "opacity-40" : ""}`}
             >
               <span>{name}</span>
               <span className="h-[7px] rounded-sm bg-muted">
@@ -617,8 +704,9 @@ function KpiPanels() {
                 />
               </span>
               <span className="text-right text-foreground">{count}</span>
-            </div>
+            </button>
           ))}
+          <div className="mt-2 text-[9px] text-muted-foreground/80">click a bar to filter ↓</div>
         </KpiCard>
 
         <KpiCard label="Certifications" index={4} p={p}>
@@ -871,6 +959,7 @@ function ThemeToggle() {
 
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [toolFilter] = useToolFilter();
 
   return (
     <div className="relative isolate min-h-screen overflow-x-clip bg-background text-foreground">
@@ -1110,16 +1199,27 @@ function Index() {
 
       {/* Projects */}
       <Section id="projects" label="Projects" title="What I've" italic="built">
+        <ProjectSlicer
+          total={PROJECTS.length}
+          shown={PROJECTS.filter((p) => projectMatches(p.tags, toolFilter)).length}
+        />
         <div className="grid md:grid-cols-2 gap-5 max-w-5xl mx-auto">
-          {PROJECTS.map((p, i) => (
+          {PROJECTS.map((p, i) => {
+            const match = projectMatches(p.tags, toolFilter);
+            return (
             <Reveal key={p.title} direction={i % 2 === 0 ? "left" : "right"} delay={i * 60}>
               <a
                 href={p.href}
                 target="_blank"
                 rel="noreferrer"
+                aria-disabled={!match || undefined}
                 className={`group p-6 rounded-xl border bg-card hover:border-foreground/40 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col text-left h-full ${
-                  p.featured ? "border-foreground/30 shadow-sm" : "border-border"
-                }`}
+                  toolFilter && match
+                    ? "border-accent ring-1 ring-accent/40 shadow-md"
+                    : p.featured
+                      ? "border-foreground/30 shadow-sm"
+                      : "border-border"
+                } ${match ? "" : "opacity-30 grayscale scale-[0.98]"}`}
               >
                 <div className="flex flex-wrap items-center gap-1.5 font-mono text-[11px] mb-3">
                   {p.featured && (
@@ -1142,7 +1242,8 @@ function Index() {
                 </div>
               </a>
             </Reveal>
-          ))}
+            );
+          })}
         </div>
       </Section>
 
