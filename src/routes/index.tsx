@@ -264,6 +264,29 @@ const CERTIFICATIONS = [
   },
 ];
 
+/* ------------------------------ ANALYTICS ------------------------------ */
+// Records a GoatCounter event if analytics is enabled (see GOATCOUNTER_CODE in __root.tsx); no-op otherwise.
+function trackEvent(path: string, title?: string) {
+  try {
+    const gc = (window as unknown as { goatcounter?: { count?: (o: object) => void } }).goatcounter;
+    gc?.count?.({ path, title: title ?? path, event: true });
+  } catch {
+    // analytics must never break the page
+  }
+}
+
+/* ------------------------------ HEADLINE STATS ------------------------------ */
+// Single source for the numbers shown in KPI cards, the KPI strip, tooltips and text.
+// Counts are derived from the lists above, so adding a project/cert/role updates everything.
+// Years of experience is set by hand (shown as "5+").
+const YEARS_EXPERIENCE = 5;
+const STATS = {
+  years: YEARS_EXPERIENCE,
+  roles: EXPERIENCE.length,
+  projects: PROJECTS.length,
+  certs: CERTIFICATIONS.length,
+};
+
 /* ------------------------------ TERMINAL ------------------------------ */
 
 type Lang = "python" | "sql";
@@ -273,7 +296,7 @@ const SCRIPTS: Record<Lang, { text: string; bold?: string }[]> = {
     { text: 'print("Hello, World! 👋 I\'m Harsh Gupta")' },
     { text: 'print("Current status: Data Analyst · Dublin, IE")', bold: "Current status:" },
     {
-      text: 'print("Professional Summary: Data & BI Analyst with 4+ years of experience turning fragmented data into decision-ready dashboards using Power BI, DAX, SQL and Python.")',
+      text: `print("Professional Summary: Data & BI Analyst with ${STATS.years}+ years of experience turning fragmented data into decision-ready dashboards using Power BI, DAX, SQL and Python.")`,
       bold: "Professional Summary:",
     },
     {
@@ -287,7 +310,7 @@ const SCRIPTS: Record<Lang, { text: string; bold?: string }[]> = {
     { text: "WHERE name = 'Harsh Gupta';" },
     { text: "-- Role: Data Analyst · Dublin, IE", bold: "Role:" },
     {
-      text: "-- Summary: 4+ yrs turning fragmented data into decision-ready dashboards with Power BI, DAX, SQL and Python.",
+      text: `-- Summary: ${STATS.years}+ yrs turning fragmented data into decision-ready dashboards with Power BI, DAX, SQL and Python.`,
       bold: "Summary:",
     },
     { text: "-- Status: Open to work · Data Analyst · BI Analyst · Reporting Analyst · Ireland", bold: "Status:" },
@@ -697,13 +720,13 @@ function ProjectSlicer({ total, shown }: { total: number; shown: number }) {
               aria-pressed={active}
               className={`flex items-center gap-1.5 rounded border px-3 py-1.5 text-xs transition ${
                 active
-                  ? "border-accent bg-accent text-accent-foreground"
+                  ? "border-accent bg-accent text-background"
                   : "border-border bg-background text-muted-foreground hover:border-foreground/40 hover:text-foreground"
               }`}
             >
               <span
                 className={`inline-block h-3 w-3 rounded-sm border ${
-                  active ? "border-accent-foreground bg-accent-foreground/90" : "border-muted-foreground/50"
+                  active ? "border-background bg-background/90" : "border-muted-foreground/50"
                 }`}
               />
               {o ?? "All"}
@@ -716,12 +739,12 @@ function ProjectSlicer({ total, shown }: { total: number; shown: number }) {
 }
 
 const KPI_SMALL = "mt-1 text-[11px] leading-snug text-muted-foreground";
-const PROJECT_TOOLS: [string, number][] = [
-  ["Power BI", 3],
-  ["Python", 2],
-  ["SQL", 2],
-  ["Excel", 1],
-];
+// Projects per main tool, counted from PROJECTS using the same matching as the slicer.
+const PROJECT_TOOLS: [string, number][] = Object.entries(TOOL_MATCH).map(([tool, names]) => [
+  tool,
+  PROJECTS.filter((pr) => pr.tags.some((t) => names.includes(t))).length,
+]);
+const PROJECT_TOOLS_MAX = Math.max(1, ...PROJECT_TOOLS.map(([, n]) => n));
 
 function KpiPanels() {
   const p = useIntroProgress();
@@ -749,7 +772,7 @@ function KpiPanels() {
         </KpiCard>
 
         <KpiCard label="Experience" index={1} p={p} tip={KPI_TIPS.experience}>
-          <BigStat value={4} suffix="+" sub="yrs · 3 roles" p={p} index={0} />
+          <BigStat value={STATS.years} suffix="+" sub={`yrs · ${STATS.roles} roles`} p={p} index={0} />
           <svg viewBox="0 0 154 44" className="mt-2 block w-full overflow-visible">
             <polyline
               points="0,38 50,38 50,24 102,24 102,10 154,10"
@@ -783,7 +806,7 @@ function KpiPanels() {
 
       <div className={column} style={{ right: gutter }}>
         <KpiCard label="Projects" index={3} p={p} tip={KPI_TIPS.projects}>
-          <BigStat value={6} sub="by main tool" p={p} index={1} />
+          <BigStat value={STATS.projects} sub="by main tool" p={p} index={1} />
           {PROJECT_TOOLS.map(([name, count], i) => (
             <button
               key={name}
@@ -800,7 +823,7 @@ function KpiPanels() {
               <span className="h-[7px] rounded-sm bg-muted">
                 <span
                   className="block h-full rounded-sm bg-accent"
-                  style={{ width: `${(count / 3) * 100 * ease((p - 0.25 - i * 0.05) / 0.5)}%` }}
+                  style={{ width: `${(count / PROJECT_TOOLS_MAX) * 100 * ease((p - 0.25 - i * 0.05) / 0.5)}%` }}
                 />
               </span>
               <span className="text-right text-foreground">{count}</span>
@@ -810,7 +833,7 @@ function KpiPanels() {
         </KpiCard>
 
         <KpiCard label="Certifications" index={4} p={p} tip={KPI_TIPS.certs}>
-          <BigStat value={3} sub="earned" p={p} index={2} />
+          <BigStat value={STATS.certs} sub="earned" p={p} index={2} />
           <div className={KPI_SMALL}>
             <span className="text-foreground">PL-300</span> Power BI Data Analyst Associate
           </div>
@@ -829,9 +852,9 @@ function KpiPanels() {
 function KpiStrip() {
   const p = useIntroProgress();
   const stats: { value: number; suffix?: string; label: string }[] = [
-    { value: 4, suffix: "+", label: "yrs experience" },
-    { value: 6, label: "projects" },
-    { value: 3, label: "certs · PL-300" },
+    { value: STATS.years, suffix: "+", label: "yrs experience" },
+    { value: STATS.projects, label: "projects" },
+    { value: STATS.certs, label: "certs · PL-300" },
   ];
   return (
     <div className="2xl:hidden mx-auto mt-6 grid max-w-md grid-cols-3 divide-x divide-border rounded-lg border border-border bg-card font-mono shadow-sm">
@@ -1118,7 +1141,7 @@ const HIRE_SPECS: [string, ReactNode][] = [
   ["roles", "Data Analyst · BI Analyst · Reporting Analyst"],
   ["location", "Dublin, Ireland · open to roles across Ireland"],
   ["work_auth", "Full work authorisation in Ireland"],
-  ["experience", "4+ yrs · retail, multi-sector client analytics, public-sector reporting"],
+  ["experience", `${STATS.years}+ yrs · retail, multi-sector client analytics, public-sector reporting`],
   ["core_stack", "Power BI · DAX · SQL · Python · Power Query"],
   ["certified", "PL-300 · Microsoft Power BI Data Analyst Associate"],
 ];
@@ -1126,6 +1149,7 @@ const HIRE_SPECS: [string, ReactNode][] = [
 function HireMe() {
   const [copied, setCopied] = useState(false);
   const copyEmail = async () => {
+    trackEvent("hire/copy-email", "Hire me: Copy email");
     try {
       await navigator.clipboard.writeText(CONTACT_EMAIL);
       setCopied(true);
@@ -1174,6 +1198,7 @@ function HireMe() {
             <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Get in touch</div>
             <a
               href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Opportunity for Harsh Gupta")}`}
+              onClick={() => trackEvent("hire/email", "Hire me: Email")}
               className="rounded-md bg-primary px-4 py-2.5 text-center font-mono text-sm text-primary-foreground transition hover:opacity-90"
             >
               ✉ Email me
@@ -1190,6 +1215,7 @@ function HireMe() {
               href="https://linkedin.com/in/1harsh-gupta"
               target="_blank"
               rel="noreferrer"
+              onClick={() => trackEvent("hire/linkedin", "Hire me: LinkedIn")}
               className="rounded-md border border-border bg-background px-4 py-2.5 text-center font-mono text-sm transition hover:border-accent hover:text-accent"
             >
               LinkedIn →
@@ -1332,7 +1358,7 @@ function Index() {
           <div className="flex items-center gap-4">
             <a
               href="#hire"
-              className="hidden md:inline-flex items-center gap-1.5 rounded-md border border-accent px-3 py-1 font-mono text-xs text-accent transition hover:bg-accent hover:text-accent-foreground"
+              className="hidden md:inline-flex items-center gap-1.5 rounded-md border border-accent px-3 py-1 font-mono text-xs text-accent transition hover:bg-accent hover:text-background"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
               Hire me
@@ -1376,7 +1402,7 @@ function Index() {
             <a
               href="#hire"
               onClick={() => setMenuOpen(false)}
-              className="mt-1 inline-flex w-fit items-center gap-2 rounded-md border border-accent px-3 py-1.5 text-accent transition hover:bg-accent hover:text-accent-foreground"
+              className="mt-1 inline-flex w-fit items-center gap-2 rounded-md border border-accent px-3 py-1.5 text-accent transition hover:bg-accent hover:text-background"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
               Hire me
@@ -1499,9 +1525,9 @@ function Index() {
       <section id="about" className="mx-auto max-w-5xl px-6 py-12 md:py-16 border-t border-border">
         <div className="grid xl:grid-cols-[1fr_auto] gap-10 items-start mx-auto">
           <div className="rounded-xl border border-border bg-card p-6 shadow-sm space-y-4 font-mono text-[13px] text-foreground/80 leading-relaxed">
-            <h3 className="font-mono text-lg font-bold text-foreground">💡 About Me</h3>
+            <h2 className="font-mono text-lg font-bold text-foreground">💡 About Me</h2>
             <p>
-              नमस्कार 🙏 I'm Harsh, a Data Analyst with 4+ years of experience across retail, multi-sector client
+              नमस्कार 🙏 I'm Harsh, a Data Analyst with {STATS.years}+ years of experience across retail, multi-sector client
               analytics and public-sector reporting. I work mainly in Power BI, SQL and Python, with a focus on DAX
               modelling, ETL/ELT pipelines, KPI framework design and AI-assisted analytics. I turn complex data into
               insights that improve operational efficiency, forecasting accuracy and reporting reliability.
@@ -1538,8 +1564,8 @@ function Index() {
               <img
                 src={portrait}
                 alt="Harsh Gupta portrait"
-                width={768}
-                height={896}
+                width={512}
+                height={683}
                 loading="lazy"
                 className="w-56 h-64 md:w-64 md:h-72 object-cover rounded-sm"
               />
@@ -1571,6 +1597,7 @@ function Index() {
                   if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
                   e.preventDefault();
                   setCaseStudy(i);
+                  trackEvent(`case-study/${p.title}`, `Case study: ${p.title}`);
                 }}
                 className={`group p-6 rounded-xl border bg-card hover:border-foreground/40 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col text-left h-full ${
                   toolFilter && match
@@ -1632,6 +1659,8 @@ function Index() {
                       <img
                         src={exp.logo}
                         alt={`${exp.company} logo`}
+                        width={40}
+                        height={40}
                         className="max-h-full max-w-full object-contain p-1"
                         loading="lazy"
                       />
@@ -1681,6 +1710,8 @@ function Index() {
                       <img
                         src={e.logo}
                         alt={`${e.school} logo`}
+                        width={64}
+                        height={64}
                         className="max-h-full max-w-full object-contain p-1.5"
                         loading="lazy"
                       />
