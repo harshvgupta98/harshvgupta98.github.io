@@ -1373,6 +1373,14 @@ function Index() {
             <a href="#certifications" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:text-accent transition">
               <Code2 className="h-4 w-4" /> Certifications
             </a>
+            <a
+              href="#hire"
+              onClick={() => setMenuOpen(false)}
+              className="mt-1 inline-flex w-fit items-center gap-2 rounded-md border border-accent px-3 py-1.5 text-accent transition hover:bg-accent hover:text-accent-foreground"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
+              Hire me
+            </a>
             <div className="flex items-center gap-5 pt-3 mt-1 border-t border-border">
               <a
                 href="https://github.com/harshvgupta98"
