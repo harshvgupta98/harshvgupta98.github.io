@@ -72,6 +72,8 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+const SITE_URL = "https://harshvgupta98.github.io";
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
@@ -83,9 +85,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "Harsh Gupta — Data & BI Analyst" },
       { property: "og:description", content: "Power BI, DAX, SQL and Python dashboards for commercial and operational teams. MSc Data Analytics, NCI Dublin." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:site_name", content: "harsh.py" },
+      { property: "og:image", content: `${SITE_URL}/og-image.png` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Harsh Gupta — Data & BI Analyst, Dublin. 4+ years experience, 6 projects, PL-300 certified." },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Harsh Gupta — Data & BI Analyst" },
+      { name: "twitter:description", content: "Power BI, DAX, SQL and Python dashboards for commercial and operational teams. MSc Data Analytics, NCI Dublin." },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.png` },
     ],
     links: [
+      { rel: "canonical", href: `${SITE_URL}/` },
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
