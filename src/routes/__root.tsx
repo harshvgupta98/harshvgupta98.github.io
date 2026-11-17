@@ -77,7 +77,7 @@ const SITE_URL = "https://harshvgupta98.github.io";
 // GoatCounter (privacy-friendly, cookie-free analytics). Analytics is OFF until this is set.
 // Create a free account at goatcounter.com, then put your site code here,
 // e.g. "harshgupta" for https://harshgupta.goatcounter.com
-const GOATCOUNTER_CODE = "";
+const GOATCOUNTER_CODE = "harshvgupta1998";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
