@@ -452,6 +452,313 @@ function RightRail() {
   );
 }
 
+/* ------------------------------ SIDE KPI PANELS ------------------------------ */
+// Dashboard-style KPI cards + faint background charts in the side gutters.
+// Only shown on wide screens (2xl, >=1536px) where the gutters have room.
+
+const ANIM_MS = 1800;
+const ease = (t: number) => 1 - Math.pow(1 - Math.min(1, Math.max(0, t)), 3);
+
+/** Drives a 0→1 progress value once on mount; jumps straight to 1 for reduced motion. */
+function useIntroProgress() {
+  const [p, setP] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setP(1);
+      return;
+    }
+    let raf = 0;
+    let t0 = 0;
+    const startDelay = setTimeout(() => {
+      const frame = (now: number) => {
+        if (!t0) t0 = now;
+        const next = Math.min(1, (now - t0) / ANIM_MS);
+        setP(next);
+        if (next < 1) raf = requestAnimationFrame(frame);
+      };
+      raf = requestAnimationFrame(frame);
+    }, 400);
+    return () => {
+      clearTimeout(startDelay);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+  return p;
+}
+
+function DublinClock() {
+  const [time, setTime] = useState("");
+  useEffect(() => {
+    const tick = () =>
+      setTime(
+        new Date().toLocaleTimeString("en-IE", {
+          timeZone: "Europe/Dublin",
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+      );
+    tick();
+    const id = setInterval(tick, 30_000);
+    return () => clearInterval(id);
+  }, []);
+  return <>{time}</>;
+}
+
+function KpiCard({ label, index, p, children }: { label: string; index: number; p: number; children: ReactNode }) {
+  const t = ease((p - index * 0.06) / 0.35);
+  return (
+    <div
+      className="w-[184px] rounded-lg border border-border bg-card px-3.5 py-3 shadow-sm"
+      style={{ opacity: t, transform: `translateY(${(1 - t) * 12}px)` }}
+    >
+      <div className="mb-1.5 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">{label}</div>
+      {children}
+    </div>
+  );
+}
+
+function CountUp({ value, suffix = "", p, index }: { value: number; suffix?: string; p: number; index: number }) {
+  const t = ease((p - 0.1 - index * 0.05) / 0.6);
+  return (
+    <span className="text-[22px] font-semibold text-foreground">
+      {Math.round(value * t)}
+      {t >= 1 ? suffix : ""}
+    </span>
+  );
+}
+
+function BigStat({ value, suffix, sub, p, index }: { value: number; suffix?: string; sub: string; p: number; index: number }) {
+  return (
+    <div className="flex items-baseline gap-1.5">
+      <CountUp value={value} suffix={suffix} p={p} index={index} />
+      <span className="text-[11px] text-accent">{sub}</span>
+    </div>
+  );
+}
+
+const KPI_SMALL = "mt-1 text-[11px] leading-snug text-muted-foreground";
+const PROJECT_TOOLS: [string, number][] = [
+  ["Power BI", 3],
+  ["Python", 2],
+  ["SQL", 2],
+  ["Excel", 1],
+];
+
+function KpiPanels() {
+  const p = useIntroProgress();
+  const lineT = ease((p - 0.3) / 0.5);
+  const dotT = ease((p - 0.7) / 0.2);
+  const column =
+    "absolute top-1/2 -translate-y-1/2 flex flex-col gap-3.5";
+  const gutter = "max(72px, calc((100vw - 1152px) / 2 - 220px))";
+
+  return (
+    <div className="hidden 2xl:block fixed inset-0 z-20 pointer-events-none font-mono" aria-hidden="true">
+      <div className={column} style={{ left: gutter }}>
+        <KpiCard label="Status" index={0} p={p}>
+          <div className="flex items-center gap-2 text-[15px] font-semibold text-foreground">
+            <span className="relative h-2 w-2">
+              <span className="absolute inset-0 rounded-full bg-green-500" />
+              <span className="absolute -inset-1 rounded-full bg-green-500/25" />
+            </span>
+            Open to work
+          </div>
+          <div className={KPI_SMALL}>
+            Dublin, IE · <DublinClock />
+          </div>
+        </KpiCard>
+
+        <KpiCard label="Experience" index={1} p={p}>
+          <BigStat value={4} suffix="+" sub="yrs · 3 roles" p={p} index={0} />
+          <svg viewBox="0 0 154 44" className="mt-2 block w-full overflow-visible">
+            <polyline
+              points="0,38 50,38 50,24 102,24 102,10 154,10"
+              fill="none"
+              stroke="var(--accent)"
+              strokeWidth="1.75"
+              pathLength={1}
+              strokeDasharray={1}
+              strokeDashoffset={1 - lineT}
+            />
+            {[
+              [25, 38, "Junior"],
+              [76, 24, "Analyst"],
+              [128, 10, "Reporting"],
+            ].map(([x, y, label]) => (
+              <g key={label as string}>
+                <circle cx={x} cy={y} r="2.5" fill="var(--accent)" opacity={dotT} />
+                <text x={x} y={(y as number) - 7} fontSize="8" textAnchor="middle" fill="var(--muted-foreground)">
+                  {label}
+                </text>
+              </g>
+            ))}
+          </svg>
+        </KpiCard>
+
+        <KpiCard label="Current role" index={2} p={p}>
+          <div className="text-[13px] font-semibold text-foreground">Data Reporting Analyst</div>
+          <div className={KPI_SMALL}>@ Lenehans · since Aug 2024</div>
+        </KpiCard>
+      </div>
+
+      <div className={column} style={{ right: gutter }}>
+        <KpiCard label="Projects" index={3} p={p}>
+          <BigStat value={6} sub="by main tool" p={p} index={1} />
+          {PROJECT_TOOLS.map(([name, count], i) => (
+            <div
+              key={name}
+              className="mt-1.5 grid grid-cols-[52px_1fr_10px] items-center gap-1.5 text-[10px] text-muted-foreground"
+            >
+              <span>{name}</span>
+              <span className="h-[7px] rounded-sm bg-muted">
+                <span
+                  className="block h-full rounded-sm bg-accent"
+                  style={{ width: `${(count / 3) * 100 * ease((p - 0.25 - i * 0.05) / 0.5)}%` }}
+                />
+              </span>
+              <span className="text-right text-foreground">{count}</span>
+            </div>
+          ))}
+        </KpiCard>
+
+        <KpiCard label="Certifications" index={4} p={p}>
+          <BigStat value={3} sub="earned" p={p} index={2} />
+          <div className={KPI_SMALL}>
+            <span className="text-foreground">PL-300</span> Power BI Data Analyst Associate
+          </div>
+        </KpiCard>
+
+        <KpiCard label="Largest dataset" index={5} p={p}>
+          <BigStat value={400} suffix="K+" sub="ad events" p={p} index={3} />
+          <div className={KPI_SMALL}>Meta Ad Performance · 50 campaigns, 12 DAX measures</div>
+        </KpiCard>
+      </div>
+    </div>
+  );
+}
+
+/** Faint decorative charts (grid, area line, bars, donut, scatter) behind the side gutters. */
+function BackgroundCharts() {
+  const p = useIntroProgress();
+  const panels = useMemo(
+    () =>
+      [0, 1].map((seed) => {
+        const pts: string[] = [];
+        let y = 150;
+        for (let i = 0; i <= 19; i++) {
+          y += Math.sin(i * 1.1 + seed) * 22 - 5;
+          pts.push(`${i * 20},${Math.max(40, Math.min(170, y)).toFixed(1)}`);
+        }
+        const scatter = Array.from({ length: 28 }, (_, i) => {
+          const x = 30 + ((i * 67 + seed * 31) % 320);
+          return [x, 730 - x * 0.35 - ((i * 53) % 60)];
+        });
+        const bars = [40, 65, 52, 90, 74, 110, 96, 130].map((v) => v * (seed ? 0.9 : 1));
+        return { seed, line: pts.join(" "), scatter, bars };
+      }),
+    [],
+  );
+
+  const fadeT = ease((p - 0.3) / 0.6);
+  const W = 380;
+  const H = 760;
+  const r = 52;
+  const C = 2 * Math.PI * r;
+  const mask = "linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent)";
+
+  return (
+    <div className="hidden 2xl:block fixed inset-0 -z-10 pointer-events-none opacity-45" aria-hidden="true">
+      {panels.map(({ seed, line, scatter, bars }) => {
+        const side = seed === 0 ? "left" : "right";
+        const cx = seed ? 110 : 270;
+        let off = 0;
+        return (
+          <svg
+            key={seed}
+            viewBox={`0 0 ${W} ${H}`}
+            preserveAspectRatio="xMidYMid slice"
+            className="absolute top-1/2 -translate-y-1/2"
+            style={{
+              [side]: "max(20px, calc((100vw - 1152px) / 2 - 330px))",
+              width: `min(${W}px, calc((100vw - 1024px) / 2 - 20px))`,
+              height: H,
+              WebkitMaskImage: mask,
+              maskImage: mask,
+            }}
+          >
+            {Array.from({ length: W / 38 + 1 }, (_, i) => (
+              <line key={`v${i}`} x1={i * 38} y1={0} x2={i * 38} y2={H} stroke="var(--foreground)" strokeWidth={0.6} opacity={0.06} />
+            ))}
+            {Array.from({ length: H / 38 + 1 }, (_, i) => (
+              <line key={`h${i}`} x1={0} y1={i * 38} x2={W} y2={i * 38} stroke="var(--foreground)" strokeWidth={0.6} opacity={0.06} />
+            ))}
+
+            <polygon points={`0,190 ${line} ${W},190`} fill="var(--accent)" opacity={0.07 * fadeT} />
+            <polyline
+              points={line}
+              fill="none"
+              stroke="var(--accent)"
+              strokeWidth={2}
+              opacity={0.28}
+              pathLength={1}
+              strokeDasharray={1}
+              strokeDashoffset={1 - ease(p / 0.9)}
+            />
+
+            {bars.map((v, i) => (
+              <rect
+                key={i}
+                x={30 + i * 40}
+                y={420 - v}
+                width={24}
+                height={v}
+                rx={2}
+                fill="var(--accent)"
+                opacity={0.08 + i * 0.015}
+                style={{
+                  transformBox: "fill-box",
+                  transformOrigin: "bottom",
+                  transform: `scaleY(${ease((p - 0.1 - i * 0.04) / 0.5)})`,
+                }}
+              />
+            ))}
+            <line x1={20} y1={420} x2={W - 20} y2={420} stroke="var(--foreground)" strokeWidth={1} opacity={0.12} />
+
+            {[
+              [0.45, 0.22],
+              [0.3, 0.14],
+              [0.25, 0.08],
+            ].map(([f, o], i) => {
+              const seg = (
+                <circle
+                  key={i}
+                  cx={cx}
+                  cy={540}
+                  r={r}
+                  fill="none"
+                  stroke="var(--accent)"
+                  strokeWidth={16}
+                  opacity={o * fadeT}
+                  strokeDasharray={`${f * C} ${C}`}
+                  strokeDashoffset={-off * C}
+                  transform={`rotate(-90 ${cx} 540)`}
+                />
+              );
+              off += f;
+              return seg;
+            })}
+
+            {scatter.map(([x, y], i) => (
+              <circle key={i} cx={x} cy={y} r={3} fill="var(--accent)" opacity={0.18 * fadeT} />
+            ))}
+            <line x1={30} y1={700} x2={350} y2={590} stroke="var(--accent)" strokeWidth={1.5} strokeDasharray="4 4" opacity={0.25 * fadeT} />
+          </svg>
+        );
+      })}
+    </div>
+  );
+}
+
 /* ------------------------------ THEME TOGGLE ------------------------------ */
 
 function ThemeToggle() {
@@ -537,7 +844,9 @@ function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="relative isolate min-h-screen bg-background text-foreground">
+      <BackgroundCharts />
+      <KpiPanels />
       <LeftRail />
       <RightRail />
 
