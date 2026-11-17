@@ -454,17 +454,46 @@ function RightRail() {
 
 /* ------------------------------ THEME TOGGLE ------------------------------ */
 
+const THEME_HINT_KEY = "themeHintSeen";
+
 function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
+  const [hintVisible, setHintVisible] = useState(false);
 
   useEffect(() => {
     setIsDark(document.documentElement.classList.contains("dark"));
+
+    // First-visit hint: show once, shortly after load, then fade out on its own.
+    let seen = false;
+    try {
+      seen = localStorage.getItem(THEME_HINT_KEY) === "1";
+    } catch {
+      // localStorage unavailable — fall through and show the hint this visit
+    }
+    if (seen) return;
+
+    const showTimer = setTimeout(() => setHintVisible(true), 1200);
+    const hideTimer = setTimeout(() => dismissHint(), 1200 + 7000);
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
   }, []);
+
+  function dismissHint() {
+    setHintVisible(false);
+    try {
+      localStorage.setItem(THEME_HINT_KEY, "1");
+    } catch {
+      // ignore
+    }
+  }
 
   function toggle() {
     const next = !isDark;
     setIsDark(next);
     document.documentElement.classList.toggle("dark", next);
+    dismissHint();
     try {
       localStorage.setItem("theme", next ? "dark" : "light");
     } catch {
@@ -473,6 +502,7 @@ function ThemeToggle() {
   }
 
   return (
+    <div className="relative flex items-center">
     <button
       onClick={toggle}
       className="text-muted-foreground hover:text-accent transition"
@@ -489,6 +519,30 @@ function ThemeToggle() {
         </svg>
       )}
     </button>
+
+    {/* First-visit hint bubble */}
+    <div
+      role="status"
+      aria-hidden={!hintVisible}
+      className={`absolute right-[-6px] top-full mt-3 z-50 transition-all duration-300 ease-out ${
+        hintVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1 pointer-events-none"
+      }`}
+    >
+      {/* arrow pointing up at the button */}
+      <span className="absolute -top-1.5 right-[10px] h-3 w-3 rotate-45 bg-foreground" />
+      <div className="relative flex items-center gap-2 whitespace-nowrap rounded-md bg-foreground text-background font-mono text-xs pl-3 pr-2 py-2 shadow-lg">
+        <span>Try {isDark ? "light" : "dark"} mode {isDark ? "☀️" : "🌙"}</span>
+        <button
+          onClick={dismissHint}
+          tabIndex={hintVisible ? 0 : -1}
+          className="opacity-60 hover:opacity-100 transition px-1"
+          aria-label="Dismiss theme hint"
+        >
+          ×
+        </button>
+      </div>
+    </div>
+    </div>
   );
 }
 
