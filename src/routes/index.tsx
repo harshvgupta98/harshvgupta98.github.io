@@ -637,6 +637,35 @@ function KpiPanels() {
   );
 }
 
+/** Compact KPI strip under the hero title for screens where the side panels are hidden (<2xl). */
+function KpiStrip() {
+  const p = useIntroProgress();
+  const stats: { value: number; suffix?: string; label: string }[] = [
+    { value: 4, suffix: "+", label: "yrs experience" },
+    { value: 6, label: "projects" },
+    { value: 3, label: "certs · PL-300" },
+  ];
+  return (
+    <div className="2xl:hidden mx-auto mt-6 grid max-w-md grid-cols-3 divide-x divide-border rounded-lg border border-border bg-card font-mono shadow-sm">
+      {stats.map((s, i) => {
+        const t = ease((p - i * 0.08) / 0.4);
+        return (
+          <div
+            key={s.label}
+            className="flex flex-col items-center px-2 py-3"
+            style={{ opacity: t, transform: `translateY(${(1 - t) * 8}px)` }}
+          >
+            <CountUp value={s.value} suffix={s.suffix} p={p} index={i} />
+            <span className="mt-0.5 text-[10px] sm:text-[11px] uppercase tracking-wider text-muted-foreground text-center">
+              {s.label}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 /** Faint decorative charts (grid, area line, bars, donut, scatter) behind the side gutters. */
 function BackgroundCharts() {
   const p = useIntroProgress();
@@ -844,7 +873,7 @@ function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="relative isolate min-h-screen bg-background text-foreground">
+    <div className="relative isolate min-h-screen overflow-x-clip bg-background text-foreground">
       <BackgroundCharts />
       <KpiPanels />
       <LeftRail />
@@ -964,6 +993,7 @@ function Index() {
         <p className="mt-4 font-mono text-lg md:text-xl text-muted-foreground">
           Data Analyst
         </p>
+        <KpiStrip />
 
         <div className="mt-10">
           <Terminal />
