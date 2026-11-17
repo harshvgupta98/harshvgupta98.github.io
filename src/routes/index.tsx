@@ -1110,6 +1110,108 @@ function ProjectCaseStudy({ index, onChange }: { index: number | null; onChange:
   );
 }
 
+/* ------------------------------ HIRE ME ------------------------------ */
+
+const CONTACT_EMAIL = "harshvgupta1998@gmail.com";
+
+const HIRE_SPECS: [string, ReactNode][] = [
+  ["roles", "Data Analyst · BI Analyst · Reporting Analyst"],
+  ["location", "Dublin, Ireland · open to roles across Ireland"],
+  ["work_auth", "Full work authorisation in Ireland"],
+  ["experience", "4+ yrs · retail, multi-sector client analytics, public-sector reporting"],
+  ["core_stack", "Power BI · DAX · SQL · Python · Power Query"],
+  ["certified", "PL-300 · Microsoft Power BI Data Analyst Associate"],
+];
+
+function HireMe() {
+  const [copied, setCopied] = useState(false);
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(CONTACT_EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      // Clipboard blocked — the address is visible on the page anyway.
+    }
+  };
+
+  return (
+    <Reveal className="mx-auto max-w-5xl">
+      <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+        {/* header bar, like a report page title */}
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-6 py-4">
+          <div className="flex items-center gap-2.5 font-mono text-sm font-semibold">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inset-0 animate-ping rounded-full bg-green-500/60 motion-reduce:animate-none" />
+              <span className="relative h-2.5 w-2.5 rounded-full bg-green-500" />
+            </span>
+            Open to work
+          </div>
+          <span className="font-mono text-[11px] text-muted-foreground">SELECT * FROM candidate WHERE name = 'Harsh Gupta';</span>
+        </div>
+
+        <div className="grid gap-0 md:grid-cols-[1fr_300px]">
+          {/* spec table */}
+          <div className="px-6 py-5">
+            <p className="mb-5 text-base md:text-lg leading-relaxed text-foreground">
+              Looking for my next <span className="text-accent font-semibold">Data</span>,{" "}
+              <span className="text-accent font-semibold">BI</span> or{" "}
+              <span className="text-accent font-semibold">Reporting Analyst</span> role, turning fragmented data into
+              decision-ready dashboards.
+            </p>
+            <dl className="divide-y divide-border rounded-lg border border-border font-mono text-[12px]">
+              {HIRE_SPECS.map(([k, v]) => (
+                <div key={k} className="grid grid-cols-[110px_1fr] gap-3 px-3.5 py-2.5 sm:grid-cols-[130px_1fr]">
+                  <dt className="text-muted-foreground">{k}</dt>
+                  <dd className="text-foreground">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          {/* actions */}
+          <div className="flex flex-col gap-3 border-t border-border bg-secondary/40 px-6 py-5 md:border-l md:border-t-0">
+            <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Get in touch</div>
+            <a
+              href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Opportunity for Harsh Gupta")}`}
+              className="rounded-md bg-primary px-4 py-2.5 text-center font-mono text-sm text-primary-foreground transition hover:opacity-90"
+            >
+              ✉ Email me
+            </a>
+            <button
+              onClick={copyEmail}
+              className="flex items-center justify-between gap-2 rounded-md border border-border bg-background px-3 py-2 font-mono text-[11px] text-muted-foreground transition hover:border-foreground/40 hover:text-foreground"
+              aria-label="Copy email address"
+            >
+              <span className="truncate">{CONTACT_EMAIL}</span>
+              <span className={copied ? "text-accent" : ""}>{copied ? "copied ✓" : "copy"}</span>
+            </button>
+            <a
+              href="https://linkedin.com/in/1harsh-gupta"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-md border border-border bg-background px-4 py-2.5 text-center font-mono text-sm transition hover:border-accent hover:text-accent"
+            >
+              LinkedIn →
+            </a>
+            <a
+              href="https://github.com/harshvgupta98"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-md border border-border bg-background px-4 py-2.5 text-center font-mono text-sm transition hover:border-accent hover:text-accent"
+            >
+              GitHub →
+            </a>
+            <p className="mt-auto pt-2 font-mono text-[10px] leading-relaxed text-muted-foreground">
+              Based in Dublin · Irish time (GMT/IST)
+            </p>
+          </div>
+        </div>
+      </div>
+    </Reveal>
+  );
+}
+
 /* ------------------------------ THEME TOGGLE ------------------------------ */
 
 function ThemeToggle() {
@@ -1228,6 +1330,13 @@ function Index() {
             </a>
           </div>
           <div className="flex items-center gap-4">
+            <a
+              href="#hire"
+              className="hidden md:inline-flex items-center gap-1.5 rounded-md border border-accent px-3 py-1 font-mono text-xs text-accent transition hover:bg-accent hover:text-accent-foreground"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
+              Hire me
+            </a>
             <ThemeToggle />
             <button
               onClick={() => setMenuOpen((v) => !v)}
@@ -1631,6 +1740,11 @@ function Index() {
             </Reveal>
           ))}
         </div>
+      </Section>
+
+      {/* Hire me */}
+      <Section id="hire" label="Hire me" title="Let's" italic="work together">
+        <HireMe />
       </Section>
 
       <footer className="border-t border-border">
