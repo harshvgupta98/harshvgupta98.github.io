@@ -454,8 +454,6 @@ function RightRail() {
 
 /* ------------------------------ THEME TOGGLE ------------------------------ */
 
-const THEME_HINT_KEY = "themeHintSeen";
-
 function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
   const [hintVisible, setHintVisible] = useState(false);
@@ -463,15 +461,7 @@ function ThemeToggle() {
   useEffect(() => {
     setIsDark(document.documentElement.classList.contains("dark"));
 
-    // First-visit hint: show once, shortly after load, then fade out on its own.
-    let seen = false;
-    try {
-      seen = localStorage.getItem(THEME_HINT_KEY) === "1";
-    } catch {
-      // localStorage unavailable — fall through and show the hint this visit
-    }
-    if (seen) return;
-
+    // Theme hint: show on every visit shortly after load, then fade out on its own.
     const showTimer = setTimeout(() => setHintVisible(true), 1200);
     const hideTimer = setTimeout(() => dismissHint(), 1200 + 7000);
     return () => {
@@ -482,11 +472,6 @@ function ThemeToggle() {
 
   function dismissHint() {
     setHintVisible(false);
-    try {
-      localStorage.setItem(THEME_HINT_KEY, "1");
-    } catch {
-      // ignore
-    }
   }
 
   function toggle() {
