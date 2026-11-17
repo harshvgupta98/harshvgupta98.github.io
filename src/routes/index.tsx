@@ -504,18 +504,117 @@ function DublinClock() {
   return <>{time}</>;
 }
 
-function KpiCard({ label, index, p, children }: { label: string; index: number; p: number; children: ReactNode }) {
+function KpiCard({
+  label,
+  index,
+  p,
+  tip,
+  children,
+}: {
+  label: string;
+  index: number;
+  p: number;
+  tip?: ReactNode;
+  children: ReactNode;
+}) {
   const t = ease((p - index * 0.06) / 0.35);
+  // Left-column cards (0-2) open their tooltip to the right, right-column cards to the left.
+  const opensRight = index < 3;
   return (
     <div
-      className="w-[184px] rounded-lg border border-border bg-card px-3.5 py-3 shadow-sm"
+      tabIndex={tip ? 0 : undefined}
+      className="group relative w-[184px] rounded-lg border border-border bg-card px-3.5 py-3 shadow-sm pointer-events-auto transition-colors hover:border-foreground/30 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
       style={{ opacity: t, transform: `translateY(${(1 - t) * 12}px)` }}
     >
-      <div className="mb-1.5 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">{label}</div>
+      <div className="mb-1.5 flex items-center justify-between text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+        {label}
+        {tip && <span className="normal-case tracking-normal opacity-50 group-hover:opacity-100 transition">ⓘ</span>}
+      </div>
       {children}
+      {tip && (
+        <div
+          role="tooltip"
+          className={`pointer-events-none absolute top-0 z-30 w-[270px] rounded-lg border border-border bg-popover p-3.5 text-popover-foreground shadow-xl opacity-0 transition duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 ${
+            opensRight
+              ? "left-full ml-3 -translate-x-1 group-hover:translate-x-0 group-focus-visible:translate-x-0"
+              : "right-full mr-3 translate-x-1 group-hover:translate-x-0 group-focus-visible:translate-x-0"
+          }`}
+        >
+          <span
+            className={`absolute top-4 h-2.5 w-2.5 rotate-45 border-border bg-popover ${
+              opensRight ? "-left-[6px] border-b border-l" : "-right-[6px] border-r border-t"
+            }`}
+          />
+          <div className="mb-2 text-[10px] uppercase tracking-[0.12em] text-accent">{label} · details</div>
+          {tip}
+        </div>
+      )}
     </div>
   );
 }
+
+function TipRow({ main, sub }: { main: ReactNode; sub?: ReactNode }) {
+  return (
+    <div className="flex gap-2 py-1 text-[11px] leading-snug">
+      <span className="mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+      <div className="min-w-0">
+        <div className="text-foreground">{main}</div>
+        {sub && <div className="text-[10px] text-muted-foreground">{sub}</div>}
+      </div>
+    </div>
+  );
+}
+
+const shortCert = (title: string) => title.replace(/^Microsoft Certified:\s*/, "");
+const META_PROJECT = PROJECTS.find((p) => p.title.startsWith("Meta Ad"));
+
+const KPI_TIPS = {
+  status: (
+    <>
+      <TipRow main="Data Analyst · BI Analyst · Reporting Analyst" sub="Roles I'm targeting" />
+      <TipRow main="Dublin, Ireland" sub="Full work authorisation · open to roles across Ireland" />
+    </>
+  ),
+  experience: (
+    <>
+      {EXPERIENCE.map((e) => (
+        <TipRow key={e.role} main={`${e.role} @ ${e.company}`} sub={`${e.dates} · ${e.location}`} />
+      ))}
+    </>
+  ),
+  role: (
+    <>
+      <TipRow main={`${EXPERIENCE[0].company} · ${EXPERIENCE[0].location}`} sub={EXPERIENCE[0].dates} />
+      <div className="mt-2 flex flex-wrap gap-1">
+        {EXPERIENCE[0].tags.map((t) => (
+          <span key={t} className="rounded border border-border bg-secondary px-1.5 py-0.5 text-[10px] text-muted-foreground">
+            {t}
+          </span>
+        ))}
+      </div>
+    </>
+  ),
+  projects: (
+    <>
+      {PROJECTS.map((pr) => (
+        <TipRow key={pr.title} main={pr.title} sub={pr.tags.join(" · ")} />
+      ))}
+    </>
+  ),
+  certs: (
+    <>
+      {CERTIFICATIONS.map((c) => (
+        <TipRow key={c.title} main={shortCert(c.title)} sub={`${c.issuer} · ${c.date}`} />
+      ))}
+    </>
+  ),
+  dataset: (
+    <>
+      <TipRow main="400K ad events · 50 campaigns" sub="9,841 users · 12 DAX measures" />
+      {META_PROJECT?.insight && <TipRow main="Key finding" sub={META_PROJECT.insight} />}
+    </>
+  ),
+};
 
 function CountUp({ value, suffix = "", p, index }: { value: number; suffix?: string; p: number; index: number }) {
   const t = ease((p - 0.1 - index * 0.05) / 0.6);
@@ -635,7 +734,7 @@ function KpiPanels() {
   return (
     <div className="hidden 2xl:block fixed inset-0 z-20 pointer-events-none font-mono" aria-hidden="true">
       <div className={column} style={{ left: gutter }}>
-        <KpiCard label="Status" index={0} p={p}>
+        <KpiCard label="Status" index={0} p={p} tip={KPI_TIPS.status}>
           <div className="flex items-center gap-2 text-[15px] font-semibold text-foreground">
             <span className="relative h-2 w-2">
               <span className="absolute inset-0 rounded-full bg-green-500" />
@@ -648,7 +747,7 @@ function KpiPanels() {
           </div>
         </KpiCard>
 
-        <KpiCard label="Experience" index={1} p={p}>
+        <KpiCard label="Experience" index={1} p={p} tip={KPI_TIPS.experience}>
           <BigStat value={4} suffix="+" sub="yrs · 3 roles" p={p} index={0} />
           <svg viewBox="0 0 154 44" className="mt-2 block w-full overflow-visible">
             <polyline
@@ -675,14 +774,14 @@ function KpiPanels() {
           </svg>
         </KpiCard>
 
-        <KpiCard label="Current role" index={2} p={p}>
+        <KpiCard label="Current role" index={2} p={p} tip={KPI_TIPS.role}>
           <div className="text-[13px] font-semibold text-foreground">Data Reporting Analyst</div>
           <div className={KPI_SMALL}>@ Lenehans · since Aug 2024</div>
         </KpiCard>
       </div>
 
       <div className={column} style={{ right: gutter }}>
-        <KpiCard label="Projects" index={3} p={p}>
+        <KpiCard label="Projects" index={3} p={p} tip={KPI_TIPS.projects}>
           <BigStat value={6} sub="by main tool" p={p} index={1} />
           {PROJECT_TOOLS.map(([name, count], i) => (
             <button
@@ -709,14 +808,14 @@ function KpiPanels() {
           <div className="mt-2 text-[9px] text-muted-foreground/80">click a bar to filter ↓</div>
         </KpiCard>
 
-        <KpiCard label="Certifications" index={4} p={p}>
+        <KpiCard label="Certifications" index={4} p={p} tip={KPI_TIPS.certs}>
           <BigStat value={3} sub="earned" p={p} index={2} />
           <div className={KPI_SMALL}>
             <span className="text-foreground">PL-300</span> Power BI Data Analyst Associate
           </div>
         </KpiCard>
 
-        <KpiCard label="Largest dataset" index={5} p={p}>
+        <KpiCard label="Largest dataset" index={5} p={p} tip={KPI_TIPS.dataset}>
           <BigStat value={400} suffix="K+" sub="ad events" p={p} index={3} />
           <div className={KPI_SMALL}>Meta Ad Performance · 50 campaigns, 12 DAX measures</div>
         </KpiCard>
