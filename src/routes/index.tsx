@@ -18,6 +18,11 @@ import certPl300 from "@/assets/Cert_pl300_v2.png";
 import sqlLogo from "@/assets/relational-database.jpg";
 import lstmLogo from "@/assets/lstm.png";
 import azureLogo from "@/assets/azure-logo.jpg";
+import housingOverviewShot from "@/assets/housing-overview.jpg";
+import housingCouncilsShot from "@/assets/housing-local-authorities.jpg";
+import housingPipelineShot from "@/assets/housing-pipeline.jpg";
+import housingCouncilDetailShot from "@/assets/housing-council-detail.jpg";
+import housingAboutShot from "@/assets/housing-about.jpg";
 import hospitalSummaryShot from "@/assets/hospital-summary.jpg";
 import hospitalSpecialityShot from "@/assets/hospital-speciality.jpg";
 import metaFacebookShot from "@/assets/meta-facebook.jpg";
@@ -182,6 +187,51 @@ const PROJECTS: {
   href: string;
   screenshots?: Screenshot[];
 }[] = [
+  {
+    title: "Road to 300,000: Ireland Housing Delivery Tracker",
+    featured: true,
+    tags: ["Power BI", "DAX", "Power Query", "Star Schema"],
+    screenshots: [
+      {
+        src: housingOverviewShot,
+        width: 1400,
+        height: 790,
+        label: "Overview",
+        alt: "Power BI Overview page: KPI cards for 21.0% of 300,000 delivered, 38,792 built in the last 12 months, 55,753 needed per year and a 16,961 yearly shortfall, completions since 2025 vs a straight-line path to 300,000, and completions by house type 2015-2026",
+      },
+      {
+        src: housingCouncilsShot,
+        width: 1400,
+        height: 791,
+        label: "Local Authorities",
+        alt: "Power BI Local Authorities page: map of Ireland's 31 councils shaded by homes completed per 1,000 people, region, year and house type slicers, and a ranked council table led by South Dublin, Louth and Fingal",
+      },
+      {
+        src: housingPipelineShot,
+        width: 1400,
+        height: 786,
+        label: "Pipeline",
+        alt: "Power BI Pipeline page: rolling 12-month homes started vs completed since 2021, homes started each month from January 2024, and KPI cards showing 84 starts per 100 completions",
+      },
+      {
+        src: housingCouncilDetailShot,
+        width: 1400,
+        height: 791,
+        label: "Council Detail",
+        alt: "Power BI Council Detail drill-through for Dún Laoghaire-Rathdown: homes completed, per 1,000 people, rank 8 of 31, started vs completed trend, completions by type and house type mix",
+      },
+      {
+        src: housingAboutShot,
+        width: 1400,
+        height: 786,
+        label: "About",
+        alt: "Power BI About page: data sources (CSO, Department of Housing, Census 2022, Tailte Éireann), definitions, assumptions and method, caveats, and report notes",
+      },
+    ],
+    desc: "Power BI tracker of Ireland's new home completions against the 300,000 target by 2030 · live CSO and Department of Housing open data via the PxStat API · 31-council shape map, drill-through and ~30 DAX measures.",
+    insight: "21% of the way there and ~17,000 homes a year short of the target pace · only 84 homes starting per 100 completed, so the pipeline is thinning.",
+    href: "https://github.com/harshvgupta98/POWERBI_Ireland_Housing_Delivery_Tracker",
+  },
   {
     title: "Paediatric Hospital Waiting List Dashboard",
     featured: true,
@@ -1095,14 +1145,14 @@ function ScreenshotGallery({ shots }: { shots: Screenshot[] }) {
       <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
         <h4 className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Dashboard</h4>
         {shots.length > 1 && (
-          <div className="flex gap-1 font-mono text-[11px]" role="tablist" aria-label="Dashboard pages">
+          <div className="flex flex-wrap gap-1 font-mono text-[11px]" role="tablist" aria-label="Dashboard pages">
             {shots.map((s, i) => (
               <button
                 key={s.label}
                 role="tab"
                 aria-selected={i === active}
                 onClick={() => setActive(i)}
-                className={`rounded px-2.5 py-1 transition ${
+                className={`whitespace-nowrap rounded px-2.5 py-1 transition ${
                   i === active
                     ? "bg-foreground text-background"
                     : "border border-border text-muted-foreground hover:text-foreground"
